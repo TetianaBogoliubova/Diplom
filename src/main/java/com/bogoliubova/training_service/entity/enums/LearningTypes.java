@@ -1,4 +1,4 @@
-package com.bogoliubova.training_service.entity.enams;
+package com.bogoliubova.training_service.entity.enums;
 
 public enum LearningTypes {
     ONLINE,

@@ -1,22 +1,25 @@
 package com.bogoliubova.training_service.entity;
 
-import com.bogoliubova.training_service.entity.enams.LearningTypes;
+import com.bogoliubova.training_service.entity.enums.LearningTypes;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
 public class TypeOfLearning {
-    @Getter
-    @Setter
 
     private UUID id;
     private LearningTypes learningTypes;
     private double specialPrice;
 
-    public TypeOfLearning() {
-    }
 
     @Override
     public boolean equals(Object o) {

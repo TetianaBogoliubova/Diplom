@@ -1,14 +1,18 @@
 package com.bogoliubova.training_service.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Customer {
-    @Getter
-    @Setter
 
     private UUID id;
     private String firstName;
@@ -17,8 +21,6 @@ public class Customer {
     private Location locationId;
     private String email;
 
-    public Customer() {
-    }
 
     @Override
     public boolean equals(Object o) {

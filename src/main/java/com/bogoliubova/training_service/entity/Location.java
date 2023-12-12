@@ -1,21 +1,24 @@
 package com.bogoliubova.training_service.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
 public class Location {
-    @Getter
-    @Setter
+
     private UUID id;
     private String country;
     private String city;
     private int postalCode;
-
-    public Location() {
-    }
 
     @Override
     public boolean equals(Object o) {

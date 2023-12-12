@@ -1,15 +1,20 @@
 package com.bogoliubova.training_service.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Bookstore {
 
-    @Getter
-    @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+
+public class Bookstore {
 
     private UUID id;
     private Direction directionId;
@@ -17,8 +22,6 @@ public class Bookstore {
     private String author;
     private double price;
 
-    public Bookstore() {
-    }
 
     @Override
     public boolean equals(Object o) {

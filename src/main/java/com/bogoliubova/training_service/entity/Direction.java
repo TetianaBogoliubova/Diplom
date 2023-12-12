@@ -1,22 +1,24 @@
 package com.bogoliubova.training_service.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
 import java.util.UUID;
 
-public class Direction {
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 
-    @Getter
-    @Setter
+public class Direction {
 
     private UUID id;
     private String title;
     private String grading;
 
-    public Direction() {
-    }
 
     @Override
     public boolean equals(Object o) {
