@@ -1,9 +1,12 @@
 package com.bogoliubova.training_service.entity;
 
+import com.bogoliubova.training_service.entity.enums.AllDirections;
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -13,14 +16,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 
 public class Bookstore {
 
-    private UUID id;
+@Id
+    private UUID bookstoreId;
     private Direction directionId;
-    private String title;
+    private String bookTitle;
     private String author;
-    private double price;
+    private double bookPrice;
 
 
     @Override
@@ -28,22 +33,22 @@ public class Bookstore {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bookstore bookstore = (Bookstore) o;
-        return price == bookstore.price && Objects.equals(id, bookstore.id) && Objects.equals(title, bookstore.title) && Objects.equals(author, bookstore.author);
+        return bookPrice == bookstore.bookPrice && Objects.equals(bookstoreId, bookstore.bookstoreId) && Objects.equals(bookTitle, bookstore.bookTitle) && Objects.equals(author, bookstore.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, price);
+        return Objects.hash(bookstoreId, bookTitle, author, bookPrice);
     }
 
     @Override
     public String toString() {
         return "Bookstore{" +
-                "id=" + id +
+                "id=" + bookstoreId +
                 ", directionId=" + directionId +
-                ", title='" + title + '\'' +
+                ", title='" + bookTitle + '\'' +
                 ", author='" + author + '\'' +
-                ", price=" + price +
+                ", price=" + bookPrice +
                 '}';
     }
 }

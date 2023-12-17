@@ -1,9 +1,11 @@
 package com.bogoliubova.training_service.entity;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -13,9 +15,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+
 public class Rating {
 
-    private UUID id;
+@Id
+    private UUID ratingId;
     private int ratingOfTeacher;
     private String feedback;
 
@@ -24,18 +29,18 @@ public class Rating {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rating rating = (Rating) o;
-        return ratingOfTeacher == rating.ratingOfTeacher && Objects.equals(id, rating.id) && Objects.equals(feedback, rating.feedback);
+        return ratingOfTeacher == rating.ratingOfTeacher && Objects.equals(ratingId, rating.ratingId) && Objects.equals(feedback, rating.feedback);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ratingOfTeacher, feedback);
+        return Objects.hash(ratingId, ratingOfTeacher, feedback);
     }
 
     @Override
     public String toString() {
         return "Rating{" +
-                "id=" + id +
+                "id=" + ratingId +
                 ", ratingOfTeacher=" + ratingOfTeacher +
                 ", feedback='" + feedback + '\'' +
                 '}';

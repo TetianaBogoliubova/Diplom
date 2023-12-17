@@ -1,9 +1,11 @@
 package com.bogoliubova.training_service.entity;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -12,14 +14,17 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
+
 public class Customer {
 
-    private UUID id;
+    @Id
+    private UUID customerId;
     private String firstName;
     private String lastName;
     private Direction directionId;
     private Location locationId;
-    private String email;
+    private String cusEmail;
 
 
     @Override
@@ -27,23 +32,23 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(id, customer.id) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(email, customer.email);
+        return Objects.equals(customerId, customer.customerId) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(cusEmail, customer.cusEmail);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email);
+        return Objects.hash(customerId, firstName, lastName, cusEmail);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + id +
+                "id=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", directionId=" + directionId +
                 ", locationId=" + locationId +
-                ", email='" + email + '\'' +
+                ", email='" + cusEmail + '\'' +
                 '}';
     }
 }

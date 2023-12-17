@@ -1,6 +1,6 @@
 package com.bogoliubova.training_service.entity.enums;
 
-public enum LearningTypes {
+public enum AllLearningTypes {
     ONLINE,
     OFFLINE,
     GROUP,

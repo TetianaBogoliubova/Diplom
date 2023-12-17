@@ -1,6 +1,8 @@
 package com.bogoliubova.training_service.entity;
 
-import com.bogoliubova.training_service.entity.enums.LearningTypes;
+import com.bogoliubova.training_service.entity.enums.AllLearningTypes;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +15,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 
 public class TypeOfLearning {
 
-    private UUID id;
-    private LearningTypes learningTypes;
+    @Id
+    private UUID typeId;
+    private AllLearningTypes learningTypes;
     private double specialPrice;
 
 
@@ -26,19 +30,19 @@ public class TypeOfLearning {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeOfLearning that = (TypeOfLearning) o;
-        return specialPrice == that.specialPrice && Objects.equals(id, that.id) && Objects.equals(learningTypes, that.learningTypes);
+        return Double.compare(specialPrice, that.specialPrice) == 0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, learningTypes, specialPrice);
+        return Objects.hash(typeId, learningTypes, specialPrice);
     }
 
     @Override
     public String toString() {
         return "TypeOfLearning{" +
-                "id=" + id +
-                ", type='" + learningTypes + '\'' +
+                "typeId=" + typeId +
+                ", learningTypes=" + learningTypes +
                 ", specialPrice=" + specialPrice +
                 '}';
     }

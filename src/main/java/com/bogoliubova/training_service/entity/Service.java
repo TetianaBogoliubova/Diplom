@@ -1,9 +1,11 @@
 package com.bogoliubova.training_service.entity;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -12,13 +14,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
+@Entity
 
 public class Service {
 
-    private UUID id;
+    @Id
+    private UUID serviceId;
     private Direction directionId;
     private String type;
-    private int price;
+    private double servicePrice;
     private Bookstore bookstoreId;
 
     @Override
@@ -26,21 +30,21 @@ public class Service {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return price == service.price && Objects.equals(id, service.id) && Objects.equals(type, service.type);
+        return servicePrice == service.servicePrice && Objects.equals(serviceId, service.serviceId) && Objects.equals(type, service.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, price);
+        return Objects.hash(serviceId, type, servicePrice);
     }
 
     @Override
     public String toString() {
         return "Service{" +
-                "id=" + id +
+                "id=" + serviceId +
                 ", directionId=" + directionId +
                 ", type='" + type + '\'' +
-                ", price=" + price +
+                ", price=" + servicePrice +
                 ", bookstoreId=" + bookstoreId +
                 '}';
     }
