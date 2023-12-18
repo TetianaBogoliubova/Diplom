@@ -2,12 +2,12 @@ package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.entity.enums.AllGradings;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -17,11 +17,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "direction")
 
 public class Direction {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "direction_id")
     private UUID directionId;
+
+    @Column(name = "d_title")
+    @Enumerated(EnumType.STRING)
     private AllDirections dirTitle;
+
+    @Enumerated(EnumType.STRING)
     private AllGradings grading;
 
     @Override

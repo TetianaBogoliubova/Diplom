@@ -1,12 +1,12 @@
 package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllDirections;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -17,16 +17,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "bookstore")
 
 public class Bookstore {
 
-@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bookstore_id")
     private UUID bookstoreId;
-    private Direction directionId;
-    private String bookTitle;
-    private String author;
-    private double bookPrice;
 
+    @Column(name = "direction_id")
+    private Direction direction;
+
+    @Column(name = "b_title")
+    private String bookTitle;
+
+    @Column(name = "author")
+    private String author;
+
+    @Column(name = "b_price")
+    private double bookPrice;
 
     @Override
     public boolean equals(Object o) {
@@ -45,7 +55,7 @@ public class Bookstore {
     public String toString() {
         return "Bookstore{" +
                 "id=" + bookstoreId +
-                ", directionId=" + directionId +
+                ", directionId=" + direction +
                 ", title='" + bookTitle + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + bookPrice +

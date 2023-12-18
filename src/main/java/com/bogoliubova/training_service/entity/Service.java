@@ -1,11 +1,14 @@
 package com.bogoliubova.training_service.entity;
-
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+//import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -15,15 +18,26 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "service")
 
 public class Service {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "service_id")
     private UUID serviceId;
-    private Direction directionId;
+
+    @Column(name = "direction_id")
+    private Direction direction;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "s_price")
     private double servicePrice;
-    private Bookstore bookstoreId;
+
+    @Column(name = "bookstore_id")
+    private Bookstore bookstore;
 
     @Override
     public boolean equals(Object o) {
@@ -42,10 +56,10 @@ public class Service {
     public String toString() {
         return "Service{" +
                 "id=" + serviceId +
-                ", directionId=" + directionId +
+                ", directionId=" + direction +
                 ", type='" + type + '\'' +
                 ", price=" + servicePrice +
-                ", bookstoreId=" + bookstoreId +
+                ", bookstoreId=" + bookstore +
                 '}';
     }
 }

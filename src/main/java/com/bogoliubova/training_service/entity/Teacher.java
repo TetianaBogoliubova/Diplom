@@ -1,13 +1,11 @@
 package com.bogoliubova.training_service.entity;
 
-
-import jakarta.persistence.Entity;
-//import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 
 import java.util.Objects;
@@ -18,19 +16,35 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "teacher")
 
 public class Teacher {
 
-  @Id
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "teacher_id")
     private UUID teacherId;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
+
+    @Column(name = "t_email")
     private String teachEmail;
-    private Direction directionId;
-    private Location locationId;
+
+    @Column(name = "direction_id")
+    private Direction direction;
+
+    @Column(name = "location_id")
+    private Location location;
+
+    @Column(name = "rating_id")
     private Rating ratingId;
-    private TypeOfLearning typeOfLearningId;
+
+    @Column(name = "type_for_teacher")
+    private TypeOfLearning typeOfLearning;
 
 
     @Override
@@ -53,10 +67,10 @@ public class Teacher {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + teachEmail + '\'' +
-                ", directionId=" + directionId +
-                ", locationId=" + locationId +
+                ", directionId=" + direction +
+                ", locationId=" + location +
                 ", ratingId=" + ratingId +
-                ", typeOfLearningId=" + typeOfLearningId +
+                ", typeOfLearningId=" + typeOfLearning +
                 '}';
     }
 }

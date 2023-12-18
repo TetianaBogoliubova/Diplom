@@ -1,11 +1,12 @@
 package com.bogoliubova.training_service.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import jakarta.persistence.Entity;
+//import jakarta.persistence.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -15,15 +16,28 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "customer")
 
 public class Customer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private UUID customerId;
+
+    @Column(name = "first_name")
     private String firstName;
+
+    @Column(name = "last_name")
     private String lastName;
-    private Direction directionId;
-    private Location locationId;
+
+    @Column(name = "direction_id")
+    private Direction direction;
+
+    @Column(name = "location_id")
+    private Location location;
+
+    @Column(name = "c_email")
     private String cusEmail;
 
 
@@ -46,8 +60,8 @@ public class Customer {
                 "id=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", directionId=" + directionId +
-                ", locationId=" + locationId +
+                ", directionId=" + direction +
+                ", locationId=" + location +
                 ", email='" + cusEmail + '\'' +
                 '}';
     }

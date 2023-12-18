@@ -1,8 +1,7 @@
 package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllLearningTypes;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,12 +15,20 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "type_of_learning")
 
 public class TypeOfLearning {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "type_id")
     private UUID typeId;
+
+    @Column(name = "learning_types")
+    @Enumerated(EnumType.STRING)
     private AllLearningTypes learningTypes;
+
+    @Column(name = "special_price")
     private double specialPrice;
 
 

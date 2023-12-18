@@ -1,11 +1,11 @@
 package com.bogoliubova.training_service.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+// import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -15,12 +15,22 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "location")
+
 public class Location {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "location_id")
     private UUID locationId;
+
+    @Column(name = "country")
     private String country;
+
+    @Column(name = "city")
     private String city;
+
+    @Column(name = "postal_code")
     private int postalCode;
 
     @Override

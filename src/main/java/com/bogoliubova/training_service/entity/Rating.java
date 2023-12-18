@@ -1,11 +1,12 @@
 package com.bogoliubova.training_service.entity;
 
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -16,12 +17,19 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@Table(name = "rating")
 
 public class Rating {
 
-@Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rating_id")
     private UUID ratingId;
+
+    @Column(name = "rating_for_teacher")
     private int ratingOfTeacher;
+
+    @Column(name = "feedback")
     private String feedback;
 
     @Override
