@@ -16,9 +16,10 @@ public enum AllDirections {
     READING("reading"),
     LOGIC("logic"),
     MANUAL_WORK("manual_work");
-private final String value;
-AllDirections(String value){
-    this.value = value;
-}
+    private final String value;
+
+    AllDirections(String value) {
+        this.value = value;
+    }
 
 }

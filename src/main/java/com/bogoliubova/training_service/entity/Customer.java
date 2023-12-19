@@ -31,10 +31,10 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "direction_id")
+    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
     private Direction direction;
 
-    @Column(name = "location_id")
+    @JoinColumn(name = "location_id", referencedColumnName = "locationId")
     private Location location;
 
     @Column(name = "c_email")

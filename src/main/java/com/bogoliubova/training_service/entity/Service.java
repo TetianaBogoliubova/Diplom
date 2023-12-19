@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.entity;
+
 import jakarta.persistence.*;
 //import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,7 +28,7 @@ public class Service {
     @Column(name = "service_id")
     private UUID serviceId;
 
-    @Column(name = "direction_id")
+    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
     private Direction direction;
 
     @Column(name = "type")
@@ -36,7 +37,7 @@ public class Service {
     @Column(name = "s_price")
     private double servicePrice;
 
-    @Column(name = "bookstore_id")
+    @JoinColumn(name = "bookstore_id", referencedColumnName = "bookstoreId")
     private Bookstore bookstore;
 
     @Override

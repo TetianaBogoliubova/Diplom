@@ -9,7 +9,8 @@ public enum AllLearningTypes {
     TIMELY("timely");
 
     private final String value;
-    AllLearningTypes(String value){
+
+    AllLearningTypes(String value) {
         this.value = value;
     }
 }

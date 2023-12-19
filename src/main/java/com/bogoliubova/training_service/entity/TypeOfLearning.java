@@ -31,7 +31,6 @@ public class TypeOfLearning {
     @Column(name = "special_price")
     private double specialPrice;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

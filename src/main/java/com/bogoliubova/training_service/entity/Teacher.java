@@ -34,16 +34,16 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    @Column(name = "direction_id")
+    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
     private Direction direction;
 
-    @Column(name = "location_id")
+    @JoinColumn(name = "location_id", referencedColumnName = "locationId")
     private Location location;
 
-    @Column(name = "rating_id")
+    @JoinColumn(name = "rating_id", referencedColumnName = "ratingId")
     private Rating ratingId;
 
-    @Column(name = "type_for_teacher")
+    @JoinColumn(name = "type_id", referencedColumnName = "typeId")
     private TypeOfLearning typeOfLearning;
 
 

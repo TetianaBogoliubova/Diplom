@@ -26,7 +26,8 @@ public class Bookstore {
     @Column(name = "bookstore_id")
     private UUID bookstoreId;
 
-    @Column(name = "direction_id")
+    //@Column(name = "direction_id")
+    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
     private Direction direction;
 
     @Column(name = "b_title")

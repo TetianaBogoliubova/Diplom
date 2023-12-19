@@ -10,7 +10,8 @@ public enum AllGradings {
     PENSIONERS("pensioners");
 
     private final String value;
-    AllGradings(String value){
+
+    AllGradings(String value) {
         this.value = value;
     }
 }
