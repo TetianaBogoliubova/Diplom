@@ -15,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "type_of_learning")
+@Table(name = "types_of_learning")
 
 public class TypeOfLearning {
 

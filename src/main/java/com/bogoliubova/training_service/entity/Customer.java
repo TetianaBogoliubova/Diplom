@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import jakarta.persistence.Entity;
-//import jakarta.persistence.Id;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 
 public class Customer {
 
@@ -31,9 +30,11 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
+    @OneToMany
     @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private Direction direction;
+    private List<Direction> direction;
 
+    @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "locationId")
     private Location location;
 

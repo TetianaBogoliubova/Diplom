@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import org.springframework.data.annotation.Id;
 
-
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,7 +15,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "teacher")
+@Table(name = "teachers")
 
 public class Teacher {
 
@@ -34,17 +33,21 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
+    @OneToMany
     @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private Direction direction;
+    private List<Direction> direction;
 
+    @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "locationId")
     private Location location;
 
+    @OneToOne
     @JoinColumn(name = "rating_id", referencedColumnName = "ratingId")
     private Rating ratingId;
 
+    @OneToMany
     @JoinColumn(name = "type_id", referencedColumnName = "typeId")
-    private TypeOfLearning typeOfLearning;
+    private List<TypeOfLearning> typeOfLearning;
 
 
     @Override
