@@ -1,13 +1,17 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +19,6 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "books")
-
 public class Book {
 
     @Id
@@ -32,9 +35,22 @@ public class Book {
     @Column(name = "b_price")
     private double bookPrice;
 
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
+    //с такой записью все работает
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+
+    //а с такой не работает
+//    @OneToMany
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;
+
+
+    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    // @JsonIgnore
+    private List<Direction> directions;
 
     @Override
     public boolean equals(Object o) {
@@ -53,7 +69,7 @@ public class Book {
     public String toString() {
         return "Book{" +
                 "id=" + bookId +
-                ", directionId=" + direction +
+                ", directionId=" + directions +
                 ", title='" + bookTitle + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + bookPrice +

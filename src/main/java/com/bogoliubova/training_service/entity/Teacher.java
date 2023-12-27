@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static jakarta.persistence.CascadeType.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -32,9 +34,23 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id", insertable = false, updatable = false)
-    private Direction direction;
+    //с такой записью все работает
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+
+    //а с такой не работает
+//    @OneToMany
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;
+
+
+    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    // @JsonIgnore
+    private List<Direction> directions;
+
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
@@ -44,9 +60,10 @@ public class Teacher {
     @JoinColumn(name = "rating_id", referencedColumnName = "rating_id")
     private Rating ratingId;
 
-    @OneToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "type_id", insertable = false, updatable = false)
-    private TypeOfLearning typesOfLearning;
+    // исправлено по аналогии с Direction
+    //@JoinColumn(name = "type_id", referencedColumnName = "type_id", insertable = false, updatable = false)
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<TypeOfLearning> typesOfLearning;
 
 
     @Override
@@ -69,7 +86,7 @@ public class Teacher {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + teachEmail + '\'' +
-                ", directionId=" + direction +
+                ", directionId=" + directions +
                 ", locationId=" + location +
                 ", ratingId=" + ratingId +
                 ", typeOfLearningId=" + typesOfLearning +

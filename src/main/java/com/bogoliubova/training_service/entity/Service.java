@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static jakarta.persistence.CascadeType.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -27,10 +29,6 @@ public class Service {
     @Column(name = "service_id")
     private UUID serviceId;
 
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
-
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private AllServices type;
@@ -38,9 +36,27 @@ public class Service {
     @Column(name = "s_price")
     private double servicePrice;
 
-    @OneToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Book book;
+    //с такой записью все работает
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+
+    //а с такой не работает
+//    @OneToMany
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;
+
+
+    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    // @JsonIgnore
+    private List<Direction> directions;
+
+//здесь все срабатывает и нет, как в случае с Direction
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+   // @JoinColumn(name = "book_id", referencedColumnName = "book_id") не срабатывает
+    private List<Book> books;
 
     @Override
     public boolean equals(Object o) {
@@ -59,10 +75,10 @@ public class Service {
     public String toString() {
         return "Service{" +
                 "serviceId=" + serviceId +
-                ", direction=" + direction +
+                ", direction=" + directions +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
-                ", books=" + book +
+                ", books=" + books +
                 '}';
     }
 }

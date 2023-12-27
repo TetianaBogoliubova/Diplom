@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import static jakarta.persistence.CascadeType.*;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
 @Table(name = "customers")
-
 public class Customer {
 
     @Id
@@ -30,16 +31,29 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
+    @Column(name = "c_email")
+    private String cusEmail;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     private Location location;
 
-    @Column(name = "c_email")
-    private String cusEmail;
+    //с такой записью все работает
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+
+    //а с такой не работает
+//    @OneToMany
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;
+
+
+    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
+    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    // @JsonIgnore
+    private List<Direction> directions;
 
 
     @Override
@@ -61,7 +75,7 @@ public class Customer {
                 "id=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", directionId=" + direction +
+                ", directionId=" + directions +
                 ", locationId=" + location +
                 ", email='" + cusEmail + '\'' +
                 '}';
