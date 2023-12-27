@@ -15,7 +15,6 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "locations")
-
 public class Location {
 
     @Id

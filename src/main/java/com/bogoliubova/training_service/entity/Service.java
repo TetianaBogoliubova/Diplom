@@ -20,7 +20,6 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "services")
-
 public class Service {
 
     @Id
@@ -28,9 +27,9 @@ public class Service {
     @Column(name = "service_id")
     private UUID serviceId;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private List<Direction> direction;
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+    private Direction direction;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
@@ -39,9 +38,9 @@ public class Service {
     @Column(name = "s_price")
     private double servicePrice;
 
-    @OneToMany
-    @JoinColumn(name = "book_id", referencedColumnName = "book(bookId)")//???
-    private List<Book> books;
+    @OneToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+    private Book book;
 
     @Override
     public boolean equals(Object o) {
@@ -63,7 +62,7 @@ public class Service {
                 ", direction=" + direction +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
-                ", books=" + books +
+                ", books=" + book +
                 '}';
     }
 }

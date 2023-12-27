@@ -23,10 +23,6 @@ public class Book {
     @Column(name = "book_id")
     private UUID bookId;
 
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private Direction direction;
-
     @Column(name = "b_title")
     private String bookTitle;
 
@@ -35,6 +31,10 @@ public class Book {
 
     @Column(name = "b_price")
     private double bookPrice;
+
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+    private Direction direction;
 
     @Override
     public boolean equals(Object o) {
@@ -51,7 +51,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Bookstore{" +
+        return "Book{" +
                 "id=" + bookId +
                 ", directionId=" + direction +
                 ", title='" + bookTitle + '\'' +

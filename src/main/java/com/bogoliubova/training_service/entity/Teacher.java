@@ -16,7 +16,6 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "teachers")
-
 public class Teacher {
 
     @Id
@@ -33,21 +32,21 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private List<Direction> direction;
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id", insertable = false, updatable = false)
+    private Direction direction;
 
     @OneToOne
-    @JoinColumn(name = "location_id", referencedColumnName = "locationId")
+    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     private Location location;
 
     @OneToOne
-    @JoinColumn(name = "rating_id", referencedColumnName = "ratingId")
+    @JoinColumn(name = "rating_id", referencedColumnName = "rating_id")
     private Rating ratingId;
 
-    @OneToMany
-    @JoinColumn(name = "type_id", referencedColumnName = "typeId")
-    private List<TypeOfLearning> typeOfLearning;
+    @OneToOne
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id", insertable = false, updatable = false)
+    private TypeOfLearning typesOfLearning;
 
 
     @Override
@@ -73,7 +72,7 @@ public class Teacher {
                 ", directionId=" + direction +
                 ", locationId=" + location +
                 ", ratingId=" + ratingId +
-                ", typeOfLearningId=" + typeOfLearning +
+                ", typeOfLearningId=" + typesOfLearning +
                 '}';
     }
 }

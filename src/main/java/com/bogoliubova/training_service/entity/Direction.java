@@ -17,7 +17,6 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "directions")
-
 public class Direction {
 
     @Id

@@ -30,12 +30,12 @@ public class Customer {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id", referencedColumnName = "directionId")
-    private List<Direction> direction;
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+    private Direction direction;
 
     @OneToOne
-    @JoinColumn(name = "location_id", referencedColumnName = "locationId")
+    @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     private Location location;
 
     @Column(name = "c_email")
