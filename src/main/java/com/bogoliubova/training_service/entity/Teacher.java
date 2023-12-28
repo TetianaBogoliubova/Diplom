@@ -39,18 +39,15 @@ public class Teacher {
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private Direction direction;
 
-
     //а с такой не работает
 //    @OneToMany
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
 
-
     //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
     @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
     // @JsonIgnore
     private List<Direction> directions;
-
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")

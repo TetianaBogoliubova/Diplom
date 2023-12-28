@@ -45,7 +45,7 @@ public class Book {
 //    @OneToMany
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
-
+    // training_service
 
     //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
     @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)

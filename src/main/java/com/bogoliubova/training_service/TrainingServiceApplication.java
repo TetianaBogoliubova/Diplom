@@ -10,4 +10,6 @@ public class TrainingServiceApplication {
         SpringApplication.run(TrainingServiceApplication.class, args);
     }
 
+
+    //<include file="db/changelog/changes/v0.0.1-SNAPSHOT/RTN-283-create-tables-changelog.xml"/>
 }
