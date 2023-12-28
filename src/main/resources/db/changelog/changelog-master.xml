@@ -1,3 +1,3 @@
-
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/v0.0.1-master.xml"/>
+<!-- <include file="db/changelog/changes/v0.0.1-SNAPSHOT/v0.0.1-master.xml"/>-->
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/v0.0.1-master.yml"/>
 
