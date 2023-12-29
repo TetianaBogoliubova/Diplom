@@ -35,9 +35,9 @@ public class Teacher {
     private String teachEmail;
 
     //с такой записью все работает
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+    private Direction direction;
 
     //а с такой не работает
 //    @OneToMany
@@ -45,9 +45,9 @@ public class Teacher {
 //    private List<Direction> directions;
 
     //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
-    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-    // @JsonIgnore
-    private List<Direction> directions;
+//    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+//    // @JsonIgnore
+//    private List<Direction> directions;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
@@ -59,9 +59,11 @@ public class Teacher {
 
     // исправлено по аналогии с Direction
     //@JoinColumn(name = "type_id", referencedColumnName = "type_id", insertable = false, updatable = false)
-    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<TypeOfLearning> typesOfLearning;
-
+//    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+//    private List<TypeOfLearning> typesOfLearning;
+    @OneToOne
+    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+    private TypeOfLearning typesOfLearning;
 
     @Override
     public boolean equals(Object o) {
@@ -83,7 +85,7 @@ public class Teacher {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + teachEmail + '\'' +
-                ", directionId=" + directions +
+                ", directionId=" + direction +
                 ", locationId=" + location +
                 ", ratingId=" + ratingId +
                 ", typeOfLearningId=" + typesOfLearning +

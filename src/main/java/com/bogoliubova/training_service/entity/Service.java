@@ -37,9 +37,9 @@ public class Service {
     private double servicePrice;
 
     //с такой записью все работает
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
+    @OneToOne
+    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+    private Direction direction;
 
 
     //а с такой не работает
@@ -49,14 +49,16 @@ public class Service {
 
 
     //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
-    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+   // @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
     // @JsonIgnore
-    private List<Direction> directions;
+    @OneToOne
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+    private Book book;
 
 //здесь все срабатывает и нет, как в случае с Direction
-    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    //@OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
    // @JoinColumn(name = "book_id", referencedColumnName = "book_id") не срабатывает
-    private List<Book> books;
+   // private List<Book> books;
 
     @Override
     public boolean equals(Object o) {
@@ -75,10 +77,10 @@ public class Service {
     public String toString() {
         return "Service{" +
                 "serviceId=" + serviceId +
-                ", direction=" + directions +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
-                ", books=" + books +
+                ", direction=" + direction +
+                ", book=" + book +
                 '}';
     }
 }
