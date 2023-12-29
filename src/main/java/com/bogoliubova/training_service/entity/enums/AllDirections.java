@@ -15,7 +15,8 @@ public enum AllDirections {
     MEMORY_DEVELOPMENT("memory_development"),
     READING("reading"),
     LOGIC("logic"),
-    MANUAL_WORK("manual_work");
+    MANUAL_WORK("manual_work"),
+    MUSIC("music");
     private final String value;
 
     AllDirections(String value) {

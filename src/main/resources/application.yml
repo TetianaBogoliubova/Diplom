@@ -14,3 +14,7 @@ spring:
 
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
+
+  app:
+    server:
+      url: http://localhost:8080
