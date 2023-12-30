@@ -47,7 +47,7 @@ public class Customer {
 //    private List<Direction> directions;
 
     @OneToMany
-    @JoinColumn(name ="direction_id")
+    @JoinColumn(name = "direction_id")
     private List<Direction> directions;
 
     @Override

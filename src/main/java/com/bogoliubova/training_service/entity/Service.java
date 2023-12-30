@@ -47,13 +47,6 @@ public class Service {
     @JoinColumn(name = "direction_id")
     private List<Direction> directions;
 
-//    @OneToOne
-//    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-//    private Book book;
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-//    private List<Book> books;
-
     @OneToMany
     @JoinColumn(name = "book_id")
     private List<Book> books;

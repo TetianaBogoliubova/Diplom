@@ -66,7 +66,7 @@ public class Book {
                 ", bookTitle='" + bookTitle + '\'' +
                 ", author='" + author + '\'' +
                 ", bookPrice=" + bookPrice +
-              //  ", directions=" + directions +
+                ", directions=" + directions +
                 '}';
     }
 }

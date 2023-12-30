@@ -9,6 +9,16 @@
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml"/>
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/data.sql"/>
+    <!--<include file="db/changelog/changes/v0.0.1-SNAPSHOT/data.sql"/>  -->
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-directions-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-locations-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-books-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-services-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-types_of_learning-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-ratings-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-customers-data.sql"/>
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-teachers-data.sql"/>
+
+
     <!--  <include file="db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.yml"/> -->
 </databaseChangeLog>
