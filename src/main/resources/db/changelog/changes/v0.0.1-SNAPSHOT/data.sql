@@ -16,7 +16,7 @@ values ('8329ey41-93g5-77a1-2301-c7290d5612sr', 'mathematics', 'junior_school'),
        ('1811t737-81e9-47n3-91a0-127f574057w6', 'manual_work', 'pensioners'),
        ('829dw762-62y2-8s75-8199-6311t5284c18', 'music', 'middle_school');
 
-insert into locations(location_id, country, city, postal_code)
+insert into locations (location_id, country, city, postal_code)
 values ('1289d537-53l9-76a7-24p6-962y98i87329', 'Germany', 'Berlin', 30133),
        ('7061t853-42r9-w948-65l6-433d5598a469', 'Austria', 'Graz', 51261),
        ('548h2018-2e54-f479-93a3-59h916517q06', 'Germany', 'Dresden', 46699),
