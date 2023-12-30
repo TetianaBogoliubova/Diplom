@@ -36,29 +36,27 @@ public class Service {
     @Column(name = "s_price")
     private double servicePrice;
 
-    //с такой записью все работает
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
 
-
-    //а с такой не работает
-//    @OneToMany
+    //    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
+    @OneToMany
+    @JoinColumn(name = "direction_id")
+    private List<Direction> directions;
 
+//    @OneToOne
+//    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+//    private Book book;
+//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+//    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
+//    private List<Book> books;
 
-    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
-   // @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-    // @JsonIgnore
-    @OneToOne
-    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
-    private Book book;
-
-//здесь все срабатывает и нет, как в случае с Direction
-    //@OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-   // @JoinColumn(name = "book_id", referencedColumnName = "book_id") не срабатывает
-   // private List<Book> books;
+    @OneToMany
+    @JoinColumn(name = "book_id")
+    private List<Book> books;
 
     @Override
     public boolean equals(Object o) {
@@ -79,8 +77,8 @@ public class Service {
                 "serviceId=" + serviceId +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
-                ", direction=" + direction +
-                ", book=" + book +
+                ", directions=" + directions +
+                ", books=" + books +
                 '}';
     }
 }

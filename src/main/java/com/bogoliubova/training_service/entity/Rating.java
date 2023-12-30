@@ -10,8 +10,8 @@ import lombok.Setter;
 import java.util.Objects;
 import java.util.UUID;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -29,6 +29,10 @@ public class Rating {
     @Column(name = "feedback")
     private String feedback;
 
+//    @OneToOne
+//    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
+//    private Teacher teacher;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,9 +49,10 @@ public class Rating {
     @Override
     public String toString() {
         return "Rating{" +
-                "id=" + ratingId +
+                "ratingId=" + ratingId +
                 ", ratingOfTeacher=" + ratingOfTeacher +
                 ", feedback='" + feedback + '\'' +
+                //", teacher=" + teacher +
                 '}';
     }
 }

@@ -34,27 +34,21 @@ public class Customer {
     @Column(name = "c_email")
     private String cusEmail;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     private Location location;
 
-    //с такой записью все работает
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
 
-
-    //а с такой не работает
-//    @OneToMany
+//    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
 
-
-    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
-//    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-//    // @JsonIgnore
-//    private List<Direction> directions;
-
+    @OneToMany
+    @JoinColumn(name ="direction_id")
+    private List<Direction> directions;
 
     @Override
     public boolean equals(Object o) {
@@ -72,12 +66,12 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "id=" + customerId +
+                "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", directionId=" + direction +
-                ", locationId=" + location +
-                ", email='" + cusEmail + '\'' +
+                ", cusEmail='" + cusEmail + '\'' +
+                ", location=" + location +
+                ", directions=" + directions +
                 '}';
     }
 }

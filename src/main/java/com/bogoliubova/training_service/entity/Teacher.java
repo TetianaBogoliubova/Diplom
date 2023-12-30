@@ -34,36 +34,38 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    //с такой записью все работает
-    @OneToOne
-    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-    private Direction direction;
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
 
-    //а с такой не работает
-//    @OneToMany
+//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
 
-    //  с такой записью работает, только надо уточнить про "orphanRemoval = true" и "@JsonIgnore"
-//    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
-//    // @JsonIgnore
-//    private List<Direction> directions;
+    @OneToMany
+    @JoinColumn(name = "direction_id")
+    private List<Direction> directions;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     private Location location;
 
-    @OneToOne
-    @JoinColumn(name = "rating_id", referencedColumnName = "rating_id")
-    private Rating ratingId;
+    @OneToMany
+    @JoinColumn(name = "rating_id")
+    private List<Rating> ratings;
 
-    // исправлено по аналогии с Direction
-    //@JoinColumn(name = "type_id", referencedColumnName = "type_id", insertable = false, updatable = false)
-//    @OneToMany(cascade = {MERGE, REFRESH, PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+//    @OneToOne
+//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
+//    private TypeOfLearning typesOfLearning;
+
+//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")//, insertable = false, updatable = false)
 //    private List<TypeOfLearning> typesOfLearning;
-    @OneToOne
-    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-    private TypeOfLearning typesOfLearning;
+
+    @OneToMany
+    @JoinColumn(name = "type_id")
+    private List<TypeOfLearning> typesOfLearning;
+
 
     @Override
     public boolean equals(Object o) {
@@ -85,9 +87,9 @@ public class Teacher {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + teachEmail + '\'' +
-                ", directionId=" + direction +
+                ", directionId=" + directions +
                 ", locationId=" + location +
-                ", ratingId=" + ratingId +
+                ", ratings=" + ratings +
                 ", typeOfLearningId=" + typesOfLearning +
                 '}';
     }
