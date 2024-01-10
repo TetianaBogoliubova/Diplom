@@ -17,7 +17,7 @@
 
         <createTable tableName="directions">
 
-            <column name="direction_id" type="binary(36)">
+            <column name="direction_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -81,7 +81,7 @@
 
         <createTable tableName="books">
 
-            <column name="book_id" type="binary(36)">
+            <column name="book_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -97,7 +97,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="direction_id" type="binary(36)">
+            <column name="direction_id" type="UUID">
                 <constraints foreignKeyName="direction_id" references="directions(direction_id)" unique="true"
                              nullable="false"/>
             </column>
@@ -128,12 +128,12 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="direction_id" type="binary(36)">
+            <column name="direction_id" type="UUID">
                 <constraints foreignKeyName="fk_services_direction" references="directions(direction_id)" unique="true"
                              nullable="false"/>
             </column>
 
-            <column name="book_id" type="binary(36)">
+            <column name="book_id" type="UUID">
                 <constraints foreignKeyName="fk_services_book" references="books(book_id)" unique="true"
                              nullable="false"/>
             </column>
@@ -204,7 +204,7 @@
 
         <createTable tableName="customers">
 
-            <column name="customer_id" type="UUID">
+            <column name="customer_id" type="binary(36)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -225,7 +225,7 @@
                              nullable="false"/>
             </column>
 
-            <column name="direction_id" type="binary(36)">
+            <column name="direction_id" type="UUID">
                 <constraints foreignKeyName="fk_customers_direction" references="directions(direction_id)" unique="true"
                              nullable="false"/>
             </column>
@@ -260,7 +260,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="direction_id" type="binary(36)">
+            <column name="direction_id" type="UUID">
                 <constraints foreignKeyName="fk_teachers_direction" references="directions(direction_id)" unique="true"
                              nullable="false"/>
             </column>

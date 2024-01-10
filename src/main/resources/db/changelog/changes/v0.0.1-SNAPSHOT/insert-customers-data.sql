@@ -1,7 +1,7 @@
 insert into customers (customer_id, first_name, last_name, c_email, location_id, direction_id)
-values ('614r5310-5j75-9s96-2w53-56672g876h54', 'Albert', 'Wisoky', 'galen.crooks@hotmail.com',
-        '1289d537-53l9-76a7-24p6-962y98i87329', '829dw762-62y2-8s75-8199-6311t5284c18'),
-       ('48365800-9408-2733-1678-617223078864', 'Ismael', 'Spencer', 'kassandra.hammes@yahoo.com',
-        '7061t853-42r9-w948-65l6-433d5598a469', '1811t737-81e9-47n3-91a0-127f574057w6'),
-       ('51084635-5549-6344-5272-367474413754', 'Sharla', 'Conn', 'brock.kilback@yahoo.com',
-        '548h2018-2e54-f479-93a3-59h916517q06', '571u9645-1d27-32a6-7712-87t762244n87');
+values ('614r5310-j75t-9sy6-w593-566726876254', 'Albert', 'Wisoky', 'galen.crooks@hotmail.com',
+        '128d5373-w59i-7gf7-q246-962698987329', '829d4762-y25p-8sw5-n199-631195284218'),
+       ('48365800-t40d-2wq3-b678-617223078864', 'Ismael', 'Spencer', 'kassandra.hammes@yahoo.com',
+        '706t8538-w49n-4nw8-s656-433255983469', '181t7378-v89w-4tn3-g130-127357405796'),
+       ('51084635-t54c-6ww4-t272-367474413754', 'Sharla', 'Conn', 'brock.kilback@yahoo.com',
+        '548h2018-e54m-7na9-f333-598916517306', '571u9645-d27m-3xa6-x712-872762244687');

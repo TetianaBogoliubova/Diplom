@@ -1,4 +1,4 @@
 insert into ratings (rating_id, rating_for_teacher, feedback)
-values ('4510s889-f208-6r08-5h40-307w5715t625', 6, 'Uses different methods'),
-       ('87722r46-7e57-9q37-9m55-5u33607v8004', 7, 'Good with children'),
-       ('57691c92-406e-510y-19r4-u05887r28270', 9, 'High professionalism');
+values ('451s8893-f20t-6rf8-h470-307057153625', 6, 'Uses different methods'),
+       ('877t2246-e57k-9qe7-m555-573360728004', 7, 'Good with children'),
+       ('576w9192-w06e-5yr5-n194-405887628270', 9, 'High professionalism');

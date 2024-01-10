@@ -31,6 +31,11 @@ public class Direction {
     @Enumerated(EnumType.STRING)
     private AllGradings grading;
 
+
+    public UUID getDirectionId() {
+        return directionId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
