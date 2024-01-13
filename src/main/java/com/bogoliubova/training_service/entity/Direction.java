@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -24,6 +25,11 @@ public class Direction {
     @Column(name = "direction_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(name = "UUID",
+//            strategy = "com.bogoliubova.training_service.generator.UuidTimeSequenceGenerator")
+//    @Column(name = "direction_id")
+
     // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "00000000-0000-0000-0000-000000000000")
     // @JsonFormat(pattern = "00000000-0000-0000-0000-000000000000")
     private UUID directionId;
@@ -36,9 +42,9 @@ public class Direction {
     private AllGradings grading;
 
 
-    public UUID getDirectionId() {
-        return directionId;
-    }
+    //public UUID getDirectionId() {
+//        return directionId;
+//    }
 
     @Override
     public boolean equals(Object o) {

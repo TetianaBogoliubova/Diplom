@@ -16,7 +16,7 @@ public class TypeOfLearningController {
     private final TypeOfLearningService typeOfLearningService;
 
     @GetMapping("/id_type/{type_id}")
-    public TypeOfLearning getTypeOfLearningById(@PathVariable("type_id") String id) {
+    public TypeOfLearning getTypeOfLearningByTypeId(@PathVariable("type_id") String id) {
         return typeOfLearningService.getTypeOfLearningById(id);
     }
 }

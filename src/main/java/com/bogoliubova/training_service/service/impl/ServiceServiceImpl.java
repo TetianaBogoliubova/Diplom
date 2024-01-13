@@ -17,4 +17,6 @@ public class ServiceServiceImpl implements ServiceService {
     public com.bogoliubova.training_service.entity.Service getServiceById(String id) {
         return serviceRepository.findServiceByServiceId(UUID.fromString(id));
     }
+
+
 }

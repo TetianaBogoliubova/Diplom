@@ -36,7 +36,7 @@ public class DirectionController {
 //    }
 
     @GetMapping("/id_direction/{direction_id}")
-    public Direction getDirectionById(@PathVariable("direction_id") String direction_id) {
+    public Direction getDirectionByDirectionId(@PathVariable("direction_id") String direction_id) {
         return directionService.getDirectionById(direction_id);
     }
 }

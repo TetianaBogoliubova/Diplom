@@ -15,7 +15,7 @@ public class CustomerController {
 
     private final CustomerService customerService;
     @GetMapping("/id_customer/{customer_id}")
-    public Customer getCustomerById(@PathVariable("customer_id") String id) {
+    public Customer getCustomerByCustomerId(@PathVariable("customer_id") String id) {
         return customerService.getCustomerById(id);
     }
 }

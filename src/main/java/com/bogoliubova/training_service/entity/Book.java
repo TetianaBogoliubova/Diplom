@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,11 +30,18 @@ public class Book {
 //    @JsonSerialize(using = ToStringSerializer.class)
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "00000000-0000-0000-0000-000000000000")
 //    @JsonFormat(pattern = "00000000-0000-0000-0000-000000000000")
+
+//    @GeneratedValue(generator = "UUID", strategy = GenerationType.UUID)
 //    private UUID bookId;
 
     @Id
     @Column(name = "book_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator(name = "UUID",
+//            strategy = "com.bogoliubova.training_service.generator.UuidTimeSequenceGenerator")
+//    @Column(name = "book_id")
     private UUID bookId;
 
     @Column(name = "b_title")

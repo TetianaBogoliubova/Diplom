@@ -16,7 +16,7 @@ public class LocationController {
     private final LocationService locationService;
 
     @GetMapping("/id_location/{location_id}")
-    public Location getLocationById(@PathVariable("location_id") String id) {
+    public Location getLocationByLocationId(@PathVariable("location_id") String id) {
         return locationService.getLocationById(id);
     }
 }

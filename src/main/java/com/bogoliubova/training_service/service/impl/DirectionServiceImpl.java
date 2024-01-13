@@ -18,5 +18,6 @@ public class DirectionServiceImpl implements DirectionService {
     public Direction getDirectionById(String direction_id) {
 
         return directoryRepository.findDirectionByDirectionId(UUID.fromString(String.valueOf(direction_id)));
+        // return directoryRepository.getDirectionByDirectionId(UUID.fromString(String.valueOf(direction_id)));
     }
 }
