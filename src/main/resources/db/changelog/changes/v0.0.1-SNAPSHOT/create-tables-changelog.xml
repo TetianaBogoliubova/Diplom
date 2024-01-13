@@ -51,7 +51,7 @@
 
         <createTable tableName="locations">
 
-            <column name="location_id" type="binary(36)">
+            <column name="location_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -116,7 +116,7 @@
 
         <createTable tableName="services">
 
-            <column name="service_id" type="binary(36)">
+            <column name="service_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -152,7 +152,7 @@
 
         <createTable tableName="types_of_learning">
 
-            <column name="type_id" type="binary(36)">
+            <column name="type_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -178,7 +178,7 @@
 
         <createTable tableName="ratings">
 
-            <column name="rating_id" type="binary(36)">
+            <column name="rating_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -204,7 +204,7 @@
 
         <createTable tableName="customers">
 
-            <column name="customer_id" type="binary(36)">
+            <column name="customer_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -220,7 +220,7 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="location_id" type="binary(36)">
+            <column name="location_id" type="UUID">
                 <constraints foreignKeyName="fk_customers_location" references="locations(location_id)" unique="true"
                              nullable="false"/>
             </column>
@@ -244,7 +244,7 @@
 
         <createTable tableName="teachers">
 
-            <column name="teacher_id" type="binary(36)">
+            <column name="teacher_id" type="UUID">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
@@ -265,18 +265,18 @@
                              nullable="false"/>
             </column>
 
-            <column name="location_id" type="binary(36)">
+            <column name="location_id" type="UUID">
                 <constraints foreignKeyName="fk_teachers_location" references="locations(location_id)" unique="true"
                              nullable="false"/>
             </column>
 
-            <column name="type_id" type="binary(36)">
+            <column name="type_id" type="UUID">
                 <constraints foreignKeyName="fk_teachers_typeOfLearning" references="types_of_learning(type_id)"
                              unique="true"
                              nullable="false"/>
             </column>
 
-            <column name="rating_id" type="binary(36)">
+            <column name="rating_id" type="UUID">
                 <constraints foreignKeyName="fk_teachers_rating" references="ratings(rating_id)" unique="true" nullable="false"/>
             </column>
 

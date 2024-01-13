@@ -1,5 +1,8 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,9 +23,17 @@ import static jakarta.persistence.CascadeType.*;
 @Table(name = "books")
 public class Book {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "book_id", columnDefinition = "BINARY(36)")
+//    @JsonSerialize(using = ToStringSerializer.class)
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "00000000-0000-0000-0000-000000000000")
+//    @JsonFormat(pattern = "00000000-0000-0000-0000-000000000000")
+//    private UUID bookId;
+
     @Id
+    @Column(name = "book_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "book_id")
     private UUID bookId;
 
     @Column(name = "b_title")
@@ -72,5 +83,39 @@ public class Book {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 //create-tables-changelog.xml
 //insert_test_data_changelog_1.xml
+
+//CREATE TRIGGER IF NOT
+// EXISTS before_insert_users
+// BEFORE INSERT ON oxatrade.users
+// FOR EACH ROW BEGIN
+// IF NEW.id IS NULL THEN
+// SET NEW.id = (UUID_TO_BIN(UUID()));
+// END IF; END;
+
+//CREATE TABLE IF NOT EXISTS oxatrade.users (
+// id BINARY(16) NOT NULL,
+// email varchar(64) NOT NULL,
+// password varchar(2048) NOT NULL,
+// phone varchar(25) DEFAULT NULL,
+// provider varchar(25) DEFAULT NULL COMMENT 'google or facebook, etc.',
+// user_role varchar(32) NOT NULL DEFAULT 'USER',
+// first_name varchar(64) NOT NULL,
+// last_name varchar(64) DEFAULT NULL,
+// title varchar(32) DEFAULT NULL,
+// enabled BOOLEAN NOT NULL DEFAULT '0',
+// created_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+// updated_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,  PRIMARY KEY (id),  UNIQUE KEY email (email)) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Table of users';

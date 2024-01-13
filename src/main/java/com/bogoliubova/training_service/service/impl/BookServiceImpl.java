@@ -15,7 +15,9 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    public Book getBookById(String bookId) {
-        return bookRepository.findBookByBookId(UUID.fromString(bookId));
+    public Book getBookById(String book_id) {
+
+        //return bookRepository.findBookByBookId(UUID.fromString(bookId));
+        return bookRepository.findBookByBookId(UUID.fromString(book_id));
     }
 }
