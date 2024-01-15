@@ -19,8 +19,8 @@ public class LocationServiceImpl implements LocationService {
         return locationRepository.findLocationByLocationId(UUID.fromString(id));
     }
 
-//    @Override
-//    public Location createNewLocation(Location location) {
-//        return locationRepository.save(location);
-//    }
+    @Override
+    public Location createNewLocation(Location location) {
+        return locationRepository.save(location);
+    }
 }

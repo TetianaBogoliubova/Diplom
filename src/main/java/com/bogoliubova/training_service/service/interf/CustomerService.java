@@ -5,5 +5,5 @@ import com.bogoliubova.training_service.entity.Customer;
 public interface CustomerService {
     Customer getCustomerById(String id);
 
-    //Customer createNewCustomer(Customer customer);
+    Customer createNewCustomer(Customer customer);
 }

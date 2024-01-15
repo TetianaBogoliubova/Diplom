@@ -1,25 +1,17 @@
 package com.bogoliubova.training_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,12 +22,10 @@ import static jakarta.persistence.CascadeType.*;
 public class Book {
 
     @Id
-   // @Type(type = "uuid-char")
     @Column(name = "book_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     //@UuidGenerator
     @JdbcTypeCode(SqlTypes.CHAR)
-
     private UUID bookId;
 
     @Column(name = "b_title")
@@ -46,14 +36,6 @@ public class Book {
 
     @Column(name = "b_price")
     private double bookPrice;
-
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
 
     @OneToMany
     @JsonIgnore
@@ -84,6 +66,12 @@ public class Book {
                 '}';
     }
 }
+
+
+
+
+
+
 
 
 //create-tables-changelog.xml
@@ -138,8 +126,6 @@ public class Book {
 //    @Column(name = "book_id")
 
 
-
-
 //    @GetMapping(value = "/id_book/{book_id}", produces = MediaType.APPLICATION_JSON_VALUE) //
 //    public Book getBookById(@PathVariable("book_id") UUID id) {
 //        return bookService.getBookById(String.valueOf(id));
@@ -155,3 +141,12 @@ public class Book {
 //        Book book = bookService.getBookById(UUID.fromString(String.valueOf(id)));
 //        return ResponseEntity.ok(book);
 //    }
+
+
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+//    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;

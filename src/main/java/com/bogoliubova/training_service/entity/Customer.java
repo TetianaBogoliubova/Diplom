@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -24,7 +22,6 @@ import static jakarta.persistence.CascadeType.*;
 public class Customer {
 
     @Id
-    //@UuidGenerator
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
     @JdbcTypeCode(SqlTypes.CHAR)

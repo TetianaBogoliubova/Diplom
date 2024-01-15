@@ -6,6 +6,6 @@ import com.bogoliubova.training_service.entity.Book;
 public interface BookService {
     Book getBookById(String id);
 
-//    Book createNewBook(Book book);
+    Book createNewBook(Book book);
 }
 

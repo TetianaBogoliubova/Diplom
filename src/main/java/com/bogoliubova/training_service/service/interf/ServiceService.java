@@ -5,5 +5,5 @@ import com.bogoliubova.training_service.entity.Service;
 public interface ServiceService {
     Service getServiceById(String id);
 
-   // Service createNewService(Service service);
+    Service createNewService(Service service);
 }

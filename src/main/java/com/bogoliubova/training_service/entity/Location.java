@@ -21,7 +21,6 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@UuidGenerator
     @Column(name = "location_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID locationId;

@@ -7,5 +7,4 @@ import java.util.UUID;
 
 public interface DirectionRepository extends JpaRepository<Direction, UUID> {
     Direction findDirectionByDirectionId(UUID directionId);
-
 }

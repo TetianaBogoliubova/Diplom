@@ -1,6 +1,5 @@
 package com.bogoliubova.training_service.controller.page;
 
-import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import lombok.RequiredArgsConstructor;

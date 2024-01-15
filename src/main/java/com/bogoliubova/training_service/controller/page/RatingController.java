@@ -1,6 +1,5 @@
 package com.bogoliubova.training_service.controller.page;
 
-import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Rating;
 import com.bogoliubova.training_service.service.interf.RatingService;
 import lombok.RequiredArgsConstructor;
@@ -22,4 +21,5 @@ public class RatingController {
 //    public Rating createRating(@RequestBody Rating rating) {
 //        return ratingService.createNewRating(rating);
 //    }
+//}
 }

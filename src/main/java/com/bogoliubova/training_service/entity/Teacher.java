@@ -13,8 +13,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.CascadeType.*;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -25,7 +23,6 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@UuidGenerator
     @Column(name = "teacher_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID teacherId;
@@ -38,14 +35,6 @@ public class Teacher {
 
     @Column(name = "t_email")
     private String teachEmail;
-
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
 
     @OneToMany
     @JoinColumn(name = "direction_id")
@@ -62,19 +51,10 @@ public class Teacher {
     @JsonIgnore
     private List<Rating> ratings;
 
-//    @OneToOne
-//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-//    private TypeOfLearning typesOfLearning;
-
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")//, insertable = false, updatable = false)
-//    private List<TypeOfLearning> typesOfLearning;
-
     @OneToMany
     @JoinColumn(name = "type_id")
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
-
 
     @Override
     public boolean equals(Object o) {

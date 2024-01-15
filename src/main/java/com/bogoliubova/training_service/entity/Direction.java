@@ -2,13 +2,11 @@ package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.entity.enums.AllGradings;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -24,18 +22,9 @@ import java.util.UUID;
 public class Direction {
 
     @Id
-
     @Column(name = "direction_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JdbcTypeCode(SqlTypes.CHAR)
-    //@UuidGenerator
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(name = "UUID",
-//            strategy = "com.bogoliubova.training_service.generator.UuidTimeSequenceGenerator")
-//    @Column(name = "direction_id")
-
-    // @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "00000000-0000-0000-0000-000000000000")
-    // @JsonFormat(pattern = "00000000-0000-0000-0000-000000000000")
     private UUID directionId;
 
     @Column(name = "d_title")

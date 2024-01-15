@@ -99,7 +99,7 @@
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="direction_id" references="directions(direction_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
         </createTable>

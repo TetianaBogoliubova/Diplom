@@ -22,7 +22,6 @@ public class TypeOfLearning {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@UuidGenerator
     @Column(name = "type_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID typeId;

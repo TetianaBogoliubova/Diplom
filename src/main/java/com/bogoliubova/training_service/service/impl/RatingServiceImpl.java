@@ -19,8 +19,8 @@ public class RatingServiceImpl implements RatingService {
         return ratingRepository.findRatingByRatingId(UUID.fromString(id));
     }
 
-//    @Override
-//    public Rating createNewRating(Rating rating) {
-//        return ratingRepository.save(rating);
-//    }
+    @Override
+    public Rating createNewRating(Rating rating) {
+        return ratingRepository.save(rating);
+    }
 }

@@ -39,13 +39,6 @@ public class Service {
     @Column(name = "s_price")
     private double servicePrice;
 
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-    //    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
     @OneToMany
     @JoinColumn(name = "direction_id")
     @JsonIgnore
@@ -80,3 +73,12 @@ public class Service {
                 '}';
     }
 }
+
+
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;

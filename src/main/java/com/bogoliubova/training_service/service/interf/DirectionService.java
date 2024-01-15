@@ -5,5 +5,5 @@ import com.bogoliubova.training_service.entity.Direction;
 public interface DirectionService {
     Direction getDirectionById(String id);
 
-   // Direction createNewDirection(Direction direction);
+    Direction createNewDirection(Direction direction);
 }
