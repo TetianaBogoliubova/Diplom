@@ -18,4 +18,9 @@ public class TypeOfLearningServiceImpl implements TypeOfLearningService {
     public TypeOfLearning getTypeOfLearningById(String id) {
         return typeOfLearningRepository.findTypeByTypeId(UUID.fromString(id));
     }
+
+//    @Override
+//    public TypeOfLearning createNewType(TypeOfLearning type) {
+//        return typeOfLearningRepository.save(type);
+//    }
 }

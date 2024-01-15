@@ -3,10 +3,7 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.TypeOfLearning;
 import com.bogoliubova.training_service.service.interf.TypeOfLearningService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,4 +16,9 @@ public class TypeOfLearningController {
     public TypeOfLearning getTypeOfLearningByTypeId(@PathVariable("type_id") String id) {
         return typeOfLearningService.getTypeOfLearningById(id);
     }
+
+//    @PostMapping("/createType")
+//    public TypeOfLearning createTypeOfLearning(@RequestBody TypeOfLearning type) {
+//        return typeOfLearningService.createNewType(type);
+//    }
 }

@@ -18,4 +18,9 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher getTeacherById(String id) {
         return teacherRepository.findTeacherByTeacherId(UUID.fromString(id));
     }
+
+//    @Override
+//    public Teacher createNewTeacher(Teacher teacher) {
+//        return teacherRepository.save(teacher);
+//    }
 }

@@ -15,9 +15,12 @@ public class DirectionServiceImpl implements DirectionService {
     private final DirectionRepository directoryRepository;
 
     @Override
-    public Direction getDirectionById(String direction_id) {
-
-        return directoryRepository.findDirectionByDirectionId(UUID.fromString(String.valueOf(direction_id)));
-        // return directoryRepository.getDirectionByDirectionId(UUID.fromString(String.valueOf(direction_id)));
+    public Direction getDirectionById(String id) {
+        return directoryRepository.findDirectionByDirectionId(UUID.fromString(String.valueOf(id)));
     }
+
+//    @Override
+//    public Direction createNewDirection(Direction direction) {
+//        return directoryRepository.save(direction);
+//    }
 }

@@ -9,7 +9,7 @@ public enum AllServices {
     PLAYING_MUSICAL_INSTRUMENTS("playing_musical_instruments"),
     LEARNING_A_CRAFT("learning_a_craft"),
     TRAINING_FOR_ADULTS("training_for_adults"),
-    TRAINING_FOR_PENSIONEERS("training_for_persioneers"),
+    TRAINING_FOR_PENSIONEERS("training_for_pensioneers"),
     BOOKSTORE("bookstore");
 
     private final String value;

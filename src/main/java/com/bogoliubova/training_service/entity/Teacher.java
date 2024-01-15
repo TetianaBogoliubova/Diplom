@@ -1,10 +1,13 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +25,9 @@ public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@UuidGenerator
     @Column(name = "teacher_id")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID teacherId;
 
     @Column(name = "first_name")
@@ -44,14 +49,17 @@ public class Teacher {
 
     @OneToMany
     @JoinColumn(name = "direction_id")
+    @JsonIgnore
     private List<Direction> directions;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    @JsonIgnore
     private Location location;
 
     @OneToMany
     @JoinColumn(name = "rating_id")
+    @JsonIgnore
     private List<Rating> ratings;
 
 //    @OneToOne
@@ -64,6 +72,7 @@ public class Teacher {
 
     @OneToMany
     @JoinColumn(name = "type_id")
+    @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 
 

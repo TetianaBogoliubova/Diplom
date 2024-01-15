@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -22,9 +24,11 @@ import java.util.UUID;
 public class Direction {
 
     @Id
+
     @Column(name = "direction_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @JdbcTypeCode(SqlTypes.CHAR)
+    //@UuidGenerator
 //    @GeneratedValue(generator = "UUID")
 //    @GenericGenerator(name = "UUID",
 //            strategy = "com.bogoliubova.training_service.generator.UuidTimeSequenceGenerator")
@@ -38,13 +42,9 @@ public class Direction {
     @Enumerated(EnumType.STRING)
     private AllDirections dirTitle;
 
+    @Column(name = "grading")
     @Enumerated(EnumType.STRING)
     private AllGradings grading;
-
-
-    //public UUID getDirectionId() {
-//        return directionId;
-//    }
 
     @Override
     public boolean equals(Object o) {

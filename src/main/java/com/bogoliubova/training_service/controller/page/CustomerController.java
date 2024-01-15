@@ -1,12 +1,10 @@
 package com.bogoliubova.training_service.controller.page;
 
+import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,8 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class CustomerController {
 
     private final CustomerService customerService;
+
     @GetMapping("/id_customer/{customer_id}")
     public Customer getCustomerByCustomerId(@PathVariable("customer_id") String id) {
         return customerService.getCustomerById(id);
     }
+
+//    @PostMapping("/createCustomer")
+//    public Customer createCustomer(@RequestBody Customer customer) {
+//        return customerService.createNewCustomer(customer);
+//    }
 }

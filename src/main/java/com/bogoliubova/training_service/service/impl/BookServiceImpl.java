@@ -14,19 +14,13 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
 
-//    @Override
-//    public Book getBookByBookId(String book_id) {
-//
-//        //return bookRepository.findBookByBookId(UUID.fromString(bookId));
-//
-//
-//
-////        return bookRepository.findBookByBookId(UUID.fromString(book_id));
-//        return bookRepository.getBookByBookId(UUID.fromString(book_id));
-//    }
-
     @Override
-    public Book getBookById(String book_id) {
-        return bookRepository.findBookByBookId(UUID.fromString(book_id));
+    public Book getBookById(String id) {
+        return bookRepository.findBookByBookId(UUID.fromString(id));
     }
+
+//    @Override
+//    public Book createNewBook(Book book) {
+//        return bookRepository.save(book);
+//    }
 }

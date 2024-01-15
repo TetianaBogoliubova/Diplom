@@ -1,12 +1,10 @@
 package com.bogoliubova.training_service.controller.page;
 
+import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Location;
 import com.bogoliubova.training_service.service.interf.LocationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,4 +17,9 @@ public class LocationController {
     public Location getLocationByLocationId(@PathVariable("location_id") String id) {
         return locationService.getLocationById(id);
     }
+
+//    @PostMapping("/createLocation")
+//    public Location createLocation(@RequestBody Location location) {
+//        return locationService.createNewLocation(location);
+//    }
 }

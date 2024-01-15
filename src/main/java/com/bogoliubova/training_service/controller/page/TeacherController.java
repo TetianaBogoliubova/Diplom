@@ -1,12 +1,10 @@
 package com.bogoliubova.training_service.controller.page;
 
+import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,4 +17,9 @@ public class TeacherController {
     public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
         return teacherService.getTeacherById(id);
     }
+
+//    @PostMapping("/createTeacher")
+//    public Teacher createTeacher(@RequestBody Teacher teacher) {
+//        return teacherService.createNewTeacher(teacher);
+//    }
 }

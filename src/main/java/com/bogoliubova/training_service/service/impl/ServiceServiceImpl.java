@@ -18,5 +18,8 @@ public class ServiceServiceImpl implements ServiceService {
         return serviceRepository.findServiceByServiceId(UUID.fromString(id));
     }
 
-
+//    @Override
+//    public com.bogoliubova.training_service.entity.Service createNewService(com.bogoliubova.training_service.entity.Service service) {
+//        return serviceRepository.save(service);
+//    }
 }

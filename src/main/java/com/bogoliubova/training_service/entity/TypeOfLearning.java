@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -20,7 +22,9 @@ public class TypeOfLearning {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@UuidGenerator
     @Column(name = "type_id")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID typeId;
 
     @Column(name = "learning_types")
