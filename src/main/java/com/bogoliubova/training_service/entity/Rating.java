@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -20,7 +22,9 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@UuidGenerator
     @Column(name = "rating_id")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID ratingId;
 
     @Column(name = "rating_for_teacher")
@@ -28,10 +32,6 @@ public class Rating {
 
     @Column(name = "feedback")
     private String feedback;
-
-//    @OneToOne
-//    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
-//    private Teacher teacher;
 
     @Override
     public boolean equals(Object o) {
@@ -52,7 +52,6 @@ public class Rating {
                 "ratingId=" + ratingId +
                 ", ratingOfTeacher=" + ratingOfTeacher +
                 ", feedback='" + feedback + '\'' +
-                //", teacher=" + teacher +
                 '}';
     }
 }

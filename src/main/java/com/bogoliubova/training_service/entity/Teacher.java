@@ -1,16 +1,17 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,7 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID teacherId;
 
     @Column(name = "first_name")
@@ -34,38 +36,25 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
-
     @OneToMany
     @JoinColumn(name = "direction_id")
+    @JsonIgnore
     private List<Direction> directions;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    @JsonIgnore
     private Location location;
 
     @OneToMany
     @JoinColumn(name = "rating_id")
+    @JsonIgnore
     private List<Rating> ratings;
-
-//    @OneToOne
-//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")
-//    private TypeOfLearning typesOfLearning;
-
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "type_id", referencedColumnName = "type_id")//, insertable = false, updatable = false)
-//    private List<TypeOfLearning> typesOfLearning;
 
     @OneToMany
     @JoinColumn(name = "type_id")
+    @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
-
 
     @Override
     public boolean equals(Object o) {

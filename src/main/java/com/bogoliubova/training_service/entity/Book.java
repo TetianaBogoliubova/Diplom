@@ -1,16 +1,17 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+import java.util.UUID;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,8 +22,10 @@ import static jakarta.persistence.CascadeType.*;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "book_id")
+    @Column(name = "book_id", columnDefinition = "UUID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    //@UuidGenerator
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID bookId;
 
     @Column(name = "b_title")
@@ -34,15 +37,8 @@ public class Book {
     @Column(name = "b_price")
     private double bookPrice;
 
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
-
     @OneToMany
+    @JsonIgnore
     @JoinColumn(name = "direction_id")
     private List<Direction> directions;
 

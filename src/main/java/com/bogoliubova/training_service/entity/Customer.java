@@ -1,16 +1,17 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static jakarta.persistence.CascadeType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +24,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id")
+    @JdbcTypeCode(SqlTypes.CHAR)
     private UUID customerId;
 
     @Column(name = "first_name")
@@ -36,18 +38,12 @@ public class Customer {
 
     @OneToOne()
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
+    @JsonIgnore
     private Location location;
-
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
 
     @OneToMany
     @JoinColumn(name = "direction_id")
+    @JsonIgnore
     private List<Direction> directions;
 
     @Override
