@@ -1,6 +1,8 @@
 package com.bogoliubova.training_service.service.interf;
 
 import com.bogoliubova.training_service.entity.Book;
+import org.springframework.http.ResponseEntity;
+
 import java.util.Map;
 
 
@@ -9,12 +11,10 @@ public interface BookService {
 
     Book createNewBook(Book book);
 
-    Book updateBook(Book existingBook);
+    ResponseEntity<Book> updateBook(Book existingBook, String id);
 
-    boolean deleteBookById(String bookId);
+    ResponseEntity<String> deleteBookById(String bookId);
 
-    Book patchUpdateBook(String bookId, Map<String, Object> updates);
+    ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates);
 }
 
-
-// Book patchUpdateBook(String bookId,String bookTitle, String author, Double bookPrice);

@@ -1,9 +1,12 @@
 package com.bogoliubova.training_service.service.impl;
 
 import com.bogoliubova.training_service.entity.Book;
+import com.bogoliubova.training_service.exception.BookEx;
 import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -18,32 +21,49 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book getBookById(String id) {
-
         return bookRepository.findBookByBookId(UUID.fromString(id));
     }
 
     @Override
     public Book createNewBook(Book book) {
-
         return bookRepository.save(book);
     }
 
     @Override
-    public Book updateBook(Book existingBook) {
-        return bookRepository.save(existingBook);
+    public ResponseEntity<Book> updateBook(Book updateBook, String id) {
+
+        Book existingBook = bookRepository.findBookByBookId(UUID.fromString(id));
+
+        if (existingBook != null) {
+            existingBook.setBookTitle(updateBook.getBookTitle());
+            existingBook.setAuthor(updateBook.getAuthor());
+            existingBook.setBookPrice(updateBook.getBookPrice());
+            existingBook.setDirections(updateBook.getDirections());
+
+            Book updateBookResult = bookRepository.save(existingBook);
+
+            return new ResponseEntity<>(updateBookResult, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
+
     @Override
-    public Book patchUpdateBook(String bookId, Map<String, Object> updates) {
+    public ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates) {
         UUID uuidBookId = UUID.fromString(bookId);
-        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);
+        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);//.orElseThrow(() -> BookEx("now f" + updateBook()));
 
         if (optionalBook.isPresent()) {
             Book existingBook = optionalBook.get();
             applyUpdates(existingBook, updates);
-            return bookRepository.save(existingBook);
+
+            Book updatedBook = bookRepository.save(existingBook);
+
+            return new ResponseEntity<>(updatedBook, HttpStatus.OK);
         } else {
-            return null;
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -60,31 +80,32 @@ public class BookServiceImpl implements BookService {
         }
     }
 
+//    @Override
+//    public boolean deleteBookById(String bookId) {
+//        UUID uuidBookId = UUID.fromString(bookId);
+//        Optional<Book> book = bookRepository.findById(uuidBookId);
+//        if (book.isPresent()) {
+//            bookRepository.delete(book.get());
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
+
+
     @Override
-    public boolean deleteBookById(String bookId) {
+    public ResponseEntity<String> deleteBookById(String bookId) {
         UUID uuidBookId = UUID.fromString(bookId);
         Optional<Book> book = bookRepository.findById(uuidBookId);
         if (book.isPresent()) {
             bookRepository.delete(book.get());
-            return true;
+            return new ResponseEntity<>("Book deleted successfully", HttpStatus. OK);
         } else {
-            return false;
+            return new ResponseEntity<>("Book not found", HttpStatus.NOT_FOUND);
         }
     }
 }
 
-
-/////////////////////
-//    @Override
-//    public Book patchUpdateBook(String bookId, String bookTitle, String author, Double bookPrice) {
-//        UUID uuidBookId = UUID.fromString(bookId);
-//        int updateRows = bookRepository.patchUpdateBook(uuidBookId.toString(), bookTitle, author, bookPrice);
-//        if (updateRows > 0) {
-//            return bookRepository.findBookByBookId(uuidBookId);
-//        } else {
-//            return null;
-//        }
-//    }
 
 
 
