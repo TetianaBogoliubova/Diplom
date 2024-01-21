@@ -1,7 +1,6 @@
 package com.bogoliubova.training_service.service.impl;
 
 import com.bogoliubova.training_service.entity.Book;
-import com.bogoliubova.training_service.exception.BookEx;
 import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +61,6 @@ public class BookServiceImpl implements BookService {
 
             return new ResponseEntity<>(updatedBook, HttpStatus.OK);
         } else {
-
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -80,26 +78,13 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-//    @Override
-//    public boolean deleteBookById(String bookId) {
-//        UUID uuidBookId = UUID.fromString(bookId);
-//        Optional<Book> book = bookRepository.findById(uuidBookId);
-//        if (book.isPresent()) {
-//            bookRepository.delete(book.get());
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-
-
     @Override
     public ResponseEntity<String> deleteBookById(String bookId) {
         UUID uuidBookId = UUID.fromString(bookId);
         Optional<Book> book = bookRepository.findById(uuidBookId);
         if (book.isPresent()) {
             bookRepository.delete(book.get());
-            return new ResponseEntity<>("Book deleted successfully", HttpStatus. OK);
+            return new ResponseEntity<>("Book deleted successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Book not found", HttpStatus.NOT_FOUND);
         }
