@@ -3,9 +3,6 @@ package com.bogoliubova.training_service.entity;
 import com.bogoliubova.training_service.entity.enums.AllServices;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,10 +20,10 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "services")
-public class Service {
+public class Services {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     //@UuidGenerator
     @Column(name = "service_id")
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -53,7 +50,7 @@ public class Service {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
+        Services service = (Services) o;
         return Double.compare(servicePrice, service.servicePrice) == 0 && Objects.equals(serviceId, service.serviceId) && type == service.type;
     }
 

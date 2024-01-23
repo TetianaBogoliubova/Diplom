@@ -130,12 +130,12 @@
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="fk_services_direction" references="directions(direction_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="book_id" type="char(36)">
                 <constraints foreignKeyName="fk_services_book" references="books(book_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
         </createTable>
