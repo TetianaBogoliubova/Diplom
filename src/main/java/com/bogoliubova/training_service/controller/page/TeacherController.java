@@ -1,5 +1,6 @@
 package com.bogoliubova.training_service.controller.page;
 
+import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +13,10 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-//    @GetMapping("/id_teacher/{teacher_id}")
-//    public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
-//        return teacherService.getTeacherById(id);
-//    }
+    @GetMapping("/id_teacher/{teacher_id}")
+    public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
+        return teacherService.getTeacherById(id);
+    }
 
     @PostMapping("/createTeacher")
     public Teacher createTeacher(@RequestBody Teacher teacher) {

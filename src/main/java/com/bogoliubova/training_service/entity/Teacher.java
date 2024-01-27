@@ -22,7 +22,7 @@ import java.util.UUID;
 public class Teacher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "teacher_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID teacherId;

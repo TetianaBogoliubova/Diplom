@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
     Teacher findTeacherByTeacherId(UUID teacherId);
+
+    Teacher getTeacherByFirstNameAndLastName(String firstName, String lastName);
 }
