@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class LocationController {
 
     private final LocationService locationService;
-//
-//    @GetMapping("/id_location/{location_id}")
-//    public Location getLocationByLocationId(@PathVariable("location_id") String id) {
-//        return locationService.getLocationById(id);
-//    }
+
+    @GetMapping("/id_location/{location_id}")
+    public Location getLocationByLocationId(@PathVariable("location_id") String id) {
+        return locationService.getLocationById(id);
+    }
 
     @PostMapping("/createLocation")
     public Location createLocation(@RequestBody Location location) {

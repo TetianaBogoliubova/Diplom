@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -31,14 +32,16 @@ public class TypeOfLearning {
     private AllLearningTypes learningTypes;
 
     @Column(name = "special_price")
-    private double specialPrice;
+    private Double specialPrice;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeOfLearning that = (TypeOfLearning) o;
-        return Double.compare(specialPrice, that.specialPrice) == 0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
+        //boolean result = BigDecimal.valueOf(specialPrice, that.specialPrice) == 0.0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
+        //return result;
+        return Double.compare(specialPrice, that.specialPrice) == 0.0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
     }
 
     @Override
