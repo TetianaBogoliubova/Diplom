@@ -69,12 +69,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    @Override
-    public CustomerDto getCLDId(UUID id) {
-        Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
-        return customerMapper.toDto(entity);
-    }
-
     private void applyUpdates(Customer customer, Map<String, Object> updates) {
 
         if (updates.containsKey("firstName")) {
@@ -99,6 +93,14 @@ public class CustomerServiceImpl implements CustomerService {
             return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
         }
     }
+
+    @Override
+    public CustomerDto getCLDId(UUID id) {
+        Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
+        return customerMapper.toDto(entity);
+    }
+
+
 }
 
 
