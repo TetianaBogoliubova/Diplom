@@ -1,7 +1,6 @@
 package com.bogoliubova.training_service.controller.page;
 
 import com.bogoliubova.training_service.entity.Customer;
-
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,8 @@ public class CustomerController {
         return customerService.createNewCustomer(customer);
     }
 
-    @PutMapping(value = "/updateCustomer/{customer_id}")//http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864
+    @PutMapping(value = "/updateCustomer/{customer_id}")
+//http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     public Customer updateCustomerById(@RequestBody Customer updateCustomer, @PathVariable("customer_id") String id) {
         return customerService.updateCustomer(updateCustomer, id);
     }
@@ -42,4 +42,5 @@ public class CustomerController {
     public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {
         return customerService.deleteCustomerById(customerId);
     }
+
 }

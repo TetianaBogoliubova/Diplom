@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class TeacherRestController {
 
-   private final TeacherService teacherService;
+    private final TeacherService teacherService;
 
     @PostMapping("/createTeacherRest")
     public Teacher createTeacherRest(@RequestBody TeacherDto teacherDto) {
-
         return teacherService.create(teacherDto);
     }
 }
