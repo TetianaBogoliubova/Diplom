@@ -99,7 +99,6 @@ public class CustomerServiceImpl implements CustomerService {
         Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
         return customerMapper.toDto(entity);
     }
-
 }
 
 
