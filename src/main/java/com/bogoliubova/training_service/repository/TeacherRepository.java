@@ -17,18 +17,9 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
 
     List<Teacher> findTeachersByLocation_City(String city);
 
-//    @Query("SELECT new com.bogoliubova.training_service.dto.TeacherDto(t.firstName, t.lastName, t.teachEmail, t.directions, t.location, t.ratings) " +
-//            "FROM Teacher t JOIN t.ratings r " +
-//            "WHERE r.ratingOfTeacher = :ratingOfTeacher")// никакой запрос не срабатывает!
-
     @Query("SELECT t FROM Teacher t " +
             "JOIN t.ratings r " +
             "WHERE r.ratingOfTeacher = :ratingOfTeacher")
-        //запрос срабатывает, но выдает только пустые списки
-
-//    @Query("SELECT t FROM Teacher t " +
-//            "LEFT JOIN FETCH t.ratings r " +
-//            "WHERE r.ratingOfTeacher = :ratingOfTeacher") //запрос срабатывает, но выдает только пустые списки
     List<Teacher> findTeachersByRatings(@Param("ratingOfTeacher") Integer ratingOfTeacher);
 
 }
@@ -40,3 +31,12 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
 //            "WHERE d.directionId = :direction " +
 //            "AND :rating MEMBER OF r.ratingOfTeacher")
 //    List<Teacher> findTeachersByDirectionAndRating(@Param("direction") String direction, @Param("rating") Integer rating);
+
+
+//    @Query("SELECT t FROM Teacher t " +
+//            "LEFT JOIN FETCH t.ratings r " +
+//            "WHERE r.ratingOfTeacher = :ratingOfTeacher") //запрос срабатывает, но выдает только пустые списки
+
+//    @Query("SELECT new com.bogoliubova.training_service.dto.TeacherDto(t.firstName, t.lastName, t.teachEmail, t.directions, t.location, t.ratings) " +
+//            "FROM Teacher t JOIN t.ratings r " +
+//            "WHERE r.ratingOfTeacher = :ratingOfTeacher")// никакой запрос не срабатывает!

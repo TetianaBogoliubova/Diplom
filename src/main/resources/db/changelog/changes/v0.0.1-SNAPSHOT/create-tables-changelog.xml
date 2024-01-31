@@ -190,6 +190,12 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="teacher_id" type="char(36)">
+                <constraints nullable="false"/>
+<!--                <constraints foreignKeyName="fk_ratings_teacher" references="ratings(teacher_id)" unique="false"-->
+<!--                             nullable="true"/>-->
+            </column>
+
         </createTable>
 
     </changeSet>

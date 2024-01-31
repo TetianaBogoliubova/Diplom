@@ -21,7 +21,7 @@ import java.util.UUID;
 public class Rating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     //@UuidGenerator
     @Column(name = "rating_id")
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -32,6 +32,10 @@ public class Rating {
 
     @Column(name = "feedback")
     private String feedback;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id",  referencedColumnName = "teacher_id")
+    private Teacher teacher;
 
     @Override
     public boolean equals(Object o) {
@@ -52,6 +56,7 @@ public class Rating {
                 "ratingId=" + ratingId +
                 ", ratingOfTeacher=" + ratingOfTeacher +
                 ", feedback='" + feedback + '\'' +
+                ", teacher=" + teacher +
                 '}';
     }
 }

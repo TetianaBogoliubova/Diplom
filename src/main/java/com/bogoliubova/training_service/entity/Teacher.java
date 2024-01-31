@@ -46,8 +46,7 @@ public class Teacher {
     @JsonIgnore
     private Location location;
 
-    @OneToMany
-    @JoinColumn(name = "rating_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Rating> ratings;
 

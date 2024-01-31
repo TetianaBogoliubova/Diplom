@@ -34,7 +34,7 @@ public class TeacherRestController {
 
 
 
-    @GetMapping("/getTeacherRating/{rating}")
+    @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9
     public List<TeacherDto> getTeacherByRating(@PathVariable("rating") Integer rating) {
         return teacherService.getTByR(rating);
     }
