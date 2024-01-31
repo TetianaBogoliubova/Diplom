@@ -2,6 +2,7 @@ package com.bogoliubova.training_service.controller.rest;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.entity.Teacher;
+import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,17 +33,14 @@ public class TeacherRestController {
         return teacherService.getTByC(city);
     }
 
-
-
     @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9
     public List<TeacherDto> getTeacherByRating(@PathVariable("rating") Integer rating) {
         return teacherService.getTByR(rating);
     }
+
+    @GetMapping("/getTeacherDirAndRating/{direction}/{rating}")
+    //http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
+    public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") AllDirections dirTitle, @PathVariable("rating") Integer ratingOfTeacher) {
+        return teacherService.getTByDR(dirTitle, ratingOfTeacher);
+    }
 }
-
-
-
-//    @GetMapping("/getTeacherRating/{direction}/{rating}")
-//    public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") String direction, @PathVariable("rating") Integer rating) {
-//        return teacherService.getTByDR(direction, rating);
-//    }

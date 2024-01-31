@@ -2,7 +2,6 @@ package com.bogoliubova.training_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +34,7 @@ public class Rating {
     private String feedback;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id",  referencedColumnName = "teacher_id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     @JsonIgnore
     private Teacher teacher;
 

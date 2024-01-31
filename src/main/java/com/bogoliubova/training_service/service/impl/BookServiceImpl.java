@@ -1,7 +1,5 @@
 package com.bogoliubova.training_service.service.impl;
 
-//import com.bogoliubova.training_service.entity.Service;
-
 import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
@@ -24,12 +22,6 @@ public class BookServiceImpl implements BookService {
     public Book getBookById(String id) {
         return bookRepository.findBookByBookId(UUID.fromString(id));
     }
-
-//    @Override
-//    public  getBookById(String id) {
-//        return bookRepository.findBookByBookId(UUID.fromString(id));
-//    }
-
 
     @Override
     public Book createNewBook(Book book) {

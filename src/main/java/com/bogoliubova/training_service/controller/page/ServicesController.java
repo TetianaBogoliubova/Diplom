@@ -12,7 +12,8 @@ public class ServicesController {
 
     private final ServicesService servicesService;
 
-    @GetMapping("/id_services/{service_id}")//http://localhost:8080/services/id_services/056e0725-e24a-7cd3-f291-258372740391
+    @GetMapping("/id_services/{service_id}")
+//http://localhost:8080/services/id_services/056e0725-e24a-7cd3-f291-258372740391
     public ServicesDto getServicesByServiceId(@PathVariable("service_id") String id) {
         return servicesService.getServicesDtoById(id);
     }

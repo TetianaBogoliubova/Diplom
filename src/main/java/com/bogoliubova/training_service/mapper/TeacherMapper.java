@@ -25,8 +25,7 @@ public interface TeacherMapper {
 
     @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
     @Mapping(source = "teacher.ratings", target = "ratings", qualifiedByName = "findTeachersRatings")
-    @Mapping(source = "teacher.directions", target = "directions")
-//, qualifiedByName = "findTeachersByDirectionAndRating")
+    @Mapping(source = "teacher.directions", target = "directions", qualifiedByName = "findTeachersByDirectionAndRating")
     default List<TeacherDto> toDtoList(List<Teacher> teachers) {
         return teachers.stream()
                 .map(entity -> toDto(entity))
@@ -43,8 +42,8 @@ public interface TeacherMapper {
         return toDto(teacher);
     }
 
-//    @Named("findTeachersByDirectionAndRating")
-//    default TeacherDto findTeacherByDirectionsAndRatings(Teacher teacher) {
-//        return toDto(teacher);
-//    }
+    @Named("findTeachersByDirectionAndRating")
+    default TeacherDto findTeacherByDirectionsAndRatings(Teacher teacher) {
+        return toDto(teacher);
+    }
 }

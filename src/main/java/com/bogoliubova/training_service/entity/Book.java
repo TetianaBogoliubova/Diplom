@@ -9,9 +9,9 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.util.UUID;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,7 +42,7 @@ public class Book {
     private List<Direction> directions;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_id",  referencedColumnName = "service_id")
+    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
     @JsonIgnore
     private Services services;
 

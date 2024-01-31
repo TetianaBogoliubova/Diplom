@@ -2,11 +2,8 @@ package com.bogoliubova.training_service.controller.page;
 
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.service.interf.CustomerService;
-import com.bogoliubova.training_service.validation.annotation.UuidChecker1;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.constraints.UUID;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -14,15 +11,13 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/customer")
-//@Validated
 public class CustomerController {
 
     private final CustomerService customerService;
 
     @GetMapping("/id_customer/{customer_id}")
 //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
-    //public Customer getCustomerByCustomerId(@UuidChecker1 @PathVariable("customer_id") String id) {
-        public Customer getCustomerByCustomerId(@PathVariable("customer_id") String id) {
+    public Customer getCustomerByCustomerId(@PathVariable("customer_id") String id) {
         return customerService.getCustomerById(id);
     }
 
@@ -47,5 +42,4 @@ public class CustomerController {
     public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {
         return customerService.deleteCustomerById(customerId);
     }
-
 }

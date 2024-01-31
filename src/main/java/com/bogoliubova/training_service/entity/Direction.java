@@ -37,22 +37,22 @@ public class Direction {
     private AllGradings grading;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id",  referencedColumnName = "teacher_id")
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     @JsonIgnore
     private Teacher teacher;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "service_id",  referencedColumnName = "service_id")
+    @JoinColumn(name = "service_id", referencedColumnName = "service_id")
     @JsonIgnore
     private Services services;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id",  referencedColumnName = "book_id")
+    @JoinColumn(name = "book_id", referencedColumnName = "book_id")
     @JsonIgnore
     private Book book;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id",  referencedColumnName = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
     @JsonIgnore
     private Customer customer;
 
