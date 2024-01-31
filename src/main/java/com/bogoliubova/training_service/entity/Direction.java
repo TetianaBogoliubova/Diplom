@@ -2,6 +2,7 @@ package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.entity.enums.AllGradings;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -35,6 +36,26 @@ public class Direction {
     @Enumerated(EnumType.STRING)
     private AllGradings grading;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id",  referencedColumnName = "teacher_id")
+    @JsonIgnore
+    private Teacher teacher;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_id",  referencedColumnName = "service_id")
+    @JsonIgnore
+    private Services services;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "book_id",  referencedColumnName = "book_id")
+    @JsonIgnore
+    private Book book;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id",  referencedColumnName = "customer_id")
+    @JsonIgnore
+    private Customer customer;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,6 +75,10 @@ public class Direction {
                 "directionId=" + directionId +
                 ", dirTitle=" + dirTitle +
                 ", grading=" + grading +
+                ", teacher=" + teacher +
+                ", services=" + services +
+                ", book=" + book +
+                ", customer=" + customer +
                 '}';
     }
 }

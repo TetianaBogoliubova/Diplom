@@ -29,6 +29,22 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="teacher_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="service_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="book_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
         </createTable>
 
     </changeSet>
@@ -101,6 +117,9 @@
                 <constraints foreignKeyName="direction_id" references="directions(direction_id)" unique="false"
                              nullable="true"/>
             </column>
+            <column name="service_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
 
         </createTable>
 
@@ -164,6 +183,10 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="teacher_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
         </createTable>
 
     </changeSet>
@@ -192,8 +215,6 @@
 
             <column name="teacher_id" type="char(36)">
                 <constraints nullable="false"/>
-<!--                <constraints foreignKeyName="fk_ratings_teacher" references="ratings(teacher_id)" unique="false"-->
-<!--                             nullable="true"/>-->
             </column>
 
         </createTable>

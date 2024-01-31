@@ -37,10 +37,14 @@ public class Book {
     @Column(name = "b_price")
     private double bookPrice;
 
-    @OneToMany
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    @JoinColumn(name = "direction_id")
     private List<Direction> directions;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "service_id",  referencedColumnName = "service_id")
+    @JsonIgnore
+    private Services services;
 
     @Override
     public boolean equals(Object o) {
@@ -63,6 +67,7 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", bookPrice=" + bookPrice +
                 ", directions=" + directions +
+                ", services=" + services +
                 '}';
     }
 }

@@ -36,8 +36,7 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
@@ -50,8 +49,7 @@ public class Teacher {
     @JsonIgnore
     private List<Rating> ratings;
 
-    @OneToMany
-    @JoinColumn(name = "type_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 

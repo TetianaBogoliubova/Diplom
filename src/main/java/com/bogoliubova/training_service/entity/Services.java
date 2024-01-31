@@ -36,13 +36,11 @@ public class Services {
     @Column(name = "s_price")
     private double servicePrice;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id")
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
-    @OneToMany
-    @JoinColumn(name = "book_id")
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Book> books;
 
@@ -61,7 +59,7 @@ public class Services {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "Services{" +
                 "serviceId=" + serviceId +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
