@@ -17,5 +17,8 @@ public interface TeacherService {
 
     List<TeacherDto> getTByC(String city);
 
+    //List<TeacherDto> getTByDR(String direction, Integer rating);
+
+    List<TeacherDto> getTByR(Integer rating);
 }
 

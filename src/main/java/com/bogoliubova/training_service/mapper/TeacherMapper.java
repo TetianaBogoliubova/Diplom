@@ -2,8 +2,6 @@ package com.bogoliubova.training_service.mapper;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.entity.Teacher;
-import com.bogoliubova.training_service.exception.ErrorMassage;
-import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
@@ -23,25 +21,30 @@ public interface TeacherMapper {
     }
 
     @Mapping(source = "teacher.location", target = "location")
-   // @Mapping(source = "teacher.directions", target = "directions")
-    //TeacherDto toDto(Teacher entity);
     TeacherDto toDto(Teacher teacher);
 
-//    @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
-//    @Mapping(source = "teacher.directions", target = "directions", qualifiedByName = "getTeacherByDirection")
-//    TeacherDto toDto1(Teacher entity);
-
-
-
     @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
-    @Mapping(source = "teacher.directions", target = "directions", qualifiedByName = "getTeacherByDirection")
+    @Mapping(source = "teacher.ratings", target = "ratings", qualifiedByName = "findTeachersRatings")
+    @Mapping(source = "teacher.directions", target = "directions")
+//, qualifiedByName = "findTeachersByDirectionAndRating")
     default List<TeacherDto> toDtoList(List<Teacher> teachers) {
-       return teachers.stream()
-               .map(entity -> toDto(entity))
-               .collect(Collectors.toList());
+        return teachers.stream()
+                .map(entity -> toDto(entity))
+                .collect(Collectors.toList());
     }
+
     @Named("getTeacherByCity")
-    default TeacherDto getTeacherByCity (Teacher teacher) {
+    default TeacherDto getTeacherByCity(Teacher teacher) {
         return toDto(teacher);
     }
+
+    @Named("findTeachersByRatings")
+    default TeacherDto findTeachersByRatings(Teacher teacher) {
+        return toDto(teacher);
+    }
+
+//    @Named("findTeachersByDirectionAndRating")
+//    default TeacherDto findTeacherByDirectionsAndRatings(Teacher teacher) {
+//        return toDto(teacher);
+//    }
 }

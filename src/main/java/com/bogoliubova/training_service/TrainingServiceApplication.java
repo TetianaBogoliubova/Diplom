@@ -35,3 +35,11 @@ public class TrainingServiceApplication {
 //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY) // not for output
 // @ValidPassword	@NotBlank(message = "{validation.field.NotBlank}")
 // private String password;
+
+//@see "Maven Annotation Processing Configuration"
+
+//private static String TEMPLATE =
+//    "^\\p{XDigit}{8}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{4}-\\p{XDigit}{12}$";
+
+//private static final String PATTERN =
+//            "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$»;

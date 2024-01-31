@@ -21,7 +21,8 @@ public class TeacherRestController {
         return teacherService.create(teacherDto);
     }
 
-    @GetMapping("/id_teacherRest/{teacher_id}")//http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
+    @GetMapping("/id_teacherRest/{teacher_id}")
+//http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
     public TeacherDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") UUID id) {
         return teacherService.getFLRId(id);
     }
@@ -30,4 +31,18 @@ public class TeacherRestController {
     public List<TeacherDto> getTeacherByCity(@PathVariable("city") String city) {
         return teacherService.getTByC(city);
     }
+
+
+
+    @GetMapping("/getTeacherRating/{rating}")
+    public List<TeacherDto> getTeacherByRating(@PathVariable("rating") Integer rating) {
+        return teacherService.getTByR(rating);
+    }
 }
+
+
+
+//    @GetMapping("/getTeacherRating/{direction}/{rating}")
+//    public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") String direction, @PathVariable("rating") Integer rating) {
+//        return teacherService.getTByDR(direction, rating);
+//    }

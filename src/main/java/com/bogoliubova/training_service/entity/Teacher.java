@@ -83,11 +83,4 @@ public class Teacher {
                 '}';
     }
 
-    public List<Direction> getDirections() {
-        return directions;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
 }
