@@ -12,7 +12,6 @@ public class UuidAnnotationChecker1 implements ConstraintValidator<UuidChecker1,
 
     private static final String TEMPLATE = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$";
 
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return Optional.ofNullable(value)

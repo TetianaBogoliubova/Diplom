@@ -5,7 +5,6 @@ import com.bogoliubova.training_service.entity.Customer;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
-import java.util.UUID;
 
 public interface CustomerService {
     Customer getCustomerById(String id);
@@ -18,5 +17,5 @@ public interface CustomerService {
 
     Customer patchUpdateCustomerById(String customerId, Map<String, Object> updates);
 
-    CustomerDto getCLDId(UUID id);
+    CustomerDto getCLDId(String id);
 }

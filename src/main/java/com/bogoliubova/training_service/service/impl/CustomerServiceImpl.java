@@ -95,8 +95,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCLDId(UUID id) {
-        Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
-        return customerMapper.toDto(entity);
+    public CustomerDto getCLDId(String id) {
+        Optional<CustomerDto> entity = customerRepository.findById(UUID.fromString(id))
+                .map(c -> customerMapper.toDto(c));
+        return entity.orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
     }
 }
