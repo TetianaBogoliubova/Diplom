@@ -15,11 +15,8 @@ public class UuidAnnotationChecker implements ConstraintValidator<UuidChecker, S
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         return Optional.ofNullable(value)
-                .filter(uuid -> !uuid.toString().isBlank())
-                .map(uuid -> uuid.toString().matches(TEMPLATE))
+                .filter(uuid -> !uuid.isBlank())
+                .map(uuid -> uuid.matches(TEMPLATE))
                 .orElse(false);
     }
 }
-
-
-

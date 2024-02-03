@@ -19,4 +19,5 @@ public @interface UuidChecker {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
 }

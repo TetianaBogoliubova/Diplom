@@ -1,6 +1,6 @@
 package com.bogoliubova.training_service.validation.annotation;
 
-import com.bogoliubova.training_service.validation.constraint.UuidAnnotationChecker1;
+import com.bogoliubova.training_service.validation.constraint.UuidAnnotationRestChecker;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -11,13 +11,12 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {UuidAnnotationChecker1.class})
+@Constraint(validatedBy = {UuidAnnotationRestChecker.class})
 
-public @interface UuidChecker1 {
+public @interface UuidRestChecker {
     String message() default "It's not UUID format!!!";
 
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
-
 }
