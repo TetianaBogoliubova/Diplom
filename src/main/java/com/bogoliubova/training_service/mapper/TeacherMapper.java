@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.mapper;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,6 +23,9 @@ public interface TeacherMapper {
 
     @Mapping(source = "teacher.location", target = "location")
     TeacherDto toDto(Teacher teacher);
+
+    @Mapping(source = "teacher.ratings", target = "ratings")
+    TeacherFullNameAndRatingDto toDtoFullName(Teacher teacher);
 
     @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
     @Mapping(source = "teacher.ratings", target = "ratings", qualifiedByName = "findTeachersRatings")

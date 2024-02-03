@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllLearningTypes;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import java.util.UUID;
 public class TypeOfLearning {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "type_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID typeId;
@@ -32,6 +33,11 @@ public class TypeOfLearning {
 
     @Column(name = "special_price")
     private double specialPrice;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
+    @JsonIgnore
+    private Teacher teacher;
 
     @Override
     public boolean equals(Object o) {
@@ -52,6 +58,7 @@ public class TypeOfLearning {
                 "typeId=" + typeId +
                 ", learningTypes=" + learningTypes +
                 ", specialPrice=" + specialPrice +
+                ", teacher=" + teacher +
                 '}';
     }
 }

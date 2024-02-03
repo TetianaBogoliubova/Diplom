@@ -22,7 +22,7 @@ import java.util.UUID;
 public class Teacher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "teacher_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID teacherId;
@@ -36,8 +36,7 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
@@ -46,13 +45,11 @@ public class Teacher {
     @JsonIgnore
     private Location location;
 
-    @OneToMany
-    @JoinColumn(name = "rating_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Rating> ratings;
 
-    @OneToMany
-    @JoinColumn(name = "type_id")
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 
@@ -82,4 +79,5 @@ public class Teacher {
                 ", typeOfLearningId=" + typesOfLearning +
                 '}';
     }
+
 }

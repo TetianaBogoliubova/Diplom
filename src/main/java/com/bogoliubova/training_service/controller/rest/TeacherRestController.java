@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.controller.rest;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.service.interf.TeacherService;
@@ -24,7 +25,7 @@ public class TeacherRestController {
 
     @GetMapping("/id_teacherRest/{teacher_id}")
 //http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
-    public TeacherDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") UUID id) {
+    public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") UUID id) {
         return teacherService.getFLRId(id);
     }
 

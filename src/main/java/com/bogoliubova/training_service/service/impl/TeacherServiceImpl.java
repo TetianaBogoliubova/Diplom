@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.service.impl;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.exception.ErrorMassage;
@@ -43,9 +44,9 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherDto getFLRId(UUID id) {
+    public TeacherFullNameAndRatingDto getFLRId(UUID id) {
         Teacher entity = teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
-        return teacherMapper.toDto(entity);
+        return teacherMapper.toDtoFullName(entity);
     }
 
     @Override

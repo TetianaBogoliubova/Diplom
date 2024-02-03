@@ -3,9 +3,6 @@ package com.bogoliubova.training_service.entity;
 import com.bogoliubova.training_service.entity.enums.AllServices;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +23,7 @@ import java.util.UUID;
 public class Services {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     //@UuidGenerator
     @Column(name = "service_id")
     @JdbcTypeCode(SqlTypes.CHAR)
@@ -39,13 +36,11 @@ public class Services {
     @Column(name = "s_price")
     private double servicePrice;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id")
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
-    @OneToMany
-    @JoinColumn(name = "book_id")
+    @OneToMany(mappedBy = "services", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Book> books;
 
@@ -64,7 +59,7 @@ public class Services {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "Services{" +
                 "serviceId=" + serviceId +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
@@ -73,4 +68,3 @@ public class Services {
                 '}';
     }
 }
-

@@ -1,5 +1,4 @@
 package com.bogoliubova.training_service.entity;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
