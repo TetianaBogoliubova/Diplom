@@ -15,7 +15,7 @@ public interface TeacherService {
 
     Teacher create(TeacherDto teacherDto);
 
-    TeacherFullNameAndRatingDto getFLRId(UUID id);
+    TeacherFullNameAndRatingDto getFLRId(String id);
 
     List<TeacherDto> getTByC(String city);
 

@@ -23,7 +23,7 @@ public class CustomerRestController {
 
     @GetMapping("/id_customerRest/{customer_id}")
     //http://localhost:8080/customer/id_customerRest/483e5800-e40a-2cd3-f678-617223078864
-    public CustomerDto getCustomerAndLocationAndDirection(@Valid @UuidRestChecker @PathVariable("customer_id") String id) {
+    public CustomerDto getCustomerAndLocationAndDirection(@UuidRestChecker @PathVariable("customer_id") String id) {
         UUID customerId = UUID.fromString(id);
         return customerService.getCLDId(String.valueOf(customerId));
     }

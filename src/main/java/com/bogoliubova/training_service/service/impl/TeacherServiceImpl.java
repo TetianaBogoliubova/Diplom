@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -44,9 +45,14 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public TeacherFullNameAndRatingDto getFLRId(UUID id) {
-        Teacher entity = teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
-        return teacherMapper.toDtoFullName(entity);
+    public TeacherFullNameAndRatingDto getFLRId(String id) {
+        Optional<TeacherFullNameAndRatingDto> entity = teacherRepository.findById(UUID.fromString(id))
+                .map(t -> teacherMapper.toDtoFullName(t));
+        return entity.orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
+
+
+        // Teacher entity = teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
+        //return teacherMapper.toDtoFullName(entity);
     }
 
     @Override
