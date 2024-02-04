@@ -8,6 +8,7 @@ import com.bogoliubova.training_service.exception.ErrorMassage;
 import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import com.bogoliubova.training_service.exception.TeacherWithThisNameAlreadyExistsException;
 import com.bogoliubova.training_service.mapper.TeacherMapper;
+import com.bogoliubova.training_service.repository.LocationRepository;
 import com.bogoliubova.training_service.repository.TeacherRepository;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.UUID;
 public class TeacherServiceImpl implements TeacherService {
 
     private final TeacherRepository teacherRepository;
+    private final LocationRepository locationRepository;
     private final TeacherMapper teacherMapper;
 
     @Override
@@ -49,10 +51,6 @@ public class TeacherServiceImpl implements TeacherService {
         Optional<TeacherFullNameAndRatingDto> entity = teacherRepository.findById(UUID.fromString(id))
                 .map(t -> teacherMapper.toDtoFullName(t));
         return entity.orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
-
-
-        // Teacher entity = teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
-        //return teacherMapper.toDtoFullName(entity);
     }
 
     @Override
@@ -76,3 +74,31 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.toDtoList(teachers);
     }
 }
+
+
+//    @Override
+//    public Teacher create(TeacherDto teacherDto) {
+//        // Создаем учителя
+//        Teacher teacher = new Teacher();
+//        teacher.setFirstName(teacherDto.getFirstName());
+//        teacher.setLastName(teacherDto.getLastName());
+//        teacher.setTeachEmail(teacherDto.getTeachEmail());
+//
+//        // Сохраняем учителя
+//        teacherRepository.save(teacher);
+//
+//        // Получаем местоположение из DTO
+//        LocationDto locationDto = teacherDto.getLocationDto();
+//
+//        // Создаем местоположение и связываем его с учителем
+//        Location location = new Location();
+//        location.setCountry(locationDto.getCountry());
+//        location.setCity(locationDto.getCity());
+//        location.setPostalCode(locationDto.getPostalCode());
+//        location.setTeacher(teacher);
+//
+//        // Сохраняем местоположение
+//        locationRepository.save(location);
+//
+//        return teacher;
+//    }

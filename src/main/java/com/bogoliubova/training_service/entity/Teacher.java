@@ -40,7 +40,7 @@ public class Teacher {
     @JsonIgnore
     private List<Direction> directions;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     @JsonIgnore
     private Location location;
@@ -79,5 +79,4 @@ public class Teacher {
                 ", typeOfLearningId=" + typesOfLearning +
                 '}';
     }
-
 }

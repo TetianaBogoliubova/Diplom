@@ -16,8 +16,9 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-    @GetMapping("/id_teacher/{teacher_id}")//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
-    public Teacher getTeacherByTeacherId(@NotNull @PathVariable("teacher_id") String id) {
+    @GetMapping("/id_teacher/{teacher_id}")
+//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
+    public Teacher getTeacherByTeacherId(@Valid @NotNull @PathVariable("teacher_id") String id) {
         return teacherService.getTeacherById(id);
     }
 

@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
@@ -18,7 +19,11 @@ public interface TeacherMapper {
 
     @Named("toUpperCase")
     static String toUpperCase(String teachEmail) {
-        return teachEmail.toUpperCase();
+        return Optional.ofNullable(teachEmail)
+                .map(String::toUpperCase)
+                .orElse(null);
+
+        //teachEmail.toUpperCase();
     }
 
     @Mapping(source = "teacher.location", target = "location")

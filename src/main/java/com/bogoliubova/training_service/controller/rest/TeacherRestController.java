@@ -23,7 +23,8 @@ public class TeacherRestController {
     private final TeacherService teacherService;
 
     @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
-    public Teacher createTeacherRest(@RequestBody TeacherDto teacherDto) {
+    public Teacher createTeacherRest(@Valid @RequestBody TeacherDto teacherDto) {
+
         return teacherService.create(teacherDto);
     }
 

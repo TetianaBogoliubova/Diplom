@@ -3,7 +3,6 @@ package com.bogoliubova.training_service.controller.rest;
 import com.bogoliubova.training_service.dto.CustomerDto;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import com.bogoliubova.training_service.validation.annotation.UuidRestChecker;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

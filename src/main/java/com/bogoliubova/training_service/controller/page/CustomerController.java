@@ -3,8 +3,6 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import com.bogoliubova.training_service.validation.annotation.UuidChecker;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;

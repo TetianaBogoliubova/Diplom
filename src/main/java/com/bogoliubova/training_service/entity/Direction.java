@@ -24,7 +24,7 @@ public class Direction {
 
     @Id
     @Column(name = "direction_id", columnDefinition = "UUID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID directionId;
 
