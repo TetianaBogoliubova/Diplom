@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,16 +23,6 @@ public class BookServiceImpl implements BookService {
     public Book getBookById(String id) {
         return bookRepository.findBookByBookId(UUID.fromString(id));
     }
-
-
-//    @Override
-//    public  getBookById(String id) {
-//
-//        return bookRepository.findBookByBookId(UUID.fromString(id));
-//    }
-
-
-
 
 
     @Override
@@ -58,11 +49,10 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-
     @Override
     public ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates) {
         UUID uuidBookId = UUID.fromString(bookId);
-        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);//.orElseThrow(() -> BookEx("now f" + updateBook()));
+        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);
 
         if (optionalBook.isPresent()) {
             Book existingBook = optionalBook.get();
@@ -85,7 +75,7 @@ public class BookServiceImpl implements BookService {
             book.setAuthor((String) updates.get("author"));
         }
         if (updates.containsKey("bookPrice")) {
-            book.setBookPrice((Double) updates.get("bookPrice"));
+            book.setBookPrice((BigDecimal) updates.get("bookPrice"));
         }
     }
 

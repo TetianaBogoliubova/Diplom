@@ -51,34 +51,6 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-//    @Override
-//    public Customer updateCustomer(Customer updateCustomer, String customerId) {
-//        try {
-//            UUID uuidCustomerId = UUID.fromString(customerId);
-//            Customer existingCustomer = customerRepository.findById(uuidCustomerId)
-//                    .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
-//
-//            validateUpdateCustomer(updateCustomer);
-//
-//            existingCustomer.setFirstName(updateCustomer.getFirstName());
-//            existingCustomer.setLastName(updateCustomer.getLastName());
-//            existingCustomer.setCusEmail(updateCustomer.getCusEmail());
-//            existingCustomer.setLocation(updateCustomer.getLocation());
-//            existingCustomer.setDirections(updateCustomer.getDirections());
-//
-//            return customerRepository.save(existingCustomer);
-//        } catch (Exception e) {
-//            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
-//        }
-//    }
-//
-//    private void validateUpdateCustomer(Customer updateCustomer) {
-//        if (updateCustomer.getFirstName() == null || updateCustomer.getLastName() == null ||
-//                updateCustomer.getCusEmail() == null || updateCustomer.getLocation() == null ||
-//                updateCustomer.getDirections() == null) {
-//            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_FIELD_MISSING);
-//        }
-//    }
 
     @Override
     public Customer patchUpdateCustomerById(String customerId, Map<String, Object> updates) {
@@ -120,3 +92,34 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 }
+
+
+
+//    @Override
+//    public Customer updateCustomer(Customer updateCustomer, String customerId) {
+//        try {
+//            UUID uuidCustomerId = UUID.fromString(customerId);
+//            Customer existingCustomer = customerRepository.findById(uuidCustomerId)
+//                    .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
+//
+//            validateUpdateCustomer(updateCustomer);
+//
+//            existingCustomer.setFirstName(updateCustomer.getFirstName());
+//            existingCustomer.setLastName(updateCustomer.getLastName());
+//            existingCustomer.setCusEmail(updateCustomer.getCusEmail());
+//            existingCustomer.setLocation(updateCustomer.getLocation());
+//            existingCustomer.setDirections(updateCustomer.getDirections());
+//
+//            return customerRepository.save(existingCustomer);
+//        } catch (Exception e) {
+//            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
+//        }
+//    }
+//
+//    private void validateUpdateCustomer(Customer updateCustomer) {
+//        if (updateCustomer.getFirstName() == null || updateCustomer.getLastName() == null ||
+//                updateCustomer.getCusEmail() == null || updateCustomer.getLocation() == null ||
+//                updateCustomer.getDirections() == null) {
+//            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_FIELD_MISSING);
+//        }
+//    }
