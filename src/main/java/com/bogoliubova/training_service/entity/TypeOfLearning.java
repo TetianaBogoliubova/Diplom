@@ -34,7 +34,7 @@ public class TypeOfLearning {
     @Column(name = "special_price")
     private double specialPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     @JsonIgnore
     private Teacher teacher;

@@ -33,7 +33,7 @@ public class Rating {
     @Column(name = "feedback")
     private String feedback;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     @JsonIgnore
     private Teacher teacher;

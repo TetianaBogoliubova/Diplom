@@ -36,13 +36,13 @@ public class Book {
     private String author;
 
     @Column(name = "b_price")
-    private double bookPrice;
+    private BigDecimal bookPrice;
 
     @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     @JoinColumn(name = "service_id", referencedColumnName = "service_id")
     @JsonIgnore
     private Services services;
