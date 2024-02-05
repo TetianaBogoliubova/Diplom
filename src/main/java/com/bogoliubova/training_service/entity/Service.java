@@ -74,3 +74,14 @@ public class Service {
     }
 }
 
+<<<<<<< HEAD
+=======
+
+//    @OneToOne
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private Direction direction;
+
+//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
+//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
+//    private List<Direction> directions;
+>>>>>>> origin/feature/first_controller
