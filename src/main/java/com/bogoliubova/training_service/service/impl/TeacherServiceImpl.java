@@ -79,6 +79,10 @@ public class TeacherServiceImpl implements TeacherService {
 //    @Override
 //    public Teacher create(TeacherDto teacherDto) {
 //        // Создаем учителя
+
+   // Teacher createNewTeacher(Teacher teacher)
+
+
 //        Teacher teacher = new Teacher();
 //        teacher.setFirstName(teacherDto.getFirstName());
 //        teacher.setLastName(teacherDto.getLastName());

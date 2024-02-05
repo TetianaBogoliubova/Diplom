@@ -40,7 +40,7 @@ public class Teacher {
     @JsonIgnore
     private List<Direction> directions;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     @JsonIgnore
     private Location location;
