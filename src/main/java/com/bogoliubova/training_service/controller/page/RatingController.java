@@ -12,14 +12,13 @@ public class RatingController {
 
     private final RatingService ratingService;
 
-    @GetMapping("id_rating/{rating_id}")
-    public Rating getRatingByRatingId(@PathVariable("rating_id") String id) {
-        return ratingService.getRatingById(id);
-    }
-
-//    @PostMapping("/createRating")
-//    public Rating createRating(@RequestBody Rating rating) {
-//        return ratingService.createNewRating(rating);
+//    @GetMapping("id_rating/{rating_id}")
+//    public Rating getRatingByRatingId(@PathVariable("rating_id") String id) {
+//        return ratingService.getRatingById(id);
 //    }
-//}
+
+    @PostMapping("/createRating")
+    public Rating createRating(@RequestBody Rating rating) {
+        return ratingService.createNewRating(rating);
+    }
 }

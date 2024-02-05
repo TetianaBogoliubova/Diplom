@@ -9,13 +9,10 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import java.util.List;
 import java.util.Objects;
-<<<<<<< HEAD
-=======
-import java.util.UUID;
->>>>>>> origin/feature/first_controller
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +36,7 @@ public class Book {
     private String author;
 
     @Column(name = "b_price")
-    private double bookPrice;
+    private BigDecimal bookPrice;
 
     @OneToMany
     @JsonIgnore
@@ -69,12 +66,7 @@ public class Book {
                 ", directions=" + directions +
                 '}';
     }
-<<<<<<< HEAD
 }
-=======
-}
-
-
 
 
 
@@ -157,4 +149,4 @@ public class Book {
 //    @OneToMany//(fetch = FetchType.LAZY, orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
 //    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
 //    private List<Direction> directions;
->>>>>>> origin/feature/first_controller
+

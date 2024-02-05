@@ -130,12 +130,12 @@
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="fk_services_direction" references="directions(direction_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="book_id" type="char(36)">
                 <constraints foreignKeyName="fk_services_book" references="books(book_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
         </createTable>
@@ -222,12 +222,12 @@
 
             <column name="location_id" type="char(36)">
                 <constraints foreignKeyName="fk_customers_location" references="locations(location_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="fk_customers_direction" references="directions(direction_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
         </createTable>
@@ -262,22 +262,22 @@
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="fk_teachers_direction" references="directions(direction_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="location_id" type="char(36)">
                 <constraints foreignKeyName="fk_teachers_location" references="locations(location_id)" unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="type_id" type="char(36)">
                 <constraints foreignKeyName="fk_teachers_typeOfLearning" references="types_of_learning(type_id)"
                              unique="false"
-                             nullable="false"/>
+                             nullable="true"/>
             </column>
 
             <column name="rating_id" type="char(36)">
-                <constraints foreignKeyName="fk_teachers_rating" references="ratings(rating_id)" unique="false" nullable="false"/>
+                <constraints foreignKeyName="fk_teachers_rating" references="ratings(rating_id)" unique="false" nullable="true"/>
             </column>
 
         </createTable>

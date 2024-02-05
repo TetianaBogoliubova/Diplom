@@ -17,8 +17,8 @@ public class LocationController {
         return locationService.getLocationById(id);
     }
 
-//    @PostMapping("/createLocation")
-//    public Location createLocation(@RequestBody Location location) {
-//        return locationService.createNewLocation(location);
-//    }
+    @PostMapping("/createLocation")
+    public Location createLocation(@RequestBody Location location) {
+        return locationService.createNewLocation(location);
+    }
 }

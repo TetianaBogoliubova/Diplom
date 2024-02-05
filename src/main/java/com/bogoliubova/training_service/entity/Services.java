@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -23,7 +24,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "services")
-public class Service {
+public class Services {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +38,7 @@ public class Service {
     private AllServices type;
 
     @Column(name = "s_price")
-    private double servicePrice;
+    private BigDecimal servicePrice;
 
     @OneToMany
     @JoinColumn(name = "direction_id")
@@ -53,8 +54,8 @@ public class Service {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Service service = (Service) o;
-        return Double.compare(servicePrice, service.servicePrice) == 0 && Objects.equals(serviceId, service.serviceId) && type == service.type;
+        Services services = (Services) o;
+        return Objects.equals(serviceId, services.serviceId) && type == services.type && Objects.equals(servicePrice, services.servicePrice);
     }
 
     @Override
@@ -64,7 +65,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "Services{" +
                 "serviceId=" + serviceId +
                 ", type=" + type +
                 ", servicePrice=" + servicePrice +
@@ -73,15 +74,3 @@ public class Service {
                 '}';
     }
 }
-
-<<<<<<< HEAD
-=======
-
-//    @OneToOne
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private Direction direction;
-
-//    @OneToMany(orphanRemoval = true, cascade = {MERGE, PERSIST, REFRESH})
-//    @JoinColumn(name = "direction_id", referencedColumnName = "direction_id")
-//    private List<Direction> directions;
->>>>>>> origin/feature/first_controller
