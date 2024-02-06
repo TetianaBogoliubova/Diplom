@@ -41,8 +41,7 @@ public class Customer {
     @JsonIgnore
     private Location location;
 
-    @OneToMany
-    @JoinColumn(name = "direction_id")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 

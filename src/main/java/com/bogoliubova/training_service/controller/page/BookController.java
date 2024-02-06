@@ -27,7 +27,8 @@ public class BookController {
     }
 
 
-    @PutMapping(value = "/updateBook/{book_id}") //http://localhost:8080/book/updateBook/298e7601-e47a-5cd9-f387-125124058224
+    @PutMapping(value = "/updateBook/{book_id}")
+    //http://localhost:8080/book/updateBook/298e7601-e47a-5cd9-f387-125124058224
     public ResponseEntity<Book> updateBookById(@RequestBody Book updateBook, @PathVariable("book_id") String id) {
         return bookService.updateBook(updateBook, id);
     }

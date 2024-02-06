@@ -1,8 +1,12 @@
 package com.bogoliubova.training_service.controller.page;
+
 import com.bogoliubova.training_service.entity.TypeOfLearning;
 import com.bogoliubova.training_service.service.interf.TypeOfLearningService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor

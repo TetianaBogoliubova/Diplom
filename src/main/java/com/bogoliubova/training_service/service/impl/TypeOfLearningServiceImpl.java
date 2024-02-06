@@ -1,5 +1,4 @@
 package com.bogoliubova.training_service.service.impl;
-
 import com.bogoliubova.training_service.entity.TypeOfLearning;
 import com.bogoliubova.training_service.repository.TypeOfLearningRepository;
 import com.bogoliubova.training_service.service.interf.TypeOfLearningService;

@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.service.impl;
+
 import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
@@ -22,7 +23,6 @@ public class BookServiceImpl implements BookService {
     public Book getBookById(String id) {
         return bookRepository.findBookByBookId(UUID.fromString(id));
     }
-
 
     @Override
     public Book createNewBook(Book book) {
@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates) {
         UUID uuidBookId = UUID.fromString(bookId);
-        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);
+        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);//.orElseThrow(() -> BookEx("now f" + updateBook()));
 
         if (optionalBook.isPresent()) {
             Book existingBook = optionalBook.get();

@@ -12,7 +12,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
 
-    private final LocationRepository locationRepository;
+    LocationRepository locationRepository;
 
     @Override
     public Location getLocationById(String id) {

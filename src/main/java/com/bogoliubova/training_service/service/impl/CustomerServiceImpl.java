@@ -1,9 +1,10 @@
 package com.bogoliubova.training_service.service.impl;
-
+import com.bogoliubova.training_service.dto.CustomerDto;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.exception.CustomerNotFoundException;
 import com.bogoliubova.training_service.exception.CustomerUpdateException;
 import com.bogoliubova.training_service.exception.ErrorMassage;
+import com.bogoliubova.training_service.mapper.CustomerMapper;
 import com.bogoliubova.training_service.repository.CustomerRepository;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
     @Override
     public Customer getCustomerById(String id) {
@@ -34,51 +36,49 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(Customer updateCustomer, String customerId) {
-        try {
-            UUID uuidCustomerId = UUID.fromString(customerId);
-            Customer existingCustomer = customerRepository.findById(uuidCustomerId)
-                    .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
 
-            existingCustomer.setFirstName(updateCustomer.getFirstName());
-            existingCustomer.setLastName(updateCustomer.getLastName());
-            existingCustomer.setCusEmail(updateCustomer.getCusEmail());
-            existingCustomer.setLocation(updateCustomer.getLocation());
-            existingCustomer.setDirections(updateCustomer.getDirections());
+        UUID uuidCustomerId = UUID.fromString(customerId);
+        Customer existingCustomer = customerRepository.findById(uuidCustomerId)
+                .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
 
-            return customerRepository.save(existingCustomer);
-        } catch (Exception e) {
-            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
-        }
+        existingCustomer.setFirstName(updateCustomer.getFirstName());
+        existingCustomer.setLastName(updateCustomer.getLastName());
+        existingCustomer.setCusEmail(updateCustomer.getCusEmail());
+        existingCustomer.setLocation(updateCustomer.getLocation());
+        existingCustomer.setDirections(updateCustomer.getDirections());
+
+        return customerRepository.save(existingCustomer);
+
     }
-
 
     @Override
     public Customer patchUpdateCustomerById(String customerId, Map<String, Object> updates) {
-        try {
-            UUID uuidCustomerId = UUID.fromString(customerId);
-            Customer existingCustomer = customerRepository.findById(uuidCustomerId)
-                    .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
 
-            applyUpdates(existingCustomer, updates);
+        UUID uuidCustomerId = UUID.fromString(customerId);
+        Customer existingCustomer = customerRepository.findById(uuidCustomerId)
+                .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
 
-            return customerRepository.save(existingCustomer);
-        } catch (Exception e) {
-            throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
-        }
+        applyUpdates(existingCustomer, updates);
+
+        return customerRepository.save(existingCustomer);
+
     }
 
     private void applyUpdates(Customer customer, Map<String, Object> updates) {
 
         if (updates.containsKey("firstName")) {
             customer.setFirstName((String) updates.get("firstName"));
-        }
+        } else throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
+
         if (updates.containsKey("lastName")) {
             customer.setLastName((String) updates.get("lastName"));
-        }
+        } else throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
+
         if (updates.containsKey("cusEmail")) {
             customer.setCusEmail((String) updates.get("cusEmail"));
-        }
+        } else throw new CustomerUpdateException(ErrorMassage.M_CUSTOMER_NOT_UPDATE);
     }
+
 
     @Override
     public ResponseEntity<String> deleteCustomerById(String customerId) {
@@ -91,5 +91,10 @@ public class CustomerServiceImpl implements CustomerService {
             return new ResponseEntity<>("Customer not found", HttpStatus.NOT_FOUND);
         }
     }
-}
 
+    @Override
+    public CustomerDto getCLDId(UUID id) {
+        Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
+        return customerMapper.toDto(entity);
+    }
+}

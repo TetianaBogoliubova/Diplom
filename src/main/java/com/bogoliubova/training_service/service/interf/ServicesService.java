@@ -1,9 +1,8 @@
 package com.bogoliubova.training_service.service.interf;
 
-import com.bogoliubova.training_service.entity.Services;
+import com.bogoliubova.training_service.dto.ServicesDto;
 
 public interface ServicesService {
-    Services getServicesById(String id);
-
-    Services createNewServices(Services services);
+    ServicesDto getServicesDtoById(String id);
+    ServicesDto createNewServicesDto(ServicesDto servicesDto);
 }

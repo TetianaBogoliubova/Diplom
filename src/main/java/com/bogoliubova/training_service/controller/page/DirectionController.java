@@ -11,10 +11,10 @@ public class DirectionController {
 
     private final DirectionService directionService;
 
-//    @GetMapping("/id_direction/{direction_id}")
-//    public Direction getDirectionByDirectionId(@PathVariable("direction_id") String id) {
-//        return directionService.getDirectionById(id);
-//    }
+    @GetMapping("/id_direction/{direction_id}")
+    public Direction getDirectionByDirectionId(@PathVariable("direction_id") String id) {
+        return directionService.getDirectionById(id);
+    }
 
     @PostMapping("/createDirection")
     public Direction createDirection(@RequestBody Direction direction) {
