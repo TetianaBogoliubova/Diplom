@@ -33,9 +33,9 @@ public class TypeOfLearning {
     private AllLearningTypes learningTypes;
 
     @Column(name = "special_price")
-    private Double specialPrice;
+    private BigDecimal specialPrice;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     @JsonIgnore
     private Teacher teacher;
@@ -45,9 +45,7 @@ public class TypeOfLearning {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeOfLearning that = (TypeOfLearning) o;
-        //boolean result = BigDecimal.valueOf(specialPrice, that.specialPrice) == 0.0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
-        //return result;
-        return Double.compare(specialPrice, that.specialPrice) == 0.0 && Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes;
+        return Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes && Objects.equals(specialPrice, that.specialPrice);
     }
 
     @Override

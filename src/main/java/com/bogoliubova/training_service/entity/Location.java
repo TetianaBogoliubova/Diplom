@@ -1,5 +1,7 @@
 package com.bogoliubova.training_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +10,7 @@ import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -20,7 +23,7 @@ import java.util.UUID;
 public class Location {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "location_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID locationId;
@@ -33,6 +36,16 @@ public class Location {
 
     @Column(name = "postal_code")
     private int postalCode;
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Customer> customers;
+
+    @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Teacher> teachers;
+
 
     @Override
     public boolean equals(Object o) {
@@ -50,10 +63,32 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "id=" + locationId +
+                "locationId=" + locationId +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", postalCode=" + postalCode +
+                ", customers=" + customers +
+                ", teachers=" + teachers +
                 '}';
     }
 }
+
+
+//////////////////////////////////////
+//    @PrePersist
+//    @PreUpdate
+//    private void prePersistOrUpdate() {
+//        // Сохраняем teachers и customers перед сохранением Location
+//        if (teachers != null) {
+//            for (Teacher teacher : teachers) {
+//                teacher.setLocation(this);
+//            }
+//        }
+//
+//        if (customers != null) {
+//            for (Customer customer : customers) {
+//                customer.setLocation(this);
+//            }
+//        }
+//    }
+////////////////////////////////////////////////

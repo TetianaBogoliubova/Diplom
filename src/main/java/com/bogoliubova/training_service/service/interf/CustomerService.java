@@ -17,5 +17,5 @@ public interface CustomerService {
 
     Customer patchUpdateCustomerById(String customerId, Map<String, Object> updates);
 
-    CustomerDto getCLDId(UUID id);
+    CustomerDto getCLDId(String id);
 }

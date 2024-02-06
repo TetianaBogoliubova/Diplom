@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.controller.page;
+
 import com.bogoliubova.training_service.entity.Direction;
 import com.bogoliubova.training_service.service.interf.DirectionService;
 import lombok.RequiredArgsConstructor;

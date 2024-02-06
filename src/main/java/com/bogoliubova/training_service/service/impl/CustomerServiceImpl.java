@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.service.impl;
+
 import com.bogoliubova.training_service.dto.CustomerDto;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.exception.CustomerNotFoundException;
@@ -48,7 +49,6 @@ public class CustomerServiceImpl implements CustomerService {
         existingCustomer.setDirections(updateCustomer.getDirections());
 
         return customerRepository.save(existingCustomer);
-
     }
 
     @Override
@@ -61,7 +61,6 @@ public class CustomerServiceImpl implements CustomerService {
         applyUpdates(existingCustomer, updates);
 
         return customerRepository.save(existingCustomer);
-
     }
 
     private void applyUpdates(Customer customer, Map<String, Object> updates) {
@@ -93,8 +92,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto getCLDId(UUID id) {
-        Customer entity = customerRepository.findById(id).orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
-        return customerMapper.toDto(entity);
+    public CustomerDto getCLDId(String id) {
+        Optional<CustomerDto> entity = customerRepository.findById(UUID.fromString(id))
+                .map(c -> customerMapper.toDto(c));
+        return entity.orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
     }
 }

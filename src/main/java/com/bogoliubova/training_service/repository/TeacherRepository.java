@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.repository;
+
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -30,7 +31,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
     List<Teacher> findTeachersByDirectionAndRating(@Param("direction") AllDirections dirTitle, @Param("ratingOfTeacher") Integer ratingOfTeacher);
 }
 
-
 //    @Query("SELECT t FROM Teacher t " +
 //             "LEFT JOIN FETCH t.directions d " +
 //            "LEFT JOIN FETCH t.ratings r " +
@@ -46,5 +46,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
 //    @Query("SELECT new com.bogoliubova.training_service.dto.TeacherDto(t.firstName, t.lastName, t.teachEmail, t.directions, t.location, t.ratings) " +
 //            "FROM Teacher t JOIN t.ratings r " +
 //            "WHERE r.ratingOfTeacher = :ratingOfTeacher")// никакой запрос не срабатывает!
+
 
 

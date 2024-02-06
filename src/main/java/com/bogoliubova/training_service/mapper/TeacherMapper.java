@@ -1,12 +1,14 @@
 package com.bogoliubova.training_service.mapper;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
@@ -17,11 +19,16 @@ public interface TeacherMapper {
 
     @Named("toUpperCase")
     static String toUpperCase(String teachEmail) {
-        return teachEmail.toUpperCase();
+        return Optional.ofNullable(teachEmail)
+                .map(String::toUpperCase)
+                .orElse(null);
     }
 
     @Mapping(source = "teacher.location", target = "location")
     TeacherDto toDto(Teacher teacher);
+
+    @Mapping(source = "teacher.ratings", target = "ratings")
+    TeacherFullNameAndRatingDto toDtoFullName(Teacher teacher);
 
     @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
     @Mapping(source = "teacher.ratings", target = "ratings", qualifiedByName = "findTeachersRatings")

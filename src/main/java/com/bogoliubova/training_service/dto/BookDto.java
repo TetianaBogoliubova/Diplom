@@ -2,8 +2,6 @@ package com.bogoliubova.training_service.dto;
 
 import lombok.Value;
 
-import lombok.Value;
-
 @Value
 public class BookDto {
     String bookTitle;

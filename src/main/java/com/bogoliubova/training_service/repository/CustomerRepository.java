@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.repository;
+
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Direction;
 import com.bogoliubova.training_service.entity.Location;

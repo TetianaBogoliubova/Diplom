@@ -1,10 +1,14 @@
 package com.bogoliubova.training_service.controller.rest;
 
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.service.interf.TeacherService;
+import com.bogoliubova.training_service.validation.annotation.RatingRestChecker;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,19 +17,22 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/teacher")
 @RequiredArgsConstructor
+@Validated
 public class TeacherRestController {
 
     private final TeacherService teacherService;
 
     @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
-    public Teacher createTeacherRest(@RequestBody TeacherDto teacherDto) {
+    public Teacher createTeacherRest(@Valid @RequestBody TeacherDto teacherDto) {
+
         return teacherService.create(teacherDto);
     }
 
     @GetMapping("/id_teacherRest/{teacher_id}")
 //http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
-    public TeacherDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") UUID id) {
-        return teacherService.getFLRId(id);
+    public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") String id) {
+        UUID teacherId = UUID.fromString(id);
+        return teacherService.getFLRId(String.valueOf(teacherId));
     }
 
     @GetMapping("/getTeacherCity/{city}")//http://localhost:8080/teacher/getTeacherCity/Vien
@@ -34,7 +41,7 @@ public class TeacherRestController {
     }
 
     @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9
-    public List<TeacherDto> getTeacherByRating(@PathVariable("rating") Integer rating) {
+    public List<TeacherDto> getTeacherByRating(@RatingRestChecker @PathVariable("rating") Integer rating) {
         return teacherService.getTByR(rating);
     }
 

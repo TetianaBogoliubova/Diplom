@@ -40,7 +40,7 @@ public class Teacher {
     @JsonIgnore
     private List<Direction> directions;
 
-    @OneToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     @JsonIgnore
     private Location location;
@@ -69,15 +69,14 @@ public class Teacher {
     @Override
     public String toString() {
         return "Teacher{" +
-                "id=" + teacherId +
+                "teacherId=" + teacherId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + teachEmail + '\'' +
-                ", directionId=" + directions +
-                ", locationId=" + location +
+                ", teachEmail='" + teachEmail + '\'' +
+                ", directions=" + directions +
+                ", location=" + location +
                 ", ratings=" + ratings +
-                ", typeOfLearningId=" + typesOfLearning +
+                ", typesOfLearning=" + typesOfLearning +
                 '}';
     }
-
 }

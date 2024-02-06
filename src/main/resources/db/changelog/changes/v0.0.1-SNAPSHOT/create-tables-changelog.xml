@@ -30,19 +30,19 @@
             </column>
 
             <column name="teacher_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="service_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="book_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="customer_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
         </createTable>
@@ -57,35 +57,7 @@
            </loadData>
        </changeSet> -->
 
-    <changeSet author="bogoliubova" id="create locations table">
 
-        <preConditions onFail="CONTINUE" onFailMessage="Table locations already exists">
-            <not>
-                <tableExists tableName="locations"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="locations">
-
-            <column name="location_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="country" type="varchar(45)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="city" type="varchar(45)">
-                <constraints nullable="false"/>
-            </column>
-
-            <column name="postal_code" type="integer">
-                <constraints nullable="false"/>
-            </column>
-
-        </createTable>
-
-    </changeSet>
 
     <changeSet author="bogoliubova" id="create books table">
 
@@ -118,7 +90,7 @@
                              nullable="true"/>
             </column>
             <column name="service_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
         </createTable>
@@ -184,7 +156,7 @@
             </column>
 
             <column name="teacher_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
         </createTable>
@@ -210,16 +182,19 @@
             </column>
 
             <column name="feedback" type="varchar(150)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
             <column name="teacher_id" type="char(36)">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
 
         </createTable>
 
     </changeSet>
+
+
+
 
     <changeSet author="bogoliubova" id="create customers table">
 
@@ -248,14 +223,17 @@
             </column>
 
             <column name="location_id" type="char(36)">
-                <constraints foreignKeyName="fk_customers_location" references="locations(location_id)" unique="false"
-                             nullable="true"/>
+                <!--                <constraints foreignKeyName="fk_customers_location" references="locations(location_id)" unique="false"-->
+                <!--                             nullable="false"/>-->
+                <constraints nullable="true"/>
             </column>
 
             <column name="direction_id" type="char(36)">
                 <constraints foreignKeyName="fk_customers_direction" references="directions(direction_id)" unique="false"
                              nullable="true"/>
             </column>
+
+
 
         </createTable>
 
@@ -293,8 +271,9 @@
             </column>
 
             <column name="location_id" type="char(36)">
-                <constraints foreignKeyName="fk_teachers_location" references="locations(location_id)" unique="false"
-                             nullable="true"/>
+                <!--                <constraints foreignKeyName="fk_teachers_location" references="locations(location_id)" unique="false"-->
+                <!--                             nullable="true"/>-->
+                <constraints nullable="true"/>
             </column>
 
             <column name="type_id" type="char(36)">
@@ -311,6 +290,45 @@
 
     </changeSet>
 
+    <changeSet author="bogoliubova" id="create locations table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table locations already exists">
+            <not>
+                <tableExists tableName="locations"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="locations">
+
+            <column name="location_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="country" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="city" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="postal_code" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints foreignKeyName="fk_locations_customer" references="customers(customer_id)" unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_locations_teacher" references="teachers(teacher_id)" unique="false"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
 
 
 </databaseChangeLog>

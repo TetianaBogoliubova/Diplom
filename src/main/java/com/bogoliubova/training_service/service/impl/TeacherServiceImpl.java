@@ -1,5 +1,6 @@
 package com.bogoliubova.training_service.service.impl;
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.exception.ErrorMassage;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,11 +41,11 @@ public class TeacherServiceImpl implements TeacherService {
         } else teacherRepository.save(teacherMapper.toEntity(teacherDto));
         return teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
     }
-
     @Override
-    public TeacherDto getFLRId(UUID id) {
-        Teacher entity = teacherRepository.findById(id).orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
-        return teacherMapper.toDto(entity);
+    public TeacherFullNameAndRatingDto getFLRId(String id) {
+        Optional<TeacherFullNameAndRatingDto> entity = teacherRepository.findById(UUID.fromString(id))
+                .map(t -> teacherMapper.toDtoFullName(t));
+        return entity.orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
     }
 
     @Override

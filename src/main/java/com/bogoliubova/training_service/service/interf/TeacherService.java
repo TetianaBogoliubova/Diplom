@@ -1,5 +1,7 @@
 package com.bogoliubova.training_service.service.interf;
+
 import com.bogoliubova.training_service.dto.TeacherDto;
+import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 
@@ -13,7 +15,7 @@ public interface TeacherService {
 
     Teacher create(TeacherDto teacherDto);
 
-    TeacherDto getFLRId(UUID id);
+    TeacherFullNameAndRatingDto getFLRId(String id);
 
     List<TeacherDto> getTByC(String city);
 
