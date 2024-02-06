@@ -5,14 +5,13 @@ import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.exception.ErrorMassage;
 import com.bogoliubova.training_service.exception.TeacherNotFoundException;
-import com.bogoliubova.training_service.exception.TeacherWithThisNameAlreadyExistsException;
+import com.bogoliubova.training_service.exception.TeacherInThisCityNotFound;
 import com.bogoliubova.training_service.mapper.TeacherMapper;
 import com.bogoliubova.training_service.repository.TeacherRepository;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -37,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher create(TeacherDto teacherDto) {
         Teacher existingTeacher = teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
         if (existingTeacher != null) {
-            throw new TeacherWithThisNameAlreadyExistsException();
+            throw new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND);
         } else teacherRepository.save(teacherMapper.toEntity(teacherDto));
         return teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
     }
@@ -53,8 +52,8 @@ public class TeacherServiceImpl implements TeacherService {
         List<Teacher> teachers = teacherRepository.findTeachersByLocation_City(city);
         if (!teachers.isEmpty()) {
             return teacherMapper.toDtoList(teachers);
-        }
-        return Collections.emptyList();
+        } else throw new TeacherInThisCityNotFound(ErrorMassage.M_TEACHER_IN_THIS_CITY_NOT_FOUND);
+
     }
 
     @Override
