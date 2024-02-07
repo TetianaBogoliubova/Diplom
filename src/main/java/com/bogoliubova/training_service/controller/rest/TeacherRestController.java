@@ -22,6 +22,7 @@ public class TeacherRestController {
 
     private final TeacherService teacherService;
 
+
     @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
     public Teacher createTeacherRest(@Valid @RequestBody TeacherDto teacherDto) {
 
@@ -37,6 +38,7 @@ public class TeacherRestController {
 
     @GetMapping("/getTeacherCity/{city}")//http://localhost:8080/teacher/getTeacherCity/Vien
     public List<TeacherDto> getTeacherByCity(@PathVariable("city") String city) {
+
         return teacherService.getTByC(city);
     }
 
