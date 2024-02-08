@@ -19,6 +19,7 @@ import java.util.UUID;
 @Setter
 @Entity
 @Table(name = "teachers")
+
 public class Teacher {
 
     @Id
@@ -40,7 +41,7 @@ public class Teacher {
     @JsonIgnore
     private List<Direction> directions;
 
-    @ManyToOne( cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")
     @JsonIgnore
     private Location location;

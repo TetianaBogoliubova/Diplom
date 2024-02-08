@@ -39,7 +39,7 @@ public class Location {
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     @JsonIgnore
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

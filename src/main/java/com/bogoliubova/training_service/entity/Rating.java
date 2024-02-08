@@ -22,7 +22,6 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@UuidGenerator
     @Column(name = "rating_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID ratingId;

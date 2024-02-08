@@ -6,7 +6,6 @@ import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface TeacherService {
     Teacher getTeacherById(String id);

@@ -25,7 +25,6 @@ public class Services {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@UuidGenerator
     @Column(name = "service_id")
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID serviceId;

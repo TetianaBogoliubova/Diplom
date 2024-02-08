@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates) {
         UUID uuidBookId = UUID.fromString(bookId);
-        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);//.orElseThrow(() -> BookEx("now f" + updateBook()));
+        Optional<Book> optionalBook = bookRepository.findById(uuidBookId);
 
         if (optionalBook.isPresent()) {
             Book existingBook = optionalBook.get();
