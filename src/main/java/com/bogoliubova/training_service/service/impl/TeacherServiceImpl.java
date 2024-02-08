@@ -6,6 +6,7 @@ import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.exception.ErrorMassage;
 import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import com.bogoliubova.training_service.exception.TeacherInThisCityNotFound;
+import com.bogoliubova.training_service.exception.ThatTeacherAlreadyExists;
 import com.bogoliubova.training_service.mapper.TeacherMapper;
 import com.bogoliubova.training_service.repository.TeacherRepository;
 import com.bogoliubova.training_service.service.interf.TeacherService;
@@ -37,7 +38,7 @@ public class TeacherServiceImpl implements TeacherService {
     public Teacher create(TeacherDto teacherDto) {
         Teacher existingTeacher = teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
         if (existingTeacher != null) {
-            throw new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND);
+            throw new ThatTeacherAlreadyExists(ErrorMassage.M_THAT_TEACHER_ALREADY_EXISTS);
         } else teacherRepository.save(teacherMapper.toEntity(teacherDto));
         return teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
     }

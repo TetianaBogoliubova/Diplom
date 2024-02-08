@@ -10,4 +10,6 @@ public class ErrorMassage {
     public static final String M_LOCATION_NOT_FOUND = "Location id is not found";
     public static final String M_TEACHER_NOT_FOUND = "Teacher id is not found";
     public static final String M_TEACHER_IN_THIS_CITY_NOT_FOUND = "Teacher in this city not found";
+
+    public static final String M_THAT_TEACHER_ALREADY_EXISTS = "That a teacher already exists";
 }
