@@ -7,5 +7,6 @@ import lombok.Value;
 //@Data
 public class ServicesDto {
     String type;
+
     Double servicePrice;
 }

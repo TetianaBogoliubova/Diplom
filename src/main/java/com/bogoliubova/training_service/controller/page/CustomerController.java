@@ -45,7 +45,7 @@ public class CustomerController {
         return customerService.patchUpdateCustomerById(customerId, updates);
     }
 
-    // удаоение объекта по id
+    // удаление объекта по id
     @DeleteMapping("/deleteCustomer/{customer_id}")
     public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {
         return customerService.deleteCustomerById(customerId);
