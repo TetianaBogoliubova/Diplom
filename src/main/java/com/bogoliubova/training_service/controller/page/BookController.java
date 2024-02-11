@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.controller.page;
 
 import com.bogoliubova.training_service.entity.Book;
+import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.Map;
 public class BookController {
 
     private final BookService bookService;
+   // private final BookRepository bookRepository;
 
     //поиск по id
     @GetMapping("/id_book/{book_id}") //http://localhost:8080/book/id_book/298e7601-e47a-5cd9-f387-125124058224
@@ -51,4 +53,5 @@ public class BookController {
     public ResponseEntity<String> deleteBookByBookId(@PathVariable("book_id") String bookId) {
         return bookService.deleteBookById(bookId);
     }
+
 }
