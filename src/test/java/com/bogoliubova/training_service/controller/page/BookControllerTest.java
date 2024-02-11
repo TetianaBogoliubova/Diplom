@@ -17,6 +17,8 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 public class BookControllerTest {
     @InjectMocks
@@ -51,8 +53,8 @@ public class BookControllerTest {
 
     @Test
     public void getBookByBookIdTest() {
-        Mockito.when(bookService.getBookById(bookId.toString())).thenReturn(book);
-        Mockito.when(services.getServiceId()).thenReturn(UUID.randomUUID());
+        when(bookService.getBookById(bookId.toString())).thenReturn(book);
+        when(services.getServiceId()).thenReturn(UUID.randomUUID());
         Book result = bookController.getBookByBookId(bookId.toString());
 
         assertNotNull(result);
@@ -64,6 +66,11 @@ public class BookControllerTest {
 
     @Test
     public void createBook() {
+        when(bookService.createNewBook(any(Book.class))).thenReturn(book);
+        Book newBook = bookController.createBook(book);
+
+        assertNotNull(newBook);
+        assertEquals(book, newBook);
     }
 
     @Test
