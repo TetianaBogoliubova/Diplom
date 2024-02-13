@@ -7,11 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 
+import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.springframework.transaction.annotation.Isolation.*;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +24,7 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public Book getBookById(String id) {
         return bookRepository.findBookByBookId(UUID.fromString(id));
     }
@@ -30,6 +35,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional(isolation = READ_COMMITTED)
     public ResponseEntity<Book> updateBook(Book updateBook, String id) {
 
         Book existingBook = bookRepository.findBookByBookId(UUID.fromString(id));
@@ -49,6 +55,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional(isolation = READ_COMMITTED)
     public ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates) {
         UUID uuidBookId = UUID.fromString(bookId);
         Optional<Book> optionalBook = bookRepository.findById(uuidBookId);
@@ -79,6 +86,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional(isolation = SERIALIZABLE)
     public ResponseEntity<String> deleteBookById(String bookId) {
         UUID uuidBookId = UUID.fromString(bookId);
         Optional<Book> book = bookRepository.findById(uuidBookId);
