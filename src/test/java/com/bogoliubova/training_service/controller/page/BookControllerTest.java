@@ -117,6 +117,11 @@ public class BookControllerTest {
 //
 //        ResponseEntity<Book> updateResult = bookController.updateBookById(result, bookId.toString());
 //
+//        result.setBookTitle("New Title2");
+//        result.setAuthor("New Author2");
+//        result.setBookPrice(BigDecimal.valueOf(50.00));
+//        result.setDirections(directions);
+//
 //        assertNotNull(updateResult);
 //        assertEquals(HttpStatus.OK, updateResult.getStatusCode());
 //        assertNotNull(updateResult.getBody());
