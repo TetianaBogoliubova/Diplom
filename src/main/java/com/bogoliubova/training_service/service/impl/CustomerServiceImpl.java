@@ -24,6 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
+
     @Override
     public Customer getCustomerById(String id) {
         return customerRepository.findById(UUID.fromString(id))
