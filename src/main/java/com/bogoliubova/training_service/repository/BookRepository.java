@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.UUID;
 
 public interface BookRepository extends JpaRepository<Book, UUID> {
@@ -14,9 +15,10 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     @Modifying
     @Query("UPDATE Book b SET b.bookTitle = :bookTitle, b.author = :author, b.bookPrice = :bookPrice WHERE b.bookId = :bookId")
-    int patchUpdateBook(@Param("bookId") String bookId,
+    Integer patchUpdateBook(@Param("bookId") String bookId,
                         @Param("bookTitle") String bookTitle,
                         @Param("author") String author,
                         @Param("bookPrice") BigDecimal bookPrice);
 
+    <V, K> Object patchUpdateBook(String s, Map<K,V> kvMap);
 }

@@ -124,28 +124,32 @@ public class BookControllerTest {
         assertEquals(updateBook, updateResult.getBody());
     }
 
-//    @Test
-//    public void updateBookByIdInconsistencyOfOldAndNewParametersTest() {
-//        when(bookService.getBookById(eq(book.getBookId().toString()))).thenReturn(book);
-//
-//        Book updateBook = new Book();
-//
-//        updateBook.setBookTitle("New Title");
-//        updateBook.setAuthor("New Author");
-//        updateBook.setBookPrice(BigDecimal.valueOf(50.00));
-//        updateBook.setDirections(directions);
-//
-//        ResponseEntity<Book> updateResult = bookController.updateBookById(updateBook, book.getBookId().toString());
-//        //assertNotNull(updateResult);
-//
-//        assertNotEquals(book, updateResult.getBody());
-//        assertNotEquals(book.getBookTitle(), updateResult.getBody().getBookTitle());
-//        assertNotEquals(book.getAuthor(), updateResult.getBody().getAuthor());
-//        assertNotEquals(book.getBookPrice(), updateResult.getBody().getBookPrice());
-//    }
+    @Test
+    public void updateBookByIdInconsistencyOfOldAndNewParametersTest() {
+        when(bookService.getBookById(book.getBookId().toString())).thenReturn(book);
+
+        Book newBook = new Book();
+
+        newBook.setBookTitle("New Title");
+        newBook.setAuthor("New Author");
+        newBook.setBookPrice(BigDecimal.valueOf(50.00));
+        newBook.setDirections(directions);
+
+        //when(bookRepository.save(any(Book.class))).thenReturn(updateBook);
+
+        when(bookService.updateBook(newBook, book.getBookId().toString())).thenReturn(new ResponseEntity<>(newBook, HttpStatus.OK));
+
+        ResponseEntity<Book> updateResult = bookController.updateBookById(newBook, book.getBookId().toString());
+        //assertNotNull(updateResult);
+
+        assertNotEquals(book, updateResult.getBody());
+        assertNotEquals(book.getBookTitle(), updateResult.getBody().getBookTitle());
+        assertNotEquals(book.getAuthor(), updateResult.getBody().getAuthor());
+        assertNotEquals(book.getBookPrice(), updateResult.getBody().getBookPrice());
+    }
 
 //    @Test
-//    public void updateNBookByIdNegativeTest() {
+//    public void updateBookByIdNegativeTest() {
 //        when(bookRepository.findBookByBookId(any(UUID.class))).thenReturn(null);
 //
 //        ResponseEntity<Book> updateResult = bookController.updateBookById(book, UUID.randomUUID().toString());
@@ -173,7 +177,28 @@ public class BookControllerTest {
         assertNotNull(updateResult);
         assertEquals(HttpStatus.OK, updateResult.getStatusCode());
         assertNotNull(updateResult.getBody());
-        assertEquals(book, updateResult.getBody());
+    }
+
+    @Test
+    public void patchUpdateBookByIdInconsistencyOfOldAndNewParametersTest() {
+
+        when(bookService.getBookById(anyString())).thenReturn(book);
+
+        Map<String, Object> updates = new HashMap<>();
+
+        updates.put("bookTitle", "New Title1");
+        updates.put("author", "New Author1");
+        updates.put("bookPriceB", BigDecimal.valueOf(50.00));
+
+        when(bookService.patchUpdateBookById(anyString(), anyMap())).thenReturn(new ResponseEntity<>(book, HttpStatus.OK));
+
+        ResponseEntity<Book> updateResult = bookController.patchUpdateBookById(book.getBookId().toString(), updates);
+
+        assertNotEquals(book, updateResult.getBody());
+        assertNotEquals("New Title1", updateResult.getBody().getBookTitle());
+        assertNotEquals("New Author1", updateResult.getBody().getAuthor());
+        assertNotEquals(BigDecimal.valueOf(50.00), updateResult.getBody().getBookPrice());
+
     }
 
     @Test
