@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 @Aspect
 @Component
 @Slf4j
+@Order(Ordered.LOWEST_PRECEDENCE)
 public class LoggingAspect {
     @Pointcut("execution(public * com.bogoliubova.training_service.controller.*.*(..))")
     public void controllerLog() {
