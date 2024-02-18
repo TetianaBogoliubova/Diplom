@@ -3,19 +3,18 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Direction;
 import com.bogoliubova.training_service.entity.Services;
-import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.interf.BookService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,57 +22,66 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+
+@SpringBootTest
 public class BookControllerTest {
     @InjectMocks
-    private static BookController bookController;
+    private BookController bookController;
     @Mock
     private BookService bookService;
     @Mock
-    private BookRepository bookRepository;
-    private static final UUID bookId = UUID.fromString("298e7601-e47a-5cd9-f387-125124058224");
-    private static final String bookTitle = "BookTitle";
-    private static final String author = " Author";
-    private static final BigDecimal bookPrice = new BigDecimal("100.00");
+    private List<Direction> directions = new ArrayList<>();
     @Mock
-    private static List<Direction> directions = new ArrayList<>();
-    @Mock
-    private static Services services;
-    private static Book book;
+    private Services services;
+    private final Book book = new Book();
 
     @Before
-    public void setUp() {
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
 
-        bookService = Mockito.mock(BookService.class);
-        bookRepository = Mockito.mock(BookRepository.class);
-        book = new Book();
-        services = Mockito.mock(Services.class);
-        directions = Collections.singletonList(Mockito.mock(Direction.class));
-
-        book.setBookId(bookId);
-        book.setBookTitle(bookTitle);
-        book.setAuthor(author);
-        book.setBookPrice(bookPrice);
+        book.setBookId(UUID.fromString("298e7601-e47a-5cd9-f387-125124058224"));
+        book.setBookTitle("The Line of Beauty");
+        book.setAuthor("Sherri Miller");
+        book.setBookPrice(BigDecimal.valueOf(13.50));
         book.setDirections(directions);
         book.getServices();
-
-        bookController = new BookController(bookService);
     }
 
     @Test
-    public void getBookByBookIdTest() {
-        when(bookService.getBookById(bookId.toString())).thenReturn(book);
-        when(services.getServiceId()).thenReturn(UUID.randomUUID());
-        Book result = bookController.getBookByBookId(bookId.toString());
+    public void getBookByBookIdPositiveTest() {
+        Book expectedBook = new Book();
 
+        when(bookService.getBookById(String.valueOf(book.getBookId()))).thenReturn(expectedBook);
+        Book result = bookController.getBookByBookId(String.valueOf(book.getBookId()));
+
+        assertEquals(expectedBook, result);
         assertNotNull(result);
-        assertEquals(bookId, result.getBookId());
-        assertEquals(bookTitle, result.getBookTitle());
-        assertEquals(author, result.getAuthor());
-        assertEquals(bookPrice, result.getBookPrice());
     }
 
     @Test
-    public void createBook() {
+    public void getBookByBookIdNegativeTest() {
+        when(bookService.getBookById(String.valueOf(book.getBookId()))).thenReturn(null);
+        Book result = bookController.getBookByBookId(String.valueOf(book.getBookId()));
+
+        assertNotEquals(book, result);
+        assertNull(result);
+    }
+
+    @Test
+    public void getBookByBookIdCheckAllParametersTest() {
+        Book expectedBook = new Book();
+
+        when(bookService.getBookById(String.valueOf(book.getBookId()))).thenReturn(expectedBook);
+        Book result = bookController.getBookByBookId(String.valueOf(book.getBookId()));
+
+        assertEquals(expectedBook.getBookId(), result.getBookId());
+        assertEquals(expectedBook.getBookTitle(), result.getBookTitle());
+        assertEquals(expectedBook.getAuthor(), result.getAuthor());
+        assertEquals(expectedBook.getBookPrice(), result.getBookPrice());
+    }
+
+    @Test
+    public void createBookTest() {
         when(bookService.createNewBook(any(Book.class))).thenReturn(book);
         Book newBook = bookController.createBook(book);
 
@@ -82,70 +90,79 @@ public class BookControllerTest {
     }
 
     @Test
-    public void updateBookByIdInconsistencyOfOldAndNewParametersTest() {
-        when(bookService.getBookById(bookId.toString())).thenReturn(book);
-        Book result = bookController.getBookByBookId(bookId.toString());
+    public void updateBookByIdPositiveTest() {
+        when(bookService.getBookById(String.valueOf(book.getBookId()))).thenReturn(book);
 
-       // assertNotNull(result);
-       // assertEquals(book, result);//книга, которую ищем, совпадает с той, что вернулась по id
+        Book updateBook = new Book();
 
-        result.setBookTitle("New Title");
-        result.setAuthor("New Author");
-        result.setBookPrice(BigDecimal.valueOf(50.00));
-        result.setDirections(directions);
+        updateBook.setBookTitle("New Title1");
+        updateBook.setAuthor("New Author1");
+        updateBook.setBookPrice(BigDecimal.valueOf(50.00));
+        updateBook.setDirections(directions);
 
+        when(bookService.updateBook(updateBook, book.getBookId().toString()))
+                .thenReturn(new ResponseEntity<>(updateBook, HttpStatus.OK));
 
-        assertNotNull(result);
-        assertNotEquals(bookTitle, result.getBookTitle());
-        assertNotEquals(author, result.getAuthor());
-        assertNotEquals(bookPrice, result.getBookPrice());
+        ResponseEntity<Book> updateResult = bookController.updateBookById(updateBook, book.getBookId().toString());
+
+        assertNotNull(updateResult);
+        assertEquals(HttpStatus.OK, updateResult.getStatusCode());
+        assertNotNull(updateResult.getBody());
+        assertEquals(updateBook, updateResult.getBody());
     }
+//Этот тест создает мок `BookService` и использует `when` для настройки возвращаемого значения при вызове метода
+// `updateBook` с ожидаемыми аргументами. Затем он вызывает метод `updateBookById` контроллера и проверяет, что
+// возвращается ожидаемый объект ResponseEntity с кодом состояния `HttpStatus.OK` и обновленной книгой в теле ответа.
 
-//    @Test
-//    public void updateBookByIdPositiveTest() {
-//        when(bookService.getBookById(bookId.toString())).thenReturn(book);
-//        // when(bookRepository.findBookByBookId(any(UUID.class))).thenReturn(book);
-//        Book result = bookController.getBookByBookId(bookId.toString());
-//
-//        assertNotNull(result);
-//        assertEquals(book, result);
-//
-//        result.setBookTitle("New Title1");
-//        result.setAuthor("New Author1");
-//        result.setBookPrice(BigDecimal.valueOf(50.00));
-//        result.setDirections(directions);
-//
-//        ResponseEntity<Book> updateResult = bookController.updateBookById(result, bookId.toString());
-//
-//        result.setBookTitle("New Title2");
-//        result.setAuthor("New Author2");
-//        result.setBookPrice(BigDecimal.valueOf(50.00));
-//        result.setDirections(directions);
-//
-//        assertNotNull(updateResult);
-//        assertEquals(HttpStatus.OK, updateResult.getStatusCode());
-//        assertNotNull(updateResult.getBody());
-//        assertEquals(result, updateResult.getBody());
-//
-//    }
-//
-//
-//
-//
-//
 //    @Test
 //    public void updateBookByIdNegativeTest() {
-//        when(bookService.getBookById(bookId.toString())).thenReturn(null);
 //
-//        ResponseEntity<Book> updateResult = bookController.updateBookById(new Book(), bookId.toString());
+//        when(bookService.getBookById(String.valueOf(book.getBookId()))).thenReturn(null);
+//        Book result = bookController.getBookByBookId(String.valueOf(book.getBookId()));
+//        ResponseEntity<Book> updateResult = bookController.updateBookById(result, book.getBookId().toString());
+//        assertNotEquals(book, result);
+//        assertNull(result);
+//        assertEquals(HttpStatus.NOT_FOUND, updateResult.getStatusCode()); // Проверка HTTP-статуса NOT_FOUND
+//        assertNull(updateResult.getBody()); // Проверка, что в ответе нет тела
+//
+//
+//    }
+//    // Проверка, что свойства книги были действительно обновлены в репозитории:
+//    //Ваш текущий метод updateBook возвращает ResponseEntity<Book>, и вы можете использовать это для проверки успешного обновления в репозитории.
+//
+//
+//    @Test
+//    public void updateBookByIdInconsistencyOfOldAndNewParametersTest() {
+//        when(bookService.getBookById(book.getBookId().toString())).thenReturn(book);
+//        Book updateBook = new Book();
+//
+//
+//        updateBook.setBookTitle("New Title");
+//        updateBook.setAuthor("New Author");
+//        updateBook.setBookPrice(BigDecimal.valueOf(50.00));
+//        updateBook.setDirections(directions);
+//
+//        ResponseEntity<Book> updateResult = bookController.updateBookById(updateBook, book.getBookId().toString());
+//        //assertNotNull(updateResult);
+//
+//        assertNotEquals(book, updateResult.getBody());
+//        assertNotEquals(book.getAuthor(), updateResult.getBody().getAuthor());
+//        assertNotEquals(book.getBookPrice(), updateResult.getBody().getBookPrice());
+//
+//    }
+
+//    @Test
+//    public void updateNonexistentBookById() {
+//        // Arrange
+//        when(bookService.getBookById(book.getBookId().toString())).thenReturn(null);
+//
+//
+//        ResponseEntity<Book> updateResult = bookController.updateBookById(book, book.getBookId().toString());
+//
 //
 //        assertEquals(HttpStatus.NOT_FOUND, updateResult.getStatusCode()); // Проверка HTTP-статуса NOT_FOUND
 //        assertNull(updateResult.getBody()); // Проверка, что в ответе нет тела
-//        }
-//        Проверка, что свойства книги были действительно обновлены в репозитории:
-//
-//        Ваш текущий метод updateBook возвращает ResponseEntity<Book>, и вы можете использовать это для проверки успешного обновления в репозитории.
-//
+//    }
 
 
     @Test
@@ -155,7 +172,7 @@ public class BookControllerTest {
     @Test
     public void deleteBookByBookId() {
     }
-}
+
 //
 //public class CustomerControllerTest {
 //
@@ -203,7 +220,7 @@ public class BookControllerTest {
 //}
 
 
-//    @Test
+    //    @Test
 //    public void updateBookById() {
 //        // Arrange
 //        when(bookService.getBookById(bookId.toString())).thenReturn(book);
@@ -233,20 +250,8 @@ public class BookControllerTest {
 //
 //        java
 //        Copy code
-//@Test
-//public void updateNonexistentBookById() {
-//        // Arrange
-//        when(bookService.getBookById(bookId.toString())).thenReturn(null);
-//
-//        // Act
-//        ResponseEntity<Book> updateResult = bookController.updateBook(new Book(), bookId.toString());
-//
-//        // Assert
-//        assertEquals(HttpStatus.NOT_FOUND, updateResult.getStatusCode()); // Проверка HTTP-статуса NOT_FOUND
-//        assertNull(updateResult.getBody()); // Проверка, что в ответе нет тела
-//        }
 
-
+}
 
 //        Проверка, что свойства книги были действительно обновлены в репозитории:
 //
@@ -280,3 +285,42 @@ public class BookControllerTest {
 //        // Проверка, что свойства книги были действительно обновлены в репозитории
 //        verify(bookRepository, times(1)).save(result);
 //        }
+
+////////////////////////////////////////////////////
+//    public void setUp() {
+////
+////        bookService = Mockito.mock(BookService.class);
+////        bookRepository = Mockito.mock(BookRepository.class);
+//        book = new Book();
+//        services = Mockito.mock(Services.class);
+//        directions = Collections.singletonList(Mockito.mock(Direction.class));
+//
+//        book.setBookId(bookId);
+//        book.setBookTitle(bookTitle);
+//        book.setAuthor(author);
+//        book.setBookPrice(bookPrice);
+//        book.setDirections(directions);
+//        book.getServices();
+//    }
+//
+//        bookController = new BookController(bookService);
+//    }
+
+//    @Test
+//    public void getBookByBookIdTest2() {
+//        UUID bookId = UUID.fromString("298e7601-e47a-5cd9-f387-125124058224");
+//        Book expectedBook = new Book();
+//        // book.setBookId(bookId);
+//        expectedBook.setBookTitle(bookTitle);
+//        expectedBook.setAuthor(author);
+//        expectedBook.setBookPrice(bookPrice);
+//        expectedBook.setDirections(directions);
+//        expectedBook.getServices();
+//
+//        when(bookService.getBookById(bookId.toString())).thenReturn(expectedBook);
+//
+//        Book actualBook = bookController.getBookByBookId(String.valueOf(bookId));
+//        assertEquals(expectedBook, actualBook);
+//        verify(bookService, times(1)).getBookById(String.valueOf(bookId));
+//
+//    }
