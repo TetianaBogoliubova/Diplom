@@ -8,14 +8,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
-
 import org.springframework.transaction.annotation.Transactional;
+
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.springframework.transaction.annotation.Isolation.*;
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
+import static org.springframework.transaction.annotation.Isolation.SERIALIZABLE;
 
 @Service
 @RequiredArgsConstructor
@@ -81,7 +82,13 @@ public class BookServiceImpl implements BookService {
             book.setAuthor((String) updates.get("author"));
         }
         if (updates.containsKey("bookPrice")) {
-            book.setBookPrice((BigDecimal) updates.get("bookPrice"));
+            //book.setBookPrice((BigDecimal) updates.get("bookPrice"));
+            Object priceValue = updates.get("bookPrice");
+            if (priceValue instanceof BigDecimal) {
+                book.setBookPrice((BigDecimal) priceValue);
+            } else if (priceValue instanceof Double) {
+                book.setBookPrice(BigDecimal.valueOf((Double) priceValue));
+            }
         }
     }
 
