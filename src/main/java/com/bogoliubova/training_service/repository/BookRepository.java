@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public interface BookRepository extends JpaRepository<Book, UUID> {
@@ -16,6 +17,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
     int patchUpdateBook(@Param("bookId") String bookId,
                         @Param("bookTitle") String bookTitle,
                         @Param("author") String author,
-                        @Param("bookPrice") double bookPrice);
+                        @Param("bookPrice") BigDecimal bookPrice);
 
 }

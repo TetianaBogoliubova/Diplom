@@ -45,11 +45,10 @@
         </encoder>
     </appender>
 
-    <root level="INFO">
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
-
 
 
     <logger name="com.bogoliubova.training_service.aspect" level="DEBUG"/>
