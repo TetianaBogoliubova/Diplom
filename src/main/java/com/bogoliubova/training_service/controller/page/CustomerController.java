@@ -3,12 +3,6 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.service.interf.CustomerService;
 import com.bogoliubova.training_service.validation.annotation.UuidChecker;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -27,20 +21,6 @@ public class CustomerController {
     // поиск по id + специальная валидация для проверки формата id + exception
     @GetMapping("/id_customer/{customer_id}")
 //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
-    @Operation(summary = "Return the customer by id",
-            description = "",
-            tags = "Customer",
-            externalDocs = @ExternalDocumentation(description = "All documents for method getCustomerByCustomerId",
-                    url = "https://google.com/"),
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "customer with this id exists"),
-                    @ApiResponse(responseCode = "404", description = "customer with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
-            },
-            hidden = false
-    )
     public Customer getCustomerByCustomerId(@UuidChecker @PathVariable("customer_id") String id) {
         return customerService.getCustomerById(id);
     }
@@ -48,18 +28,7 @@ public class CustomerController {
 
     // создание нового объекта
     @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
-    @Operation(summary = "",
-            description = "",
-            tags = "Customer",
-            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                    description = "",
-                    required = true,
-                    content = @Content(
-                            mediaType = "applicaton/json",
-                            schema = @Schema(implementation = Customer.class)
-                    )
-            )
-    )
+
     public Customer createCustomer(@RequestBody Customer customer) {
         return customerService.createNewCustomer(customer);
     }
