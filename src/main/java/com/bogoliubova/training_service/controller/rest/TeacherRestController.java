@@ -6,6 +6,12 @@ import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.service.interf.TeacherService;
 import com.bogoliubova.training_service.validation.annotation.RatingRestChecker;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +24,7 @@ import java.util.UUID;
 @RequestMapping("/teacher")
 @RequiredArgsConstructor
 @Validated
+@Tag(name = "TeacherRestController")
 public class TeacherRestController {
 
     private final TeacherService teacherService;
@@ -28,8 +35,19 @@ public class TeacherRestController {
     // + ExceptionHandler на MethodArgumentNotValidException.class
 
     @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
+    @Operation(summary = "Create a new teacher",
+            description = "If necessary fields are filled in, a new teacher is created",
+            tags = "Teacher",
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Insert json format data according to TeacherDto class",
+                    required = true,
+                    content = @Content(
+                            mediaType = "applicaton/json",
+                            schema = @Schema(implementation = Teacher.class)
+                    )
+            )
+    )
     public Teacher createTeacherRest(@Valid @RequestBody TeacherDto teacherDto) {
-
         return teacherService.create(teacherDto);
     }
 
@@ -39,6 +57,17 @@ public class TeacherRestController {
     // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND)
     @GetMapping("/id_teacherRest/{teacher_id}")
 //http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
+    @Operation(summary = "Return the teacher by id",
+            description = "If the teacher id exists in the database, method return TeacherFullNameAndRatingDto class",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Teacher with this id exists"),
+                    @ApiResponse(responseCode = "404", description = "Teacher with this id does not exists")
+            },
+            security = {
+                    @SecurityRequirement(name = "")
+            },
+            hidden = false
+    )
     public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") String id) {
         UUID teacherId = UUID.fromString(id);
         return teacherService.getFLRId(String.valueOf(teacherId));
@@ -48,8 +77,18 @@ public class TeacherRestController {
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_IN_THIS_CITY_NOT_FOUND)
     @GetMapping("/getTeacherCity/{city}")//http://localhost:8080/teacher/getTeacherCity/Vien
+    @Operation(summary = "Return the teacher by city",
+            description = "If the city exists in the database, method return list of TeacherDto class",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Teachers in this city exist"),
+                    @ApiResponse(responseCode = "404", description = "Teachers in this city do not exist")
+            },
+            security = {
+                    @SecurityRequirement(name = "")
+            },
+            hidden = false
+    )
     public List<TeacherDto> getTeacherByCity(@PathVariable("city") String city) {
-
         return teacherService.getTByC(city);
     }
 
@@ -58,13 +97,35 @@ public class TeacherRestController {
     // + специальная валидация на проверку значения рейтинга (1-10)
     // + ExceptionHandler на ConstraintViolationException.class("The number is not within the rating!!!")
     @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9
+    @Operation(summary = "Return the teacher by rating",
+            description = "If the rating is between 1 and 10, method return list of TeacherDto class",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Teachers with this rating exist"),
+                    @ApiResponse(responseCode = "404", description = "Teachers with this rating do not exist")
+            },
+            security = {
+                    @SecurityRequirement(name = "")
+            },
+            hidden = false
+    )
     public List<TeacherDto> getTeacherByRating(@RatingRestChecker @PathVariable("rating") Integer rating) {
         return teacherService.getTByR(rating);
     }
 
     //поиск учителя по направлению и рейтингу + SQL-запрос в Repository
     @GetMapping("/getTeacherDirAndRating/{direction}/{rating}")
-    //http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
+//http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
+    @Operation(summary = "Return the teacher by directions and rating",
+            description = "If the rating is between 1 and 10 and direction exists in the database, method return list of TeacherDto class",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Teachers with this rating and with direction exist"),
+                    @ApiResponse(responseCode = "404", description = "Teachers with this rating and with direction do not exist")
+            },
+            security = {
+                    @SecurityRequirement(name = "")
+            },
+            hidden = false
+    )
     public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") AllDirections dirTitle, @PathVariable("rating") Integer ratingOfTeacher) {
         return teacherService.getTByDR(dirTitle, ratingOfTeacher);
     }

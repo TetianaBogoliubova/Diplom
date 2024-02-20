@@ -41,6 +41,10 @@ public class ExceptionHandlerAspect {
     }
 
     @ExceptionHandler(TeacherInThisCityNotFound.class)
+    @ApiResponse(responseCode = "404", description = "Not found", content = {
+            @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ErrorResponse.class))
+    })
     public ResponseEntity<String> handleTeacherInThisCityNotFound(TeacherInThisCityNotFound ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -51,6 +55,10 @@ public class ExceptionHandlerAspect {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
+    @ApiResponse(responseCode = "404", description = "Not found", content = {
+            @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ErrorResponse.class))
+    })
     public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -68,6 +76,10 @@ public class ExceptionHandlerAspect {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ApiResponse(responseCode = "404", description = "Not found", content = {
+            @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = ErrorResponse.class))
+    })
     public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

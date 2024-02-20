@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ import java.util.Map;
 @RestController
 @Validated
 @RequiredArgsConstructor
+@Tag(name = "CustomerController")
 @RequestMapping("/customer")
 public class CustomerController {
 
@@ -31,7 +33,7 @@ public class CustomerController {
 //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
-            // tags = "Customer",
+            tags = "Customer",
             externalDocs = @ExternalDocumentation(description = "All documents for method getCustomerByCustomerId",
                     url = "https://google.com/"),
             responses = {
