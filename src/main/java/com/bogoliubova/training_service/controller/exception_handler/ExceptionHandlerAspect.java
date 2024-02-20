@@ -1,9 +1,11 @@
 package com.bogoliubova.training_service.controller.exception_handler;
 
-
 import com.bogoliubova.training_service.dto.ErrorResponse;
 import com.bogoliubova.training_service.exception.TeacherInThisCityNotFound;
 import com.bogoliubova.training_service.exception.TeacherNotFoundException;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -16,21 +18,14 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
 @ControllerAdvice
 public class ExceptionHandlerAspect {
 
-//    @ExceptionHandler(TeacherNotFoundException.class)
-//    public ResponseEntity<String> handleTeacherNotFoundException(TeacherNotFoundException ex) {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        return ResponseEntity
-//                .status(HttpStatus.NOT_FOUND)
-//                .headers(headers)
-//                .body("!!!!! " + ex.getMessage());
-//    }
-
     @ExceptionHandler(TeacherNotFoundException.class)
+    @ApiResponse(responseCode = "404", description = "Not found", content = {
+            @Content(mediaType = "application/json",
+            schema = @Schema(implementation = ErrorResponse.class))
+    })
     public ResponseEntity<ErrorResponse> handleTeacherNotFoundException(TeacherNotFoundException ex, HttpServletRequest request) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -116,3 +111,13 @@ public class ExceptionHandlerAspect {
 //                .body(errorResponse);
 //    }
 //}
+
+//    @ExceptionHandler(TeacherNotFoundException.class)
+//    public ResponseEntity<String> handleTeacherNotFoundException(TeacherNotFoundException ex) {
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.APPLICATION_JSON);
+//        return ResponseEntity
+//                .status(HttpStatus.NOT_FOUND)
+//                .headers(headers)
+//                .body("!!!!! " + ex.getMessage());
+//    }
