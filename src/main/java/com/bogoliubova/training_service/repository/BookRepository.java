@@ -20,5 +20,5 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
                         @Param("author") String author,
                         @Param("bookPrice") BigDecimal bookPrice);
 
-    <V, K> Object patchUpdateBook(String s, Map<K,V> kvMap);
+    //<V, K> Object patchUpdateBook(String s, Map<K,V> kvMap);
 }

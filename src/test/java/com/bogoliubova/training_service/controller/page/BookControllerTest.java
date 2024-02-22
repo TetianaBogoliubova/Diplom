@@ -10,9 +10,11 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -23,6 +25,9 @@ import static org.mockito.Mockito.when;
 
 
 @SpringBootTest
+//@AutoConfigureMockMvc
+//@Sql("/createTestDB.xml")
+//@Sql("/addTestDB")
 public class BookControllerTest {
     @InjectMocks
     private BookController bookController;
