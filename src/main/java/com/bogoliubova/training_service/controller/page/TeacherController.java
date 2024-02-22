@@ -3,7 +3,6 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.service.interf.TeacherService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +36,7 @@ public class TeacherController {
             },
             hidden = false
     )
-    public Teacher getTeacherByTeacherId( @PathVariable("teacher_id") String id) {
+    public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
         return teacherService.getTeacherById(id);
     }
 

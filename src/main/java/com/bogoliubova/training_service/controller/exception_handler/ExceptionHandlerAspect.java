@@ -24,7 +24,7 @@ public class ExceptionHandlerAspect {
     @ExceptionHandler(TeacherNotFoundException.class)
     @ApiResponse(responseCode = "404", description = "Not found", content = {
             @Content(mediaType = "application/json",
-            schema = @Schema(implementation = ErrorResponse.class))
+                    schema = @Schema(implementation = ErrorResponse.class))
     })
     public ResponseEntity<ErrorResponse> handleTeacherNotFoundException(TeacherNotFoundException ex, HttpServletRequest request) {
         HttpHeaders headers = new HttpHeaders();
@@ -94,7 +94,6 @@ public class ExceptionHandlerAspect {
                 .headers(headers)
                 .body("!!!!! " + errorMessage);
     }
-
 }
 
 //
