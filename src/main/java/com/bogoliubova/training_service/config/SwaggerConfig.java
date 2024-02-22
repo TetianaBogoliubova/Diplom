@@ -1,5 +1,5 @@
 package com.bogoliubova.training_service.config;
-//
+
 //import io.swagger.v3.oas.models.OpenAPI;
 //import io.swagger.v3.oas.models.info.Info;
 //import io.swagger.v3.oas.models.servers.Server;
@@ -51,7 +51,5 @@ package com.bogoliubova.training_service.config;
 //                        .description(stage)));
 //        //.servers(Collections.singletonList(new Server().url(serverUrl).description(stage)));
 //        //.addServersItem(new Server().url(serverUrl).description(stage));
-//
-//
 //    }
 //}
