@@ -1,0 +1,124 @@
+2024-02-22 12:13:10.000639+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog"
+Syntax error in SQL statement "[*]<databaseChangeLog"; SQL statement:
+<databaseChangeLog [42000-224]
+2024-02-22 12:13:11.414495+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog"
+Syntax error in SQL statement "[*]<databaseChangeLog"; SQL statement:
+<databaseChangeLog [42000-224]
+2024-02-22 12:13:11.450495+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog"
+Syntax error in SQL statement "[*]<databaseChangeLog"; SQL statement:
+<databaseChangeLog [42000-224]
+2024-02-22 12:13:11.487493+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog"
+Syntax error in SQL statement "[*]<databaseChangeLog"; SQL statement:
+<databaseChangeLog [42000-224]
+2024-02-22 12:13:11.516493+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog"
+Syntax error in SQL statement "[*]<databaseChangeLog"; SQL statement:
+<databaseChangeLog [42000-224]
+2024-02-22 12:29:55.845327+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:29:57.094253+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:29:57.133255+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:29:57.196246+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:29:57.232253+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:34:05.657502+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:34:07.433498+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:34:07.487496+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:34:07.548498+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 12:34:07.606497+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "<[*]!<!<!<!<!<!<!<!"
+Syntax error in SQL statement "<[*]!<!<!<!<!<!<!<!"; SQL statement:
+<!<!<!<!<!<!<!<! [42000-224]
+2024-02-22 13:53:41.037832+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "DATABASECHANGELOGLOCK" не найдена
+Table "DATABASECHANGELOGLOCK" not found; SQL statement:
+SELECT COUNT(*) FROM PUBLIC.DATABASECHANGELOGLOCK [42102-224]
+2024-02-22 13:53:50.939833+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:53:52.332831+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:53:52.398827+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:53:52.433831+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:53:52.466829+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:55:00.403589+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:55:01.434969+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:55:01.473973+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:55:01.521970+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:55:01.563972+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""
+Syntax error in SQL statement "[*]<databaseChangeLog xmlns=""http://www.liquibase.org/xml/ns/dbchangelog"""; SQL statement:
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" [42000-224]
+2024-02-22 13:57:57.353203+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog "
+Syntax error in SQL statement "[*]<databaseChangeLog "; SQL statement:
+<databaseChangeLog  [42000-224]
+2024-02-22 13:57:58.414193+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog "
+Syntax error in SQL statement "[*]<databaseChangeLog "; SQL statement:
+<databaseChangeLog  [42000-224]
+2024-02-22 13:57:58.449194+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog "
+Syntax error in SQL statement "[*]<databaseChangeLog "; SQL statement:
+<databaseChangeLog  [42000-224]
+2024-02-22 13:57:58.494201+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog "
+Syntax error in SQL statement "[*]<databaseChangeLog "; SQL statement:
+<databaseChangeLog  [42000-224]
+2024-02-22 13:57:58.526195+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "[*]<databaseChangeLog "
+Syntax error in SQL statement "[*]<databaseChangeLog "; SQL statement:
+<databaseChangeLog  [42000-224]
