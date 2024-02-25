@@ -1,18 +1,22 @@
 1. Класс Book:
     - основные запросы (get, post, put, patch, delete) - page-Controller.
+    - Unit-тесты к контроллерам и сервисам
 
 2. Класс Customer:
-    - основные запросы (get, post, put, patch, delete) - CustomerController-page.
+CustomerController-page:
+    - основные запросы (get, post, put, patch, delete);
+    - get-запрос содержит специальную валидацию для проверки формата id, exception, прописанную документацию для swagger;
+    - put-запрос содержит exception, прописанную документацию для swagger;
+    - patch-запрос содержит 2 вида exception, прописанную документацию для swagger;
+    - интеграционные тесты на все контроллеры;
 
-      get-запрос содержит специальную валидацию для проверки формата id, exception, прописанную документацию для swagger;
-      put-запрос содержит exception, прописанную документацию для swagger;
-      patch-запрос содержит 2 вида exception, прописанную документацию для swagger;
-
-    - get-запрос с возвратом Dto-класса (3 поля), содержит специальную валидацию для проверки формата id, exception и
+CustomerRestController:
+    - get-запрос с возвратом Dto-класса (3 поля). Cодержит специальную валидацию для проверки формата id, exception и
    прописанную документацию для swagger;
-      Прописан в CustomerRestController.
+
 
 3. Класс Teacher:
+TeacherRestController:
     - post-запрос на создание нововго объекта. Содержит встроенную валидацию @NotBlank на поля в Dto-классе, exception,
       ExceptionHandler на MethodArgumentNotValidException.class, прописанную документацию для swagger;
 

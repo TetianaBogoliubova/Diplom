@@ -8,9 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql("/dropTable.sql")
 @Sql("/createTestDB.sql")
 @Sql("/addTestDB.sql")
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class CustomerControllerTest {
 
     @Autowired
@@ -51,7 +48,6 @@ class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
                 .andReturn();
-
         assertEquals(200, mockPositiveResult.getResponse().getStatus());
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
@@ -59,15 +55,14 @@ class CustomerControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
                 .andReturn();
-
         assertEquals(404, mockNegativeResult.getResponse().getStatus());
-        Customer actual = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
+        Customer customerResult = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
         });
 
-        assertEquals(actual, customer);
-        assertEquals(actual.getFirstName(), customer.getFirstName());
-        assertEquals(actual.getLastName(), customer.getLastName());
-        assertEquals(actual.getCusEmail(), customer.getCusEmail());
+        assertEquals(customerResult, customer);
+        assertEquals(customerResult.getFirstName(), customer.getFirstName());
+        assertEquals(customerResult.getLastName(), customer.getLastName());
+        assertEquals(customerResult.getCusEmail(), customer.getCusEmail());
     }
 
     @Test
@@ -195,11 +190,11 @@ class CustomerControllerTest {
                 .andReturn();
         assertEquals(200, getBeforeDeleteResult.getResponse().getStatus());
 
-//        MvcResult deleteNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-//                        .delete("/customer/deleteCustomer/{customer_id}", "NotExistingCustomer")
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andReturn();
-//        assertEquals(400, deleteNotExistingCustomerResult.getResponse().getStatus());
+        MvcResult deleteNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/deleteCustomer/{customer_id}", "614e5310-e75a-9cd6-f593-566726870000")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        assertEquals(404, deleteNotExistingCustomerResult.getResponse().getStatus());
 
         MvcResult deleteCustomerResult = mockMvc.perform(MockMvcRequestBuilders
                         .delete("/customer/deleteCustomer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")

@@ -26,7 +26,8 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public Teacher getTeacherById(String id) {
-        return teacherRepository.findTeacherByTeacherId(UUID.fromString(id));
+        return teacherRepository.findById(UUID.fromString(id))
+                .orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
     }
 
     @Override

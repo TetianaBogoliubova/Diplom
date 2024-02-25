@@ -53,7 +53,7 @@ public class CustomerController {
     @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
     @Operation(summary = "Create a new customer",
             description = "If necessary fields are filled in, a new customer is created",
-            //tags = "Customer",
+            tags = "Customer",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Insert jason format data according to Customer Entity class",
                     required = true,
@@ -129,10 +129,11 @@ public class CustomerController {
             },
             security = {
                     @SecurityRequirement(name = "")
+
             },
             hidden = false
     )
-    public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {
+    public ResponseEntity<String> deleteCustomerById(@PathVariable("customer_id") String customerId) {
         return customerService.deleteCustomerById(customerId);
     }
 }

@@ -69,8 +69,8 @@ public class TeacherRestController {
             hidden = false
     )
     public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") String id) {
-        UUID teacherId = UUID.fromString(id);
-        return teacherService.getFLRId(String.valueOf(teacherId));
+        //UUID teacherId = UUID.fromString(id);
+        return teacherService.getFLRId(String.valueOf(id));//teacherId));
     }
 
     //поиск учителя по указанному городу
