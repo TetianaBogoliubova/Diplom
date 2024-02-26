@@ -23,6 +23,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -40,12 +41,15 @@ class TeacherRestControllerTest {
     private ObjectMapper objectMapper;
 
     TeacherDto teacherDto = new TeacherDto();
-
+    List<Rating> ratings = new ArrayList<>();
     @BeforeEach
     public void setup() {
         List<Direction> directions = new ArrayList<>();
         Location location = null;
-        List<Rating> ratings = new ArrayList<>();
+        Teacher teacher = new Teacher();
+        teacher.setTeacherId(UUID.fromString("837e8317-e35a-4cd1-f710-387841923887"));
+        ratings.add(new Rating(UUID.fromString("877e2246-e57a-9cd7-f555-573360728004"), 7, "Good with children", teacher));
+
 
         teacherDto.setFirstName("Ulysses");
         teacherDto.setLastName("Runte");
@@ -83,7 +87,6 @@ class TeacherRestControllerTest {
 
     @Test
     void getFirstNameAndLastNameAndRatingsIntegrationTest() throws Exception {
-        List<Rating> ratings = new ArrayList<>();
         TeacherFullNameAndRatingDto teacherFNRDto = new TeacherFullNameAndRatingDto();
         teacherFNRDto.setFirstName("Ulysses");
         teacherFNRDto.setLastName("Runte");
@@ -110,10 +113,10 @@ class TeacherRestControllerTest {
         TeacherFullNameAndRatingDto teacherResult = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
         });
 
-        //assertEquals(teacherResult, teacherFNRDto);
+        assertEquals(teacherResult, teacherFNRDto);
         assertEquals(teacherResult.getFirstName(), teacherFNRDto.getFirstName());
         assertEquals(teacherResult.getLastName(), teacherFNRDto.getLastName());
-        //assertEquals(teacherResult.getRatings(), teacherFNRDto.getRatings());
+        assertIterableEquals(teacherResult.getRatings(), teacherFNRDto.getRatings());
     }
 
     @Test
@@ -142,6 +145,8 @@ class TeacherRestControllerTest {
         assertEquals(1, teacherResultList.size());
         assertEquals(teacherResultList.get(0).getFirstName(), teacherDto.getFirstName());
         assertEquals(teacherResultList.get(0).getLastName(), teacherDto.getLastName());
+        assertEquals(teacherResultList.get(0).getTeachEmail(), teacherDto.getTeachEmail());
+        assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 
     @Test
@@ -167,7 +172,7 @@ class TeacherRestControllerTest {
         assertEquals(1, teacherResultList.size());
         assertEquals(teacherResultList.get(0).getFirstName(), teacherDto.getFirstName());
         assertEquals(teacherResultList.get(0).getLastName(), teacherDto.getLastName());
-        //assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
+        assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 
     @Test
@@ -182,17 +187,17 @@ class TeacherRestControllerTest {
         assertEquals(200, mockPositiveResult.getResponse().getStatus());
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/teacher/getTeacherDirAndRating/{direction}/{rating}", "LOGIC", 12)
+                        .get("/teacher/getTeacherDirAndRating/{direction}/{rating}", "NOTEXISTINGDIRECTION", 10)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
-        // assertEquals(404, mockNegativeResult.getResponse().getStatus());
+         assertEquals(400, mockNegativeResult.getResponse().getStatus());
 
         List<TeacherDto> teacherResultList = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
         });
         assertEquals(1, teacherResultList.size());
         assertEquals(teacherResultList.get(0).getFirstName(), teacherDto.getFirstName());
         assertEquals(teacherResultList.get(0).getLastName(), teacherDto.getLastName());
-        //assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
+        assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 }
