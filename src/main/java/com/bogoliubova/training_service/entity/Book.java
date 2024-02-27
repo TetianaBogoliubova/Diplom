@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -53,7 +52,10 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(bookPrice, book.bookPrice) && Objects.equals(bookId, book.bookId) && Objects.equals(bookTitle, book.bookTitle) && Objects.equals(author, book.author);
+        return Objects.equals(bookPrice, book.bookPrice) &&
+                Objects.equals(bookId, book.bookId) &&
+                Objects.equals(bookTitle, book.bookTitle) &&
+                Objects.equals(author, book.author);
     }
 
     @Override
@@ -72,6 +74,4 @@ public class Book {
                 ", services=" + services +
                 '}';
     }
-
-
 }
