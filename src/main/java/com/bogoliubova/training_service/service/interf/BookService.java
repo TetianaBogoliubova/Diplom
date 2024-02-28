@@ -15,5 +15,5 @@ public interface BookService {
 
     ResponseEntity<String> deleteBookById(String bookId);
 
-    ResponseEntity<Book> patchUpdateBookById(String bookId, Map<String, Object> updates);
+    ResponseEntity<Book> patchUpdateBookById(String bookId, Book updateBook);
 }

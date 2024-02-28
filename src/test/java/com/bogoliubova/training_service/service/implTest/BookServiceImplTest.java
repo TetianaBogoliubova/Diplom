@@ -2,6 +2,7 @@ package com.bogoliubova.training_service.service.implTest;
 
 import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.entity.Direction;
+import com.bogoliubova.training_service.entity.Services;
 import com.bogoliubova.training_service.repository.BookRepository;
 import com.bogoliubova.training_service.service.impl.BookServiceImpl;
 import org.junit.Before;
@@ -30,6 +31,8 @@ public class BookServiceImplTest {
     private BookRepository bookRepository = Mockito.mock(BookRepository.class);
     @Mock
     private List<Direction> directions = new ArrayList<>();
+    @Mock
+    private Services services = new Services();
 
     private Book book;
 
@@ -42,7 +45,7 @@ public class BookServiceImplTest {
         book.setAuthor("Sherri Miller");
         book.setBookPrice(BigDecimal.valueOf(13.50));
         book.setDirections(directions);
-
+        book.setServices(services);
     }
 
     @Test
@@ -55,6 +58,7 @@ public class BookServiceImplTest {
         assertNotNull(expectedBook);
 
         verify(bookRepository).findBookByBookId(book.getBookId());
+        verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
@@ -67,20 +71,20 @@ public class BookServiceImplTest {
         assertNull(expectedBook);
 
         verify(bookRepository).findBookByBookId(book.getBookId());
+        verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
     public void getBookByIdCheckAllParametersTest() {
-        Book expectedBook = new Book();
+        when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(book);
 
-        when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(expectedBook);
-        Book result = bookServiceImpl.getBookById(book.getBookId().toString());
+        Book expectedBook = bookServiceImpl.getBookById(book.getBookId().toString());
 
-        assertNotNull(result);
-        assertEquals(expectedBook.getBookId(), result.getBookId());
-        assertEquals(expectedBook.getBookTitle(), result.getBookTitle());
-        assertEquals(expectedBook.getAuthor(), result.getAuthor());
-        assertEquals(expectedBook.getBookPrice(), result.getBookPrice());
+        assertNotNull(expectedBook);
+        assertEquals(book.getBookId(), expectedBook.getBookId());
+        assertEquals(book.getBookTitle(), expectedBook.getBookTitle());
+        assertEquals(book.getAuthor(), expectedBook.getAuthor());
+        assertEquals(book.getBookPrice(), expectedBook.getBookPrice());
 
         verify(bookRepository).findBookByBookId(book.getBookId());
         verifyNoMoreInteractions(bookRepository);
@@ -90,10 +94,10 @@ public class BookServiceImplTest {
     public void createNewBookPositiveTest() {
         when(bookRepository.save(any(Book.class))).thenReturn(book);
 
-        Book newBook = bookServiceImpl.createNewBook(book);
+        Book expectedBook = bookServiceImpl.createNewBook(book);
 
-        assertNotNull(newBook);
-        assertEquals(book, newBook);
+        assertNotNull(expectedBook);
+        assertEquals(book, expectedBook);
 
         verify(bookRepository, times(1)).save(book);
         verifyNoMoreInteractions(bookRepository);
@@ -102,13 +106,13 @@ public class BookServiceImplTest {
     @Test
     public void createNewBookCheckAllParametersTest() {
         when(bookRepository.save(any(Book.class))).thenReturn(book);
-        Book newBook = bookServiceImpl.createNewBook(book);
+        Book expectedBook = bookServiceImpl.createNewBook(book);
 
-        assertNotNull(newBook.getBookId());
-        assertNotNull(newBook.getBookTitle());
-        assertNotNull(newBook.getAuthor());
-        assertNotNull(newBook.getBookPrice());
-        assertNotNull(newBook.getDirections());
+        assertNotNull(expectedBook.getBookId());
+        assertNotNull(expectedBook.getBookTitle());
+        assertNotNull(expectedBook.getAuthor());
+        assertNotNull(expectedBook.getBookPrice());
+        assertNotNull(expectedBook.getDirections());
 
         verify(bookRepository, times(1)).save(book);
         verifyNoMoreInteractions(bookRepository);
@@ -119,13 +123,13 @@ public class BookServiceImplTest {
         when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(book);
         when(bookRepository.save(any(Book.class))).thenReturn(book);
 
-        Book updateBook = new Book();
-        updateBook.setBookTitle("New Title1");
-        updateBook.setAuthor("New Author1");
-        updateBook.setBookPrice(BigDecimal.valueOf(50.00));
-        updateBook.setDirections(directions);
+        book.setBookTitle("New Title1");
+        book.setAuthor("New Author1");
+        book.setBookPrice(BigDecimal.valueOf(50.00));
+        book.setDirections(directions);
+        book.setServices(services);
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.updateBook(updateBook, book.getBookId().toString());
+        ResponseEntity<Book> expectedBook = bookServiceImpl.updateBook(book, book.getBookId().toString());
 
         assertNotNull(expectedBook);
         assertEquals(HttpStatus.OK, expectedBook.getStatusCode());
@@ -139,22 +143,18 @@ public class BookServiceImplTest {
     @Test
     public void updateBookCheckNewParametersTest() {
         when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(book);
+        when(bookRepository.save(any(Book.class))).thenReturn(book);
 
-        Book updateBook = new Book();
+        book.setBookTitle("New Title");
+        book.setAuthor("New Author");
+        book.setBookPrice(BigDecimal.valueOf(40.00));
+        book.setDirections(directions);
 
-        updateBook.setBookTitle("New Title");
-        updateBook.setAuthor("New Author");
-        updateBook.setBookPrice(BigDecimal.valueOf(40.00));
-        updateBook.setDirections(directions);
+        ResponseEntity<Book> expectedBook = bookServiceImpl.updateBook(book, book.getBookId().toString());
 
-        when(bookRepository.save(any(Book.class))).thenReturn(updateBook);
-
-        ResponseEntity<Book> updateResult = bookServiceImpl.updateBook(updateBook, book.getBookId().toString());
-
-        assertNotEquals(book, updateResult.getBody());
-        assertEquals("New Title", updateResult.getBody().getBookTitle());
-        assertEquals("New Author", updateResult.getBody().getAuthor());
-        assertEquals(BigDecimal.valueOf(40.00), updateResult.getBody().getBookPrice());
+        assertEquals("New Title", Objects.requireNonNull(expectedBook.getBody()).getBookTitle());
+        assertEquals("New Author", expectedBook.getBody().getAuthor());
+        assertEquals(BigDecimal.valueOf(40.00), expectedBook.getBody().getBookPrice());
 
         verify(bookRepository, times(1)).findBookByBookId(book.getBookId());
         verify(bookRepository, times(1)).save(any(Book.class));
@@ -165,61 +165,58 @@ public class BookServiceImplTest {
     public void updateBookByIdNegativeTest() {
         when(bookRepository.findBookByBookId(any(UUID.class))).thenReturn(null);
 
-        ResponseEntity<Book> updateResult = bookServiceImpl.updateBook(book, UUID.randomUUID().toString());
+        ResponseEntity<Book> expectedBook = bookServiceImpl.updateBook(book, UUID.randomUUID().toString());
 
-        assertEquals(HttpStatus.NOT_FOUND, updateResult.getStatusCode());
-        assertNull(updateResult.getBody());
+        assertEquals(HttpStatus.NOT_FOUND, expectedBook.getStatusCode());
+        assertNull(expectedBook.getBody());
     }
 
     @Test
     public void patchUpdateBookByIdPositiveTest() {
-        when(bookRepository.findById(book.getBookId())).thenReturn(Optional.ofNullable(book));
+        when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(book);
         when(bookRepository.save(any(Book.class))).thenReturn(book);
 
-        Map<String, Object> updates = new HashMap<>();
-        updates.put("bookTitle", "New Title1");
-        updates.put("author", "New Author1");
-        updates.put("bookPriceB", BigDecimal.valueOf(50.00));
+        book.setBookTitle("New Title1");
+        book.setAuthor("New Author1");
+        book.setBookPrice(BigDecimal.valueOf(50.00));
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById(book.getBookId().toString(), updates);
-        when(bookRepository.save(any(Book.class))).thenReturn(expectedBook.getBody());
+        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById(book.getBookId().toString(), book);
 
         assertNotNull(expectedBook);
         assertEquals(HttpStatus.OK, expectedBook.getStatusCode());
         assertNotNull(expectedBook.getBody());
 
-        verify(bookRepository, times(1)).findById(book.getBookId());
+        verify(bookRepository, times(1)).findBookByBookId(book.getBookId());
         verify(bookRepository, times(1)).save(any(Book.class));
         verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
     public void patchUpdateBookCheckNewParametersTest() {
-        when(bookRepository.findById(book.getBookId())).thenReturn(Optional.ofNullable(book));
+        when(bookRepository.findBookByBookId(book.getBookId())).thenReturn(book);
         when(bookRepository.save(any(Book.class))).thenReturn(book);
 
-        Map<String, Object> updates = new HashMap<>();
-        updates.put("bookTitle", "New Title1");
-        updates.put("author", "New Author1");
-        updates.put("bookPrice", BigDecimal.valueOf(50.00));
+        book.setBookTitle("New Title");
+        book.setAuthor("New Author");
+        book.setBookPrice(BigDecimal.valueOf(40.00));
+        book.setDirections(directions);
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById(book.getBookId().toString(), updates);
-        when(bookRepository.save(any(Book.class))).thenReturn(expectedBook.getBody());
+        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById( book.getBookId().toString(), book);
 
-        assertEquals("New Title1", expectedBook.getBody().getBookTitle());
-        assertEquals("New Author1", expectedBook.getBody().getAuthor());
-        assertEquals(BigDecimal.valueOf(50.00), expectedBook.getBody().getBookPrice());
+        assertEquals("New Title", Objects.requireNonNull(expectedBook.getBody()).getBookTitle());
+        assertEquals("New Author", expectedBook.getBody().getAuthor());
+        assertEquals(BigDecimal.valueOf(40.00), expectedBook.getBody().getBookPrice());
 
-        verify(bookRepository, times(1)).findById(book.getBookId());
+        verify(bookRepository, times(1)).findBookByBookId(book.getBookId());
         verify(bookRepository, times(1)).save(any(Book.class));
         verifyNoMoreInteractions(bookRepository);
     }
 
     @Test
     public void patchUpdateBookByIdNegativeTest() {
-        when(bookRepository.findById(any(UUID.class))).thenReturn(null);
+        when(bookRepository.findById(book.getBookId())).thenReturn(null);
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.updateBook(book, UUID.randomUUID().toString());
+        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById( UUID.randomUUID().toString(), book);
 
         assertEquals(HttpStatus.NOT_FOUND, expectedBook.getStatusCode());
         assertNull(expectedBook.getBody());
