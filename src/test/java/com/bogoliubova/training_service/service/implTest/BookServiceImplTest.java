@@ -42,7 +42,7 @@ public class BookServiceImplTest {
         book.setAuthor("Sherri Miller");
         book.setBookPrice(BigDecimal.valueOf(13.50));
         book.setDirections(directions);
-        //book.getServices();
+
     }
 
     @Test
