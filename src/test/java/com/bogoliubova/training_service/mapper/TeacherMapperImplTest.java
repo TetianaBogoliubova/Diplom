@@ -25,14 +25,12 @@ class TeacherMapperImplTest {
 
     @Mock
     private TeacherDto teacherDto;
-    private Teacher teacher;
 
     @Before
     public void setup() {
         MockitoAnnotations.openMocks(this);
 
         teacherDto = new TeacherDto();
-        teacher = new Teacher();
 
         when(teacherDto.getFirstName()).thenReturn("Ulysses");
         when(teacherDto.getLastName()).thenReturn("Runte");
@@ -64,10 +62,10 @@ class TeacherMapperImplTest {
         assertEquals(2, teachers.size());
 
         for (int i = 0; i < teachers.size(); i++) {
-            teacher = teachers.get(i);
-            teacherDto = expectedListDto.get(i);
+            Teacher currentTeacher = teachers.get(i);
+            TeacherDto currentTeacherDto = expectedListDto.get(i);
+            assertEquals(currentTeacher.getTeachEmail(), currentTeacherDto.getTeachEmail());
         }
-        assertEquals(teacher.getTeachEmail(), teacherDto.getTeachEmail());
     }
 }
 

@@ -9,15 +9,12 @@ import java.util.stream.Collectors;
 
 public class TeacherMapperImpl implements TeacherMapper {
 
-    private final Teacher teacher = new Teacher();
-    private final TeacherDto teacherDto = new TeacherDto();
-    private final TeacherFullNameAndRatingDto teacherFNAR = new TeacherFullNameAndRatingDto();
-
     @Override
     public Teacher toEntity(TeacherDto teacherDto) {
         if (teacherDto == null) {
             return null;
         }
+        Teacher teacher = new Teacher();
         teacher.setFirstName(teacherDto.getFirstName());
         teacher.setLastName(teacherDto.getLastName());
         teacher.setTeachEmail(TeacherMapper.toUpperCase(teacherDto.getTeachEmail()));
@@ -33,6 +30,7 @@ public class TeacherMapperImpl implements TeacherMapper {
         if (teacher == null) {
             return null;
         }
+        TeacherDto teacherDto = new TeacherDto();
         teacherDto.setFirstName(teacher.getFirstName());
         teacherDto.setLastName(teacher.getLastName());
         teacherDto.setTeachEmail(teacher.getTeachEmail());
@@ -45,7 +43,7 @@ public class TeacherMapperImpl implements TeacherMapper {
 
     @Override
     public TeacherFullNameAndRatingDto toDtoFullName(Teacher teacher) {
-
+        TeacherFullNameAndRatingDto teacherFNAR = new TeacherFullNameAndRatingDto();
         teacherFNAR.setFirstName(teacher.getFirstName());
         teacherFNAR.setLastName(teacher.getLastName());
         teacherFNAR.setRatings(teacher.getRatings());
