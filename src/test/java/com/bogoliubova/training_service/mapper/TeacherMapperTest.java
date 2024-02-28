@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TeacherMapperImplTest {
+class TeacherMapperTest {
 
     @InjectMocks
-    private final TeacherMapperImpl teacherMapper = new TeacherMapperImpl();
+    private final TeacherMapper teacherMapper = new TeacherMapperImpl();
 
     @Mock
     private TeacherDto teacherDto;
@@ -68,6 +68,3 @@ class TeacherMapperImplTest {
         }
     }
 }
-
-
-
