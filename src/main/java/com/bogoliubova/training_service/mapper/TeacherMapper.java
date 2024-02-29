@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public interface TeacherMapper {
 
     @Mapping(source = "teachEmail", target = "teachEmail", qualifiedByName = "toUpperCase")
+    @Mapping(target = "teacherId", ignore = true)
+    @Mapping(target = "typesOfLearning", ignore = true)
     Teacher toEntity(TeacherDto teacherDto);
 
     @Named("toUpperCase")
