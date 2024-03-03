@@ -82,7 +82,9 @@ public class BookServiceImpl implements BookService {
             book.setAuthor((String) updates.get("author"));
         }
         if (updates.containsKey("bookPrice")) {
+
             //book.setBookPrice((BigDecimal) updates.get("bookPrice"));
+
             Object priceValue = updates.get("bookPrice");
             if (priceValue instanceof BigDecimal) {
                 book.setBookPrice((BigDecimal) priceValue);

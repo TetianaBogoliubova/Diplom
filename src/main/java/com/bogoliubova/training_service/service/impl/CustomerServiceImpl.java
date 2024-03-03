@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Optional;
@@ -26,6 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    @Transactional
     public Customer getCustomerById(String id) {
         return customerRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
@@ -93,6 +95,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public CustomerDto getCLDId(String id) {
         Optional<CustomerDto> entity = customerRepository.findById(UUID.fromString(id))
                 .map(c -> customerMapper.toDto(c));

@@ -49,6 +49,7 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
+
     // создание нового объекта
     @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
     @Operation(summary = "Create a new customer",

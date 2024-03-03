@@ -54,7 +54,7 @@ public class TeacherRestController {
 
     //поиск имени, фамилии, рейтинга учителя по id
     // + exception
-    // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND)
+    // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND) с возвратом url
     @GetMapping("/id_teacherRest/{teacher_id}")
 //http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
     @Operation(summary = "Return the teacher by id",

@@ -41,8 +41,8 @@ public class TeacherController {
     }
 
     @PostMapping("/createTeacher")
-    @Operation(summary = "Create a new customer",
-            description = "If necessary fields are filled in, a new customer is created",
+    @Operation(summary = "Create a new teacher",
+            description = "If necessary fields are filled in, a new teacher is created",
             tags = "Teacher",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Insert jason format data according to Teacher Entity class",

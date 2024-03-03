@@ -8,9 +8,10 @@ spring:
     password: IT0677627052
 
   jpa:
-   show-sql: true
-   hibernate:
+    show-sql: false
+    #hibernate:
     ddl-auto: none
+    open-in-view: false
 
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
