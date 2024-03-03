@@ -8,9 +8,10 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface ServicesMapper {
 
-    @Mapping(target = "servicePrice", ignore = true)
-    @Mapping(target = "type", ignore = true)
     ServicesDto toDto(Services services);
 
+    @Mapping(target = "serviceId", ignore = true)
+    @Mapping(target = "directions", ignore = true)
+    @Mapping(target = "books", ignore = true)
     Services toEntity(ServicesDto servicesDto);
 }
