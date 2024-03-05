@@ -3,11 +3,8 @@ package com.bogoliubova.training_service.controller.page;
 import com.bogoliubova.training_service.entity.Book;
 import com.bogoliubova.training_service.service.interf.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor

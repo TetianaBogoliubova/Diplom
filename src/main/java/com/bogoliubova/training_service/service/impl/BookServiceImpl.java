@@ -46,6 +46,7 @@ public class BookServiceImpl implements BookService {
             existingBook.setAuthor(updateBook.getAuthor());
             existingBook.setBookPrice(updateBook.getBookPrice());
             existingBook.setDirections(updateBook.getDirections());
+            existingBook.setServices(updateBook.getServices());
 
             Book updateBookResult = bookRepository.save(existingBook);
 
@@ -81,6 +82,7 @@ public class BookServiceImpl implements BookService {
 //            book.setAuthor((String) updates.get("author"));
 //        }
 //        if (updates.containsKey("bookPrice")) {
+
 //
 //            //book.setBookPrice((BigDecimal) updates.get("bookPrice"));
 //
@@ -90,6 +92,9 @@ public class BookServiceImpl implements BookService {
 //            } else if (priceValue instanceof Double) {
 //                book.setBookPrice(BigDecimal.valueOf((Double) priceValue));
 //            }
+
+//            book.setBookPrice((BigDecimal) updates.get("bookPrice"));
+
 //        }
 //    }
 

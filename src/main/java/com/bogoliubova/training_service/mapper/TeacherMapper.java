@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 public interface TeacherMapper {
 
     @Mapping(source = "teachEmail", target = "teachEmail", qualifiedByName = "toUpperCase")
+    @Mapping(target = "teacherId", ignore = true)
+    @Mapping(target = "typesOfLearning", ignore = true)
     Teacher toEntity(TeacherDto teacherDto);
 
     @Named("toUpperCase")
@@ -33,7 +35,7 @@ public interface TeacherMapper {
     @Mapping(source = "teacher.location", target = "location", qualifiedByName = "getTeacherByCity")
     @Mapping(source = "teacher.ratings", target = "ratings", qualifiedByName = "findTeachersRatings")
     @Mapping(source = "teacher.directions", target = "directions", qualifiedByName = "findTeachersByDirectionAndRating")
-    default List<TeacherDto> toDtoList(List<Teacher> teachers) {
+    default List<TeacherDto> toDtoList(List<Teacher> teachers){
         return teachers.stream()
                 .map(entity -> toDto(entity))
                 .collect(Collectors.toList());
