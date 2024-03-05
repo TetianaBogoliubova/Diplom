@@ -14,7 +14,7 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     @Modifying
     @Query("UPDATE Book b SET b.bookTitle = :bookTitle, b.author = :author, b.bookPrice = :bookPrice WHERE b.bookId = :bookId")
-    int patchUpdateBook(@Param("bookId") String bookId,
+    void patchUpdateBook(@Param("bookId") String bookId,
                         @Param("bookTitle") String bookTitle,
                         @Param("author") String author,
                         @Param("bookPrice") BigDecimal bookPrice);

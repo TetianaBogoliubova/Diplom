@@ -39,11 +39,8 @@ public class BookController {
     @PatchMapping("/part_updateBook/{book_id}")
     //http://localhost:8080/book/part_updateBook/226e8867-e33a-2cd3-f362-211620192358
     public ResponseEntity<Book> patchUpdateBookById(@PathVariable("book_id") String bookId,
-                                                    @RequestBody Map<String, Object> updates) {
-        if (updates.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return bookService.patchUpdateBookById(bookId, updates);
+                                                    @RequestBody Book updateBook) {
+        return bookService.patchUpdateBookById(bookId, updateBook);
     }
 
     //удаление по id
