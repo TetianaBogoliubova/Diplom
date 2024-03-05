@@ -331,3 +331,4 @@ and any local or remote base of the path set on the search path.
 	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
 	at liquibase.command.CommandScope.execute(CommandScope.java:214)
 	... 30 common frames omitted
+05.03.2024 21:26:47.462 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.

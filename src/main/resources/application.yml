@@ -35,8 +35,3 @@ Swagger configuration:
      url: http://localhost:8080
      stage: development
 
-
-
-# <!-- app:
-#    server:
-#      url: http://localhost:8080-->
