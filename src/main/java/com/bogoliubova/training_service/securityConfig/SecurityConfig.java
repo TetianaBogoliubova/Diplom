@@ -1,95 +1,64 @@
 package com.bogoliubova.training_service.securityConfig;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
-//@Configuration
-//@EnableWebSecurity
-//public class SecurityConfig extends WebSecurityConfigurerAdapter{
+@Configuration
+@EnableWebSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http
-//                .authorizeHttpRequests(a ->
-//                        a.requestMatchers("/book/id_book/{book_id}").hasRole("BOOK")
-//                                .requestMatchers("/book/id_book/{book_id}").hasRole("BOOKADMIN"))
-//                .formLogin(Customizer.withDefaults())
-//                .logout(logoutPage -> logoutPage.logoutSuccessUrl("/book"))
-//                .build();
-//    }
-//
+    private final UserDetailsServiceImpl userDetailsService;
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .authorizeHttpRequests(a -> a
+                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("USER")
+                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("ADMIN"))
+                .formLogin(Customizer.withDefaults())
+                .logout(logoutPage -> logoutPage.logoutSuccessUrl("/customer"))
+                .build();
+    }
+
+
+    //Создание юзеров в памяти, если не хотим вводить их в БД
 //    @Bean
 //    public UserDetailsService userDetailsService() {
-//        UserDetails userDetails = User.withDefaultPasswordEncoder()
-//                .username("book")
-//                .password("123")
-//               // .password("{bcrypt}")
-//                .roles("BOOK")
+//        UserDetails user = User.builder()
+//                .passwordEncoder(rawPassword -> new BCryptPasswordEncoder().encode(rawPassword))
+//                .username("user")
+//                .password("user")//{bcrypt}
+//                .roles("USER")
 //                .build();
 //
-//        UserDetails admin = User.withDefaultPasswordEncoder()
-//                .username("bookadmin")
-//                .password("1234")
-//                .roles("BOOKADMIN")
+//        UserDetails admin = User.builder()
+//                .passwordEncoder(new BCryptPasswordEncoder()::encode)
+//                .username("admin")
+//                .password("admin")//{bcrypt}
+//                .roles("ADMIN", "USER")
 //                .build();
 //
-//        return new InMemoryUserDetailsManager(book, admin);
+//        return new InMemoryUserDetailsManager(user, admin);
 //    }
-///////////////////////////////////////////////////////////////////
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//
-//
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/book/id_book/**").hasAnyRole("BOOK", "BOOKADMIN")
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .permitAll()
-//                .and()
-//                .logout()
-//                .logoutSuccessUrl("/book")
-//                .permitAll();
-//    }
-//
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-//
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsService() {
-//        UserDetails bookUser = User.builder()
-//                .username("book")
-//                .password(passwordEncoder().encode("123"))
-//                .roles("BOOK")
-//                .build();
-//
-//        UserDetails adminUser = User.builder()
-//                .username("bookadmin")
-//                .password(passwordEncoder().encode("1234"))
-//                .roles("BOOKADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(bookUser, adminUser);
-//    }
-//
-//
-//
-//}
+}
