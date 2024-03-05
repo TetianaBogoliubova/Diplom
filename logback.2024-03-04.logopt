@@ -1,0 +1,6 @@
+04.03.2024 15:13:30.785 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: d3ff0abb-6434-42a7-8e20-4b114e8127b2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+

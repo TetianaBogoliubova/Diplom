@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @RestController
@@ -19,6 +20,7 @@ public class BookController {
     //поиск по id
     @GetMapping("/id_book/{book_id}") //http://localhost:8080/book/id_book/298e7601-e47a-5cd9-f387-125124058224
     public Book getBookByBookId(@PathVariable("book_id") String id) {
+        //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return bookService.getBookById(id);
     }
 
