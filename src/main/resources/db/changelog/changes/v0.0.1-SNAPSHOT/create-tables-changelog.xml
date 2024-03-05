@@ -1,11 +1,8 @@
 <databaseChangeLog
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-    http://www.liquibase.org/xml/ns/dbchangelog-ext
-    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="bogoliubova" id="create directions table">
 
@@ -48,15 +45,6 @@
         </createTable>
 
     </changeSet>
-
-    <!--  <changeSet author="bogoliubova" id="loadDataForDirections">
-           <loadData file="classpath:data.sql" separator="," tableName="directions">
-               <column name="direction_id" type="binary(16)"/>
-               <column name="d_title" type="varchar(45)"/>
-               <column name="grading" type="varchar(45)"/>
-           </loadData>
-       </changeSet> -->
-
 
 
     <changeSet author="bogoliubova" id="create books table">
@@ -194,7 +182,122 @@
     </changeSet>
 
 
+    <changeSet author="bogoliubova" id="create roles table">
 
+        <preConditions onFail="CONTINUE" onFailMessage="Table roles already exists">
+            <not>
+                <tableExists tableName="roles"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="roles">
+
+            <column name="role_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="role_name" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create authorities table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table authorities already exists">
+            <not>
+                <tableExists tableName="authorities"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="authorities">
+
+            <column name="authority_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="authority_name" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create customer_role table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table customer_role already exists">
+            <not>
+                <tableExists tableName="customer_role"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="customer_role">
+
+            <column name="cus_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_cus_id" references="customers(customer_id)" unique="false"/>
+            </column>
+
+            <column name="rol_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_role_id" references="roles(role_id)" unique="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create teacher_role table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table teacher_role already exists">
+            <not>
+                <tableExists tableName="teacher_role"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="teacher_role">
+
+            <column name="teach_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_teach_id" references="teachers(teacher_id)" unique="false"/>
+            </column>
+
+            <column name="rol_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_role_id" references="roles(role_id)" unique="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create role_authority table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table role_authority already exists">
+            <not>
+                <tableExists tableName="role_authority"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="role_authority">
+
+            <column name="rol_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_rol_id" references="roles(role_id)" unique="false"/>
+            </column>
+
+            <column name="authority_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_authority_id" references="authorities(authority_id)" unique="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
 
     <changeSet author="bogoliubova" id="create customers table">
 
@@ -229,10 +332,10 @@
             </column>
 
             <column name="direction_id" type="char(36)">
-                <constraints foreignKeyName="fk_customers_direction" references="directions(direction_id)" unique="false"
+                <constraints foreignKeyName="fk_customers_direction" references="directions(direction_id)"
+                             unique="false"
                              nullable="true"/>
             </column>
-
 
 
         </createTable>
@@ -283,7 +386,8 @@
             </column>
 
             <column name="rating_id" type="char(36)">
-                <constraints foreignKeyName="fk_teachers_rating" references="ratings(rating_id)" unique="false" nullable="true"/>
+                <constraints foreignKeyName="fk_teachers_rating" references="ratings(rating_id)" unique="false"
+                             nullable="true"/>
             </column>
 
         </createTable>

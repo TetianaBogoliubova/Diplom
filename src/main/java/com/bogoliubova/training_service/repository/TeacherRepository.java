@@ -1,5 +1,6 @@
 package com.bogoliubova.training_service.repository;
 
+import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +17,8 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
     Teacher getTeacherByFirstNameAndLastName(String firstName, String lastName);
 
     List<Teacher> findTeachersByLocation_City(String city);
+
+    Teacher findTeacherByTeachEmail(String email);
 
     @Query("SELECT t FROM Teacher t " +
             "JOIN t.ratings r " +

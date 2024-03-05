@@ -11,6 +11,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -44,6 +45,12 @@ public class Customer {
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "customer_role",
+    joinColumns = @JoinColumn(name = "cus_id"),
+    inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Role> roleSet;
 
     @Override
     public boolean equals(Object o) {

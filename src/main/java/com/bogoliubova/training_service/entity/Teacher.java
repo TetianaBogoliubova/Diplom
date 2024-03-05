@@ -11,6 +11,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -53,6 +54,12 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "teacher_role",
+            joinColumns = @JoinColumn(name = "teach_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+    private Set<Role> roleSet;
 
     @Override
     public boolean equals(Object o) {

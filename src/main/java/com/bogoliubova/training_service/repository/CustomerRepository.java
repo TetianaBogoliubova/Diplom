@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
     Customer findCustomerByCustomerId(UUID customerId);
 
+    Customer findCustomerByCusEmail(String email);
     @Modifying
     @Query("UPDATE Customer c SET c.firstName = :firstName, c.lastName = :lastName, c.cusEmail = :cusEmail, c.location = :location, c.directions = :directions WHERE c.customerId = :customerId")
     int patchUpdateCustomer(@Param("customerId") String customerId,
