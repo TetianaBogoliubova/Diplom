@@ -1433,3 +1433,99 @@ and any local or remote base of the path set on the search path.
 	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
 	at liquibase.command.CommandScope.execute(CommandScope.java:214)
 	... 30 common frames omitted
+05.03.2024 21:23:07.740 [main] ERROR liquibase.changelog - ChangeSet db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova encountered an exception.
+05.03.2024 21:23:07.753 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova:
+     Reason: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+05.03.2024 21:23:07.808 [main] ERROR o.s.b.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova:
+     Reason: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
+	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
+Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova:
+     Reason: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+	at liquibase.command.CommandScope.execute(CommandScope.java:237)
+	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
+	at liquibase.Scope.lambda$child$0(Scope.java:184)
+	at liquibase.Scope.child(Scope.java:193)
+	at liquibase.Scope.child(Scope.java:183)
+	at liquibase.Scope.child(Scope.java:162)
+	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
+	at liquibase.Liquibase.update(Liquibase.java:211)
+	at liquibase.Liquibase.update(Liquibase.java:193)
+	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
+	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
+	... 18 common frames omitted
+Caused by: liquibase.exception.LiquibaseException: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova:
+     Reason: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:122)
+	at liquibase.command.core.AbstractUpdateCommandStep.lambda$doRun$1(AbstractUpdateCommandStep.java:105)
+	at liquibase.Scope.lambda$child$0(Scope.java:184)
+	at liquibase.Scope.child(Scope.java:193)
+	at liquibase.Scope.child(Scope.java:183)
+	at liquibase.Scope.child(Scope.java:162)
+	at liquibase.command.core.AbstractUpdateCommandStep.doRun(AbstractUpdateCommandStep.java:104)
+	at liquibase.command.core.AbstractUpdateCommandStep.lambda$run$0(AbstractUpdateCommandStep.java:63)
+	at liquibase.Scope.lambda$child$0(Scope.java:184)
+	at liquibase.Scope.child(Scope.java:193)
+	at liquibase.Scope.child(Scope.java:183)
+	at liquibase.Scope.child(Scope.java:162)
+	at liquibase.command.core.AbstractUpdateCommandStep.run(AbstractUpdateCommandStep.java:62)
+	at liquibase.command.core.UpdateCommandStep.run(UpdateCommandStep.java:106)
+	at liquibase.command.CommandScope.execute(CommandScope.java:214)
+	... 30 common frames omitted
+Caused by: liquibase.exception.MigrationFailedException: Migration failed for changeset db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml::create teacher_role table::bogoliubova:
+     Reason: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:785)
+	at liquibase.changelog.visitor.UpdateVisitor.executeAcceptedChange(UpdateVisitor.java:118)
+	at liquibase.changelog.visitor.UpdateVisitor.visit(UpdateVisitor.java:68)
+	at liquibase.changelog.ChangeLogIterator$2.lambda$run$0(ChangeLogIterator.java:110)
+	at liquibase.Scope.lambda$child$0(Scope.java:184)
+	at liquibase.Scope.child(Scope.java:193)
+	at liquibase.Scope.child(Scope.java:183)
+	at liquibase.Scope.child(Scope.java:162)
+	at liquibase.Scope.child(Scope.java:250)
+	at liquibase.changelog.ChangeLogIterator$2.run(ChangeLogIterator.java:100)
+	at liquibase.Scope.lambda$child$0(Scope.java:184)
+	at liquibase.Scope.child(Scope.java:193)
+	at liquibase.Scope.child(Scope.java:183)
+	at liquibase.Scope.child(Scope.java:162)
+	at liquibase.Scope.child(Scope.java:250)
+	at liquibase.Scope.child(Scope.java:254)
+	at liquibase.changelog.ChangeLogIterator.run(ChangeLogIterator.java:74)
+	... 44 common frames omitted
+Caused by: liquibase.exception.DatabaseException: Duplicate foreign key constraint name 'fk_role_id' [Failed SQL: (1826) CREATE TABLE training_service.teacher_role (teach_id CHAR(36) NOT NULL, rol_id CHAR(36) NOT NULL, CONSTRAINT PK_TEACHER_ROLE PRIMARY KEY (teach_id, rol_id), CONSTRAINT fk_teach_id FOREIGN KEY (teach_id) REFERENCES training_service.teachers(teacher_id), CONSTRAINT fk_role_id FOREIGN KEY (rol_id) REFERENCES training_service.roles(role_id))]
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:468)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:77)
+	at liquibase.executor.jvm.JdbcExecutor.execute(JdbcExecutor.java:177)
+	at liquibase.database.AbstractJdbcDatabase.execute(AbstractJdbcDatabase.java:1291)
+	at liquibase.database.AbstractJdbcDatabase.executeStatements(AbstractJdbcDatabase.java:1273)
+	at liquibase.changelog.ChangeSet.execute(ChangeSet.java:744)
+	... 60 common frames omitted
+Caused by: java.sql.SQLException: Duplicate foreign key constraint name 'fk_role_id'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:130)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:767)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:652)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at liquibase.executor.jvm.JdbcExecutor$ExecuteStatementCallback.doInStatement(JdbcExecutor.java:462)
+	... 65 common frames omitted

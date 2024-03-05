@@ -14,8 +14,8 @@ spring:
     open-in-view: false
 
   liquibase:
-   # change-log: classpath:/db/changelog/changelog-master.xml
-    change-log: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml
+    change-log: classpath:/db/changelog/changelog-master.xml
+ #   change-log: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml
     parameters:
       searchPath: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/
     enabled: true
