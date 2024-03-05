@@ -29,7 +29,7 @@ public class Authority {
     @Column(name = "authority_name")
     private AllAuthorities authorityName;
 
-    @ManyToMany(mappedBy = "authorities")
+    @ManyToMany(mappedBy = "authoritySet")
     private Set<Role> roleSet;
 
 }

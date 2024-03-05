@@ -29,12 +29,12 @@ public class Role {
     @Column(name = "role_name")
     private AllRoles roleName;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "customerRoles")
     private Set<Customer> customers;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "role_authority",
-            joinColumns = @JoinColumn(name = "role_id"),
+    @JoinTable(name = "role_authorities",
+            joinColumns = @JoinColumn(name = "rol_id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Authority> authoritySet;
 }

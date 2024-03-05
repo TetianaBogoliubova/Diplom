@@ -50,7 +50,7 @@ public class Customer {
     @JoinTable(name = "customer_role",
     joinColumns = @JoinColumn(name = "cus_id"),
     inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Role> roleSet;
+    private Set<Role> customerRoles;
 
     @Override
     public boolean equals(Object o) {

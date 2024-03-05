@@ -74,7 +74,7 @@
             </column>
 
             <column name="direction_id" type="char(36)">
-                <constraints foreignKeyName="direction_id" references="directions(direction_id)" unique="false"
+                <constraints foreignKeyName="fk_direction_id" references="directions(direction_id)" unique="false"
                              nullable="true"/>
             </column>
             <column name="service_id" type="char(36)">
@@ -178,7 +178,6 @@
             </column>
 
         </createTable>
-
     </changeSet>
 
 
@@ -201,7 +200,6 @@
             </column>
 
         </createTable>
-
     </changeSet>
 
 
@@ -224,67 +222,18 @@
             </column>
 
         </createTable>
-
     </changeSet>
 
 
-    <changeSet author="bogoliubova" id="create customer_role table">
+    <changeSet author="bogoliubova" id="create role_authorities table">
 
-        <preConditions onFail="CONTINUE" onFailMessage="Table customer_role already exists">
+        <preConditions onFail="CONTINUE" onFailMessage="Table role_authorities already exists">
             <not>
-                <tableExists tableName="customer_role"/>
+                <tableExists tableName="role_authorities"/>
             </not>
         </preConditions>
 
-        <createTable tableName="customer_role">
-
-            <column name="cus_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_cus_id" references="customers(customer_id)" unique="false"/>
-            </column>
-
-            <column name="rol_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_role_id" references="roles(role_id)" unique="false"/>
-            </column>
-
-        </createTable>
-    </changeSet>
-
-
-    <changeSet author="bogoliubova" id="create teacher_role table">
-
-        <preConditions onFail="CONTINUE" onFailMessage="Table teacher_role already exists">
-            <not>
-                <tableExists tableName="teacher_role"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="teacher_role">
-
-            <column name="teach_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_teach_id" references="teachers(teacher_id)" unique="false"/>
-            </column>
-
-            <column name="rol_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_role_id" references="roles(role_id)" unique="false"/>
-            </column>
-
-        </createTable>
-    </changeSet>
-
-
-    <changeSet author="bogoliubova" id="create role_authority table">
-
-        <preConditions onFail="CONTINUE" onFailMessage="Table role_authority already exists">
-            <not>
-                <tableExists tableName="role_authority"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="role_authority">
+        <createTable tableName="role_authorities">
 
             <column name="rol_id" type="char(36)">
                 <constraints primaryKey="true" nullable="false"
@@ -336,11 +285,33 @@
                              unique="false"
                              nullable="true"/>
             </column>
+        </createTable>
+    </changeSet>
 
+    <changeSet author="bogoliubova" id="create customer_role table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table customer_role already exists">
+            <not>
+                <tableExists tableName="customer_role"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="customer_role">
+
+            <column name="cus_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_cus_id" references="customers(customer_id)" unique="false"/>
+            </column>
+
+            <column name="rol_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_role_id" references="roles(role_id)" unique="false"/>
+            </column>
 
         </createTable>
-
     </changeSet>
+
+
 
     <changeSet author="bogoliubova" id="create teachers table">
 
@@ -391,8 +362,31 @@
             </column>
 
         </createTable>
-
     </changeSet>
+
+    <changeSet author="bogoliubova" id="create teacher_role table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table teacher_role already exists">
+            <not>
+                <tableExists tableName="teacher_role"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="teacher_role">
+
+            <column name="teach_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_teach_id" references="teachers(teacher_id)" unique="false"/>
+            </column>
+
+            <column name="rol_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="fk_role_role_id" references="roles(role_id)" unique="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
 
     <changeSet author="bogoliubova" id="create locations table">
 

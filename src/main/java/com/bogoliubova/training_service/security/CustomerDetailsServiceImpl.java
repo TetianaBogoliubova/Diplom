@@ -35,7 +35,7 @@ public class CustomerDetailsServiceImpl implements UserDetailsService {
         return withUsername(email)
                 .username(customer.getCusEmail())
                 .password(customer.getCusEmail())
-                .authorities(getAuthorities(customer.getRoleSet()))
+                .authorities(getAuthorities(customer.getCustomerRoles()))
                 .build();
     }
 

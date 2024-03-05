@@ -21,7 +21,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     private CustomerDetailsServiceImpl customerDetailsService;
-    private  TeacherDetailsServiceImpl teacherDetailsService;
+    //private  TeacherDetailsServiceImpl teacherDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
