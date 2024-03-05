@@ -335,3 +335,4 @@ and any local or remote base of the path set on the search path.
 06.03.2024 00:51:20.111 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
 06.03.2024 00:53:02.281 [main] WARN  o.h.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 06.03.2024 00:53:13.235 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+06.03.2024 00:56:02.515 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
