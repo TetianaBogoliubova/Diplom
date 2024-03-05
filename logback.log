@@ -2,3 +2,5 @@
 03.03.2024 16:31:17.102 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 03.03.2024 16:31:22.356 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 03.03.2024 16:32:02.273 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+05.03.2024 21:09:35.377 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
+05.03.2024 21:16:22.656 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
