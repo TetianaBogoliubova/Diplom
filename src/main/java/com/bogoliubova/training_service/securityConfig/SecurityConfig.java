@@ -20,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 //@ComponentScan(basePackages = "com.bogoliubova.training_service.securityConfig")
 public class SecurityConfig {
 
+
     private CustomerDetailsServiceImpl customerDetailsService;
 
     @Bean
@@ -44,7 +45,6 @@ public class SecurityConfig {
                         .anyRequest().authenticated())///
                 .formLogin(Customizer.withDefaults())
                 .logout(logoutPage -> logoutPage.logoutSuccessUrl("/customer"))
-                .httpBasic(Customizer.withDefaults())
                 .build();
     }
 

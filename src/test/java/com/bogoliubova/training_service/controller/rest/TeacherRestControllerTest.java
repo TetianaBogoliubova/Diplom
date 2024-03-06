@@ -1,5 +1,6 @@
 package com.bogoliubova.training_service.controller.rest;
 
+import com.bogoliubova.training_service.TrainingServiceApplication;
 import com.bogoliubova.training_service.dto.ErrorResponse;
 import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
@@ -27,7 +28,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@SpringBootTest(classes = TrainingServiceApplication.class)
 @AutoConfigureMockMvc
 @Sql("/dropTable.sql")
 @Sql("/createTestDB.sql")

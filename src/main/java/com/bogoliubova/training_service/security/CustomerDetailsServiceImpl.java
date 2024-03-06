@@ -2,13 +2,14 @@ package com.bogoliubova.training_service.security;
 
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Role;
-import com.bogoliubova.training_service.exception.CustomerNotFoundException;
 import com.bogoliubova.training_service.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,14 +25,17 @@ import static org.springframework.security.core.userdetails.User.withUsername;
 @Component
 public class CustomerDetailsServiceImpl implements UserDetailsService {
 
+    @Autowired
     public final CustomerRepository customerRepository;
+
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email) throws CustomerNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {//CustomerNotFoundException {
         Customer customer = customerRepository.findCustomerByCusEmail(email);
         if (customer == null) {
-            throw new CustomerNotFoundException("Customer with login '" + email + "' not found");
+            throw new UsernameNotFoundException("Customer with login '" + email + "' not found");
         }
+
         return withUsername(email)
                 .username(customer.getCusEmail())
                 .password(customer.getCusEmail())
@@ -50,3 +54,11 @@ public class CustomerDetailsServiceImpl implements UserDetailsService {
         return authorities;
     }
 }
+
+
+//    UserDetails userDetails = User.builder()
+//                .username(customer.getCusEmail())
+//                .password(customer.getCusEmail())
+//                .authorities(getAuthorities(customer.getCustomerRoles()))
+//                .build();
+//        return userDetails;
