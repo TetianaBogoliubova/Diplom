@@ -38,6 +38,9 @@ public class Teacher {
     @Column(name = "t_email")
     private String teachEmail;
 
+    @Column(name = "t_password")
+    private String teachPassword;
+
     @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;

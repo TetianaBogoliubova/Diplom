@@ -2,11 +2,12 @@ package com.bogoliubova.training_service.securityConfig;
 
 import com.bogoliubova.training_service.security.CustomerDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,12 +17,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
-//@ComponentScan(basePackages = "com.bogoliubova.training_service.securityConfig")
 public class SecurityConfig {
 
-
-    private CustomerDetailsServiceImpl customerDetailsService;
+@Autowired
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    private final CustomerDetailsServiceImpl customerDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -40,8 +40,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("USER")
-                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("ADMIN")
+                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("CUSTOMER")
+                        .requestMatchers("customer/id_customerRest/{customer_id}").hasRole("CUSTOMER")
                         .anyRequest().authenticated())///
                 .formLogin(Customizer.withDefaults())
                 .logout(logoutPage -> logoutPage.logoutSuccessUrl("/customer"))

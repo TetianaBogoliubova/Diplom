@@ -72,6 +72,10 @@
                 <constraints nullable="false"/>
             </column>
 
+            <column name="t_password" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="direction_id" type="char(36)">
                 <!--                <constraints foreignKeyName="fk_teachers_direction" references="directions(direction_id)"-->
                 <constraints unique="false"
@@ -123,6 +127,10 @@
             </column>
 
             <column name="c_email" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="c_password" type="varchar(70)">
                 <constraints nullable="false"/>
             </column>
 
@@ -337,7 +345,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="role_name" type="varchar(30)">
+            <column name="role_name" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
 

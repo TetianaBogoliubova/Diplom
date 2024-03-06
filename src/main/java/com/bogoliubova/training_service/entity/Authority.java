@@ -27,6 +27,7 @@ public class Authority {
     private UUID authorityId;
 
     @Column(name = "authority_name")
+    @Enumerated(EnumType.STRING)
     private AllAuthorities authorityName;
 
     @ManyToMany(mappedBy = "authoritySet")

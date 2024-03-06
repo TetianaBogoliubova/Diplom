@@ -27,6 +27,7 @@ public class Role {
     private UUID roleId;
 
     @Column(name = "role_name")
+    @Enumerated(EnumType.STRING)
     private AllRoles roleName;
 
     @ManyToMany(mappedBy = "customerRoles")
