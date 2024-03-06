@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureMockMvc
 @Sql("/dropTable.sql")
 @Sql("/createTestDB.sql")
-@Sql("/addTestDB.sql")
+@Sql("/addTestDB.sql")   //FKpexv2ec6otg5gu05u78rw1tt4
 class CustomerControllerTest {
 
     @Autowired

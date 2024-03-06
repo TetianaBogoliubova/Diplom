@@ -44,6 +44,7 @@ public class Book {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "service_id", referencedColumnName = "service_id")
+    //@JoinColumn(name = "service_id",foreignKey = @ForeignKey(name = "service_id"))
     @JsonIgnore
     private Services services;
 

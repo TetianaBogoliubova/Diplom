@@ -1,13 +1,12 @@
 package com.bogoliubova.training_service.securityConfig;
 
 import com.bogoliubova.training_service.security.CustomerDetailsServiceImpl;
-import com.bogoliubova.training_service.security.TeacherDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,11 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@ComponentScan(basePackages = "com.bogoliubova.training_service.securityConfig")
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@ComponentScan(basePackages = "com.bogoliubova.training_service.securityConfig")
 public class SecurityConfig {
 
     private CustomerDetailsServiceImpl customerDetailsService;
-    //private  TeacherDetailsServiceImpl teacherDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,14 +40,13 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(a -> a
                         .requestMatchers("/customer/id_customer/{customer_id}").hasRole("USER")
-                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("ADMIN"))
+                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("ADMIN")
+                        .anyRequest().authenticated())///
                 .formLogin(Customizer.withDefaults())
                 .logout(logoutPage -> logoutPage.logoutSuccessUrl("/customer"))
+                .httpBasic(Customizer.withDefaults())
                 .build();
     }
-
-
-
 
 
     //Создание юзеров в памяти, если не хотим вводить их в БД
