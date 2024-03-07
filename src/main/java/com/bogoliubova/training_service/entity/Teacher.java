@@ -58,11 +58,11 @@ public class Teacher {
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "teacher_role",
-            joinColumns = @JoinColumn(name = "teach_id"),
-            inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Role> roleSet;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "teacher_role",
+//            joinColumns = @JoinColumn(name = "teach_id"),
+//            inverseJoinColumns = @JoinColumn(name = "rol_id"))
+//    private Set<Role> roleSet;
 
     @Override
     public boolean equals(Object o) {

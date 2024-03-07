@@ -22,38 +22,38 @@ import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.security.core.userdetails.User.withUsername;
-
-@Service
-@RequiredArgsConstructor
-public class TeacherDetailsServiceImpl implements UserDetailsService {
-
-    @Autowired
-    public final TeacherRepository teacherRepository;
-
-    @Override
-    @Transactional
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Teacher teacher = teacherRepository.findTeacherByTeachEmail(email);
-        if (teacher == null) {
-            throw new UsernameNotFoundException("Teacher with login '" + email + "' not found");
-        }
-        return withUsername(email)
-                .username(teacher.getTeachEmail())
-                .password(teacher.getTeachPassword())
-                .authorities(getAuthorities(teacher.getRoleSet()))
-                .build();
-    }
-
-    private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> collection) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-
-        for (Role role : collection) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));
-
-            role.getAuthoritySet().forEach(authority ->
-                    authorities.add(new SimpleGrantedAuthority(authority.getAuthorityName().name())));
-        }
-        return authorities;
-    }
-}
-
+//
+//@Service
+//@RequiredArgsConstructor
+//public class TeacherDetailsServiceImpl implements UserDetailsService {
+//
+//    @Autowired
+//    public final TeacherRepository teacherRepository;
+//
+//    @Override
+//    @Transactional
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Teacher teacher = teacherRepository.findTeacherByTeachEmail(email);
+//        if (teacher == null) {
+//            throw new UsernameNotFoundException("Teacher with login '" + email + "' not found");
+//        }
+//        return withUsername(email)
+//                .username(teacher.getTeachEmail())
+//                .password(teacher.getTeachPassword())
+//                .authorities(getAuthorities(teacher.getRoleSet()))
+//                .build();
+//    }
+//
+//    private Collection<? extends GrantedAuthority> getAuthorities(Collection<Role> collection) {
+//        List<GrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (Role role : collection) {
+//            authorities.add(new SimpleGrantedAuthority(role.getRoleName().name()));
+//
+//            role.getAuthoritySet().forEach(authority ->
+//                    authorities.add(new SimpleGrantedAuthority(authority.getAuthorityName().name())));
+//        }
+//        return authorities;
+//    }
+//}
+//

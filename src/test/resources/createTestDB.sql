@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS directions (
     teacher_id CHAR(36),
     service_id CHAR(36),
     book_id CHAR(36),
-    customer_id CHAR(36)
+    customer_id CHAR(36),
     FOREIGN KEY (teacher_id) REFERENCES teachers (teacher_id),
     FOREIGN KEY (service_id) REFERENCES services (service_id),
     FOREIGN KEY (book_id) REFERENCES books (book_id),

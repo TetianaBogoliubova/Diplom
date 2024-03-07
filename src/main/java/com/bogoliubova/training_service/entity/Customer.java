@@ -53,11 +53,11 @@ public class Customer {
     @JsonIgnore
     private List<Direction> directions;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "customer_role",
-    joinColumns = @JoinColumn(name = "cus_id"),
-    inverseJoinColumns = @JoinColumn(name = "rol_id"))
-    private Set<Role> customerRoles;
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "customer_role",
+//    joinColumns = @JoinColumn(name = "cus_id"),
+//    inverseJoinColumns = @JoinColumn(name = "rol_id"))
+//    private Set<Role> customerRoles;
 
     @Override
     public boolean equals(Object o) {

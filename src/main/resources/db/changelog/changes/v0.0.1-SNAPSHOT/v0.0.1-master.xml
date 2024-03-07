@@ -1,15 +1,11 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext
-        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
 
-
-<!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/drop-tables-changelog.xml"/>-->
+    <!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/drop-tables-changelog.xml"/>-->
 
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.xml"/>
 
@@ -21,13 +17,13 @@
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-types_of_learning-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-ratings-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-directions-data.sql"/>
-
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-users-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-roles-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-authorities-data.sql"/>
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-role_authorities-data.sql"/>
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-customer_role-data.sql"/>
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-teacher_role-data.sql"/>
-
+<!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-role_authorities-data.sql"/>-->
+    <!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-customer_role-data.sql"/>-->
+    <!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-teacher_role-data.sql"/>-->
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-user_role-data.sql"/>
 
     <!--<include file="db/changelog/changes/v0.0.1-SNAPSHOT/data.sql"/>  -->
     <!--<include file="db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.yml"/> -->

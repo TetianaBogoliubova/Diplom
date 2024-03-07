@@ -1,6 +1,7 @@
 package com.bogoliubova.training_service.entity;
 
 import com.bogoliubova.training_service.entity.enums.AllRoles;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +31,13 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private AllRoles roleName;
 
-    @ManyToMany(mappedBy = "customerRoles")
-    private Set<Customer> customers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JsonIgnore
+    private User user;
+
+//    @ManyToMany(mappedBy = "users")
+//    private Set<User> users;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_authorities",

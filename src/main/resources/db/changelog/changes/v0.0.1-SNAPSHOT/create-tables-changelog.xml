@@ -331,6 +331,45 @@
     </changeSet>
 
 
+    <changeSet author="bogoliubova" id="create users table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table users already exists">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+
+            <column name="user_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="login" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints  foreignKeyName="fk_user_customer_id" references="customers(customer_id)"
+                              nullable="true"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_user_teacher_id" references="teachers(teacher_id)"
+                             nullable="true"/>
+            </column>
+
+            <column name="role_id" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
     <changeSet author="bogoliubova" id="create roles table">
 
         <preConditions onFail="CONTINUE" onFailMessage="Table roles already exists">
@@ -347,6 +386,11 @@
 
             <column name="role_name" type="varchar(50)">
                 <constraints nullable="false"/>
+            </column>
+
+            <column name="user_id" type="char(36)">
+                <constraints foreignKeyName="fk_roles_user_id" references="users(user_id)"
+                             nullable="false"/>
             </column>
 
         </createTable>
@@ -401,53 +445,79 @@
     </changeSet>
 
 
-    <changeSet author="bogoliubova" id="create customer_role table">
+<!--    <changeSet author="bogoliubova" id="create customer_role table">-->
 
-        <preConditions onFail="CONTINUE" onFailMessage="Table customer_role already exists">
-            <not>
-                <tableExists tableName="customer_role"/>
-            </not>
-        </preConditions>
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Table customer_role already exists">-->
+<!--            <not>-->
+<!--                <tableExists tableName="customer_role"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
 
-        <createTable tableName="customer_role">
+<!--        <createTable tableName="customer_role">-->
 
-            <column name="cus_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_customers_role_cus_id" references="customers(customer_id)"
-                             unique="false"/>
-            </column>
+<!--            <column name="cus_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_customers_role_cus_id" references="customers(customer_id)"-->
+<!--                             unique="false"/>-->
+<!--            </column>-->
 
-            <column name="rol_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_customers_role_rol_id" references="roles(role_id)" unique="false"/>
-            </column>
+<!--            <column name="rol_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_customers_role_rol_id" references="roles(role_id)" unique="false"/>-->
+<!--            </column>-->
 
-        </createTable>
-    </changeSet>
+<!--        </createTable>-->
+<!--    </changeSet>-->
 
-    <changeSet author="bogoliubova" id="create teacher_role table">
+<!--    <changeSet author="bogoliubova" id="create teacher_role table">-->
 
-        <preConditions onFail="CONTINUE" onFailMessage="Table teacher_role already exists">
-            <not>
-                <tableExists tableName="teacher_role"/>
-            </not>
-        </preConditions>
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Table teacher_role already exists">-->
+<!--            <not>-->
+<!--                <tableExists tableName="teacher_role"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
 
-        <createTable tableName="teacher_role">
+<!--        <createTable tableName="teacher_role">-->
 
-            <column name="teach_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_teacher_role_teach_id" references="teachers(teacher_id)"
-                             unique="false"/>
-            </column>
+<!--            <column name="teach_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_teacher_role_teach_id" references="teachers(teacher_id)"-->
+<!--                             unique="false"/>-->
+<!--            </column>-->
 
-            <column name="rol_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"
-                             foreignKeyName="fk_teacher_role_rol_id" references="roles(role_id)" unique="false"/>
-            </column>
+<!--            <column name="rol_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_teacher_role_rol_id" references="roles(role_id)" unique="false"/>-->
+<!--            </column>-->
 
-        </createTable>
-    </changeSet>
+<!--        </createTable>-->
+<!--    </changeSet>-->
+
+
+
+<!--    <changeSet author="bogoliubova" id="create user_role table">-->
+
+<!--        <preConditions onFail="CONTINUE" onFailMessage="Table user_role already exists">-->
+<!--            <not>-->
+<!--                <tableExists tableName="user_role"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+
+<!--        <createTable tableName="user_role">-->
+
+<!--            <column name="user_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_user_role_user_id" references="users(user_id)"-->
+<!--                             unique="false"/>-->
+<!--            </column>-->
+
+<!--            <column name="role_id" type="char(36)">-->
+<!--                <constraints primaryKey="true" nullable="false"-->
+<!--                             foreignKeyName="fk_user_role_role_id" references="roles(role_id)" unique="false"/>-->
+<!--            </column>-->
+
+<!--        </createTable>-->
+<!--    </changeSet>-->
 
 
 </databaseChangeLog>
