@@ -8,10 +8,12 @@ import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import com.bogoliubova.training_service.repository.CustomerRepository;
 import com.bogoliubova.training_service.repository.TeacherRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,17 +27,19 @@ import static org.springframework.security.core.userdetails.User.withUsername;
 @RequiredArgsConstructor
 public class TeacherDetailsServiceImpl implements UserDetailsService {
 
+    @Autowired
     public final TeacherRepository teacherRepository;
+
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String email) throws TeacherNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Teacher teacher = teacherRepository.findTeacherByTeachEmail(email);
         if (teacher == null) {
-            throw new TeacherNotFoundException("Teacher with login '" + email + "' not found");
+            throw new UsernameNotFoundException("Teacher with login '" + email + "' not found");
         }
         return withUsername(email)
                 .username(teacher.getTeachEmail())
-                .password(teacher.getTeachEmail())
+                .password(teacher.getTeachPassword())
                 .authorities(getAuthorities(teacher.getRoleSet()))
                 .build();
     }

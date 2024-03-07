@@ -30,6 +30,7 @@ public class CustomerController {
 
     // поиск по id + специальная валидация для проверки формата id + exception
     @GetMapping("/id_customer/{customer_id}")
+    @CrossOrigin(origins = "*")
 //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",

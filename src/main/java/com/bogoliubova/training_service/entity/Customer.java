@@ -8,11 +8,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+
+import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -79,4 +83,7 @@ public class Customer {
                 ", directions=" + directions +
                 '}';
     }
+
+
+
 }

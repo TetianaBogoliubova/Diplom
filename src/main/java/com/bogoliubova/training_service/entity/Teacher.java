@@ -41,7 +41,7 @@ public class Teacher {
     @Column(name = "t_password")
     private String teachPassword;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
@@ -50,11 +50,11 @@ public class Teacher {
     @JsonIgnore
     private Location location;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)//fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)//fetch = FetchType.LAZY,
     @JsonIgnore
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 
