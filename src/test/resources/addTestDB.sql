@@ -6,20 +6,20 @@ values ('128e5373-e59a-7cd7-f246-962698987329', 'Germany', 'Berlin', 30133, '614
        ('801e8077-e12a-4cd6-f404-122223873732', 'Germany', 'Dortmund', 84371, null , '837e8317-e35a-4cd1-f710-387841923887'),
        ('494e6484-e20a-2cd9-f939-161613393701', 'Austria', 'Vien', 80502, null, '928e9697-e68a-2cd7-f383-511957512214');
 
-insert into teachers (teacher_id, first_name, last_name, t_email, t_password, direction_id, location_id, type_id, rating_id)
-values ('958e2063-e24a-6cd9-f860-826782168386', 'Chong', 'Schamberger', 'dustin.nader@hotmail.com', '$2a$12$Gw1GydS8F3B.Ffv3zf/sqOvNvd2a0gj6plVKIIvxUVNQTN0ljtiGK',
+insert into teachers (teacher_id, first_name, last_name, t_email, direction_id, location_id, type_id, rating_id)
+values ('958e2063-e24a-6cd9-f860-826782168386', 'Chong', 'Schamberger', 'dustin.nader@hotmail.com',
         '832e9984-e95a-7cd1-f301-972908561245', '740e6674-e74a-9cd4-f118-353479243341', '580e0579-e99a-2cd2-f283-729335462796', '451e8893-e20a-6cd8-f470-307057153625'),
-       ('837e8317-e35a-4cd1-f710-387841923887', 'Ulysses', 'Runte', 'monroe.hilpert@yahoo.com', '$2a$12$Gw1GydS8F3B.Ffv3zf/sqOvNvd2a0gj6plVKIIvxUVNQTN0ljtiGK', '482e5086-e47a-4cd8-f285-009316715220',
+       ('837e8317-e35a-4cd1-f710-387841923887', 'Ulysses', 'Runte', 'monroe.hilpert@yahoo.com', '482e5086-e47a-4cd8-f285-009316715220',
         '801e8077-e12a-4cd6-f404-122223873732', '117e7748-e56a-3cd1-f540-426147884191', '877e2246-e57a-9cd7-f555-573360728004'),
-       ('928e9697-e68a-2cd7-f383-511957512214', 'Leonardo', 'Wiza', 'santana.dibbert@gmail.com', '$2a$12$Gw1GydS8F3B.Ffv3zf/sqOvNvd2a0gj6plVKIIvxUVNQTN0ljtiGK', '732e5029-e47a-3cd8-f985-624336719840',
+       ('928e9697-e68a-2cd7-f383-511957512214', 'Leonardo', 'Wiza', 'santana.dibbert@gmail.com', '732e5029-e47a-3cd8-f985-624336719840',
         '494e6484-e20a-2cd9-f939-161613393701', '706e7226-e61a-1cd6-f099-314273313714', '576e9192-e06a-5cd5-f194-405887628270');
 
-insert into customers (customer_id, first_name, last_name, c_email, c_password, location_id, direction_id)
-values ('614e5310-e75a-9cd6-f593-566726876254', 'Albert', 'Wisoky', 'galen.crooks@hotmail.com', '$2a$12$lwt3s34ul02.X7M42M8hzuG0vPJM0KYmWkZlfR0Xnomgk3cE8Rp6a',
+insert into customers (customer_id, first_name, last_name, c_email, location_id, direction_id)
+values ('614e5310-e75a-9cd6-f593-566726876254', 'Albert', 'Wisoky', 'galen.crooks@hotmail.com',
         '128e5373-e59a-7cd7-f246-962698987329', '829e4762-e25a-8cd5-f199-631195284218'),
-       ('483e5800-e40a-2cd3-f678-617223078864', 'Ismael', 'Spencer', 'kassandra.hammes@yahoo.com', '$2a$12$lwt3s34ul02.X7M42M8hzuG0vPJM0KYmWkZlfR0Xnomgk3cE8Rp6a',
+       ('483e5800-e40a-2cd3-f678-617223078864', 'Ismael', 'Spencer', 'kassandra.hammes@yahoo.com',
         '706e8538-e49a-4cd8-f656-433255983469', '181e7378-e89a-4cd3-f130-127357405796'),
-       ('510e4635-e54a-6cd4-f272-367474413754', 'Sharla', 'Conn', 'brock.kilback@yahoo.com', '$2a$12$lwt3s34ul02.X7M42M8hzuG0vPJM0KYmWkZlfR0Xnomgk3cE8Rp6a',
+       ('510e4635-e54a-6cd4-f272-367474413754', 'Sharla', 'Conn', 'brock.kilback@yahoo.com',
         '548e2018-e54a-7cd9-f333-598916517306', '571e9645-e27a-3cd6-f712-872762244687');
 
 insert into services (service_id, type, s_price, direction_id, book_id)
@@ -93,10 +93,21 @@ values ('832e9984-e95a-7cd1-f301-972908561245', 'MATHEMATICS', 'JUNIOR_SCHOOL', 
        ('181e7378-e89a-4cd3-f130-127357405796', 'MANUAL_WORK', 'PENSIONERS', '958e2063-e24a-6cd9-f860-826782168386', '656e1953-e78a-7cd3-f921-458312740893', '769e8301-e47a-3cd1-f818-764854051936', '483e5800-e40a-2cd3-f678-617223078864'),
        ('829e4762-e25a-8cd5-f199-631195284218', 'MUSIC', 'MIDDLE_SCHOOL', '958e2063-e24a-6cd9-f860-826782168386', '760e8935-e94a-7cd3-f801-765822748220', '928e3760-e47a-3cd0-f387-482154057285', '614e5310-e75a-9cd6-f593-566726876254');
 
-insert into roles (role_id, role_name)
-values ('226e8867-e33a-2cd3-f362-211620192111', 'ROLE_USER'),
-       ('340e6220-e51a-3cd9-f027-973873847222', 'ROLE_PARTNER'),
-       ('340e6220-e51a-3cd9-f027-973873847333', 'ROLE_ADMIN');
+insert into users (user_id, login, password, customer_id, teacher_id, role_id)
+values ('226e8867-e33a-2cd3-f362-211620192111', 'user',
+        '$2a$12$hjlMUVOKjmCNMlWOdpoVturUb/FaDQlIetlrGqUgFN8d/TNmajCkq',
+        null, null, '226e8867-e33a-2cd3-f362-a11620192111'),
+       ('226e8867-e33a-2cd3-f362-211620192222', 'partner',
+        '$2a$12$TwaCTQvxWXOVfC/IHSTM1e1HYLxJdmxLAkyJ/IcHWbbeo.h2L.Jxa',
+        null, null, '340e6220-e51a-3cd9-f027-973873847222'),
+       ('226e8867-e33a-2cd3-f362-211620192333', 'admin',
+        '$2a$12$i0dkwNJkmXquMqdXrDOhiOOrOj0pbZlvRGVNnFJWLu5TLp1efpm7W',
+        null, null, '340e6220-e51a-3cd9-f027-973873847333');
+
+insert into roles (role_id, role_name, user_id)
+values ('226e8867-e33a-2cd3-f362-a11620192111', 'ROLE_USER', '226e8867-e33a-2cd3-f362-211620192111'),
+       ('340e6220-e51a-3cd9-f027-973873847222', 'ROLE_PARTNER', '226e8867-e33a-2cd3-f362-211620192222'),
+       ('340e6220-e51a-3cd9-f027-973873847333', 'ROLE_ADMIN', '226e8867-e33a-2cd3-f362-211620192333');
 
 insert into authorities (authority_id, authority_name)
 values ('116e8867-e33a-2cd3-f362-211620192111', 'READ'),
@@ -104,17 +115,17 @@ values ('116e8867-e33a-2cd3-f362-211620192111', 'READ'),
        ('330e6220-e51a-3cd9-f027-973873847333', 'ALLCHANGE');
 
 insert into role_authorities(rol_id, authority_id)
-values ('226e8867-e33a-2cd3-f362-211620192111', '116e8867-e33a-2cd3-f362-211620192111'),
+values ('226e8867-e33a-2cd3-f362-a11620192111', '116e8867-e33a-2cd3-f362-211620192111'),
        ('340e6220-e51a-3cd9-f027-973873847222', '220e6220-e51a-3cd9-f027-973873847222'),
        ('340e6220-e51a-3cd9-f027-973873847333', '330e6220-e51a-3cd9-f027-973873847333');
 
-insert into customer_role(cus_id, rol_id)
-values ('614e5310-e75a-9cd6-f593-566726876254', '340e6220-e51a-3cd9-f027-973873847222'),
-       ('483e5800-e40a-2cd3-f678-617223078864', '226e8867-e33a-2cd3-f362-211620192111'),
-       ('510e4635-e54a-6cd4-f272-367474413754', '226e8867-e33a-2cd3-f362-211620192111');
-
-insert into teacher_role(teach_id, rol_id)
-values ('958e2063-e24a-6cd9-f860-826782168386', '226e8867-e33a-2cd3-f362-211620192111'),
-       ('837e8317-e35a-4cd1-f710-387841923887', '340e6220-e51a-3cd9-f027-973873847222'),
-       ('928e9697-e68a-2cd7-f383-511957512214', '226e8867-e33a-2cd3-f362-211620192111');
+-- insert into customer_role(cus_id, rol_id)
+-- values ('614e5310-e75a-9cd6-f593-566726876254', '340e6220-e51a-3cd9-f027-973873847222'),
+--        ('483e5800-e40a-2cd3-f678-617223078864', '226e8867-e33a-2cd3-f362-211620192111'),
+--        ('510e4635-e54a-6cd4-f272-367474413754', '226e8867-e33a-2cd3-f362-211620192111');
+--
+-- insert into teacher_role(teach_id, rol_id)
+-- values ('958e2063-e24a-6cd9-f860-826782168386', '226e8867-e33a-2cd3-f362-211620192111'),
+--        ('837e8317-e35a-4cd1-f710-387841923887', '340e6220-e51a-3cd9-f027-973873847222'),
+--        ('928e9697-e68a-2cd7-f383-511957512214', '226e8867-e33a-2cd3-f362-211620192111');
 

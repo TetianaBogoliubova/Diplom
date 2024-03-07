@@ -41,8 +41,8 @@ public class Customer {
     @Column(name = "c_email")
     private String cusEmail;
 
-    @Column(name = "c_password")
-    private String cusPassword;
+//    @Column(name = "c_password")
+//    private String cusPassword;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "location_id")

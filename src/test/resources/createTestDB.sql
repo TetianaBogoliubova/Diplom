@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS teachers (
     first_name VARCHAR(70) NOT NULL,
     last_name VARCHAR(70) NOT NULL,
     t_email VARCHAR(70) NOT NULL,
-    t_password VARCHAR(70) NOT NULL,
     direction_id CHAR(36),
     location_id CHAR(36),
     type_id CHAR(36),
@@ -29,7 +28,6 @@ CREATE TABLE IF NOT EXISTS customers (
     first_name VARCHAR(70) NOT NULL,
     last_name VARCHAR(70) NOT NULL,
     c_email VARCHAR(70) NOT NULL,
-    c_password VARCHAR(70) NOT NULL,
     location_id CHAR(36),
     direction_id CHAR(36),
     FOREIGN KEY (location_id) REFERENCES locations (location_id)
@@ -85,9 +83,22 @@ CREATE TABLE IF NOT EXISTS directions (
     FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
     );
 
+CREATE TABLE IF NOT EXISTS users (
+    user_id CHAR(36) PRIMARY KEY NOT NULL,
+    login VARCHAR(20) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+    customer_id CHAR(36),
+    teacher_id CHAR(36),
+    role_id VARCHAR(36),
+    FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers (teacher_id)
+    );
+
 CREATE TABLE IF NOT EXISTS roles (
     role_id CHAR(36) PRIMARY KEY NOT NULL,
-    role_name VARCHAR(50) NOT NULL
+    role_name VARCHAR(50) NOT NULL,
+    user_id CHAR(36) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (user_id)
     );
 
 CREATE TABLE IF NOT EXISTS authorities (
@@ -103,19 +114,19 @@ CREATE TABLE IF NOT EXISTS role_authorities (
     FOREIGN KEY (authority_id) REFERENCES authorities (authority_id)
     );
 
-CREATE TABLE IF NOT EXISTS customer_role (
-    cus_id CHAR(36) NOT NULL,
-    rol_id CHAR(36) NOT NULL,
-    PRIMARY KEY (cus_id, rol_id),
-    FOREIGN KEY (cus_id) REFERENCES customers (customer_id),
-    FOREIGN KEY (rol_id) REFERENCES roles (role_id)
-    );
-
-CREATE TABLE IF NOT EXISTS teacher_role (
-    teach_id CHAR(36) NOT NULL,
-    rol_id CHAR(36) NOT NULL,
-    PRIMARY KEY (teach_id, rol_id),
-    FOREIGN KEY (teach_id) REFERENCES teachers (teacher_id),
-    FOREIGN KEY (rol_id) REFERENCES roles (role_id)
-    );
+-- CREATE TABLE IF NOT EXISTS customer_role (
+--     cus_id CHAR(36) NOT NULL,
+--     rol_id CHAR(36) NOT NULL,
+--     PRIMARY KEY (cus_id, rol_id),
+--     FOREIGN KEY (cus_id) REFERENCES customers (customer_id),
+--     FOREIGN KEY (rol_id) REFERENCES roles (role_id)
+--     );
+--
+-- CREATE TABLE IF NOT EXISTS teacher_role (
+--     teach_id CHAR(36) NOT NULL,
+--     rol_id CHAR(36) NOT NULL,
+--     PRIMARY KEY (teach_id, rol_id),
+--     FOREIGN KEY (teach_id) REFERENCES teachers (teacher_id),
+--     FOREIGN KEY (rol_id) REFERENCES roles (role_id)
+--     );
 

@@ -13,11 +13,12 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -33,7 +34,7 @@ class CustomerControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    @WithMockUser(username = "testuser", roles = "USER")
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     void getCustomerByCustomerIdIntegrationTest() throws Exception {
         Customer customer = new Customer();
         customer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
@@ -42,12 +43,12 @@ class CustomerControllerTest {
         customer.setCusEmail("galen.crooks@hotmail.com");
 
         String customerNewString = objectMapper.writeValueAsString(customer);
-        MvcResult mockPositiveResult = mockMvc.perform( MockMvcRequestBuilders
-                .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
-                .with(csrf())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(customerNewString))
-         .andExpect(status().isOk())
+        MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andExpect(status().isOk())
                 .andReturn();
         assertEquals(200, mockPositiveResult.getResponse().getStatus());
 
@@ -65,7 +66,7 @@ class CustomerControllerTest {
         assertEquals(customerResult.getLastName(), customer.getLastName());
         assertEquals(customerResult.getCusEmail(), customer.getCusEmail());
     }
-
+    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
     @Test
     void createCustomerIntegrationTest() throws Exception {
         Customer customer = new Customer();
@@ -82,7 +83,7 @@ class CustomerControllerTest {
                         .content(newStringCustomer))
                 .andReturn();
 
-       // assertEquals(200, createCustomerPositiveResult.getResponse().getStatus());
+         assertEquals(200, createCustomerPositiveResult.getResponse().getStatus());
 
         String customerResultJSON = createCustomerPositiveResult.getResponse().getContentAsString();
         Customer customerResult = objectMapper.readValue(customerResultJSON, Customer.class);
@@ -92,7 +93,7 @@ class CustomerControllerTest {
         assertEquals(customer.getCusEmail(), customerResult.getCusEmail());
         assertNotNull(customerResult.getCustomerId());//уникальность id
     }
-
+   // @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
     @Test
     void updateCustomerByIdIntegrationTest() throws Exception {
         Customer customer = new Customer();
@@ -104,18 +105,21 @@ class CustomerControllerTest {
 
         MvcResult getBeforeUpdateResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(200, getBeforeUpdateResult.getResponse().getStatus());
 
         MvcResult updateNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
                         .put("/customer/updateCustomer/NotExistingCustomer")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(400, updateNotExistingCustomerResult.getResponse().getStatus());
 
         MvcResult updateCustomerResult = mockMvc.perform(MockMvcRequestBuilders
                         .put("/customer/updateCustomer/614e5310-e75a-9cd6-f593-566726876254")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newStringCustomer))
                 .andReturn();
@@ -128,8 +132,6 @@ class CustomerControllerTest {
         expectedCustomer.setFirstName("New Firstname");
         expectedCustomer.setLastName("New Lastname");
         expectedCustomer.setCusEmail("New cusEmail@com");
-
-        System.out.println(customerStringResult);
 
         assertNotEquals(expectedCustomer.getFirstName(), customerStringResult.getFirstName());
         assertNotEquals(expectedCustomer.getLastName(), customerStringResult.getLastName());

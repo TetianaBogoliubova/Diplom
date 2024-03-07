@@ -72,9 +72,9 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="t_password" type="varchar(70)">
-                <constraints nullable="false"/>
-            </column>
+<!--            <column name="t_password" type="varchar(70)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
 
             <column name="direction_id" type="char(36)">
                 <!--                <constraints foreignKeyName="fk_teachers_direction" references="directions(direction_id)"-->
@@ -130,9 +130,9 @@
                 <constraints nullable="false"/>
             </column>
 
-            <column name="c_password" type="varchar(70)">
-                <constraints nullable="false"/>
-            </column>
+<!--            <column name="c_password" type="varchar(70)">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
 
             <column name="location_id" type="char(36)">
                 <constraints foreignKeyName="fk_customers_location" references="locations(location_id)"
