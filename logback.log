@@ -1,338 +1,75 @@
-05.03.2024 20:36:41.803 [main] WARN  o.h.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-05.03.2024 20:36:54.445 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-05.03.2024 20:37:02.001 [main] WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'com.bogoliubova.training_service.entity.enums.AllDirections'; Failed to convert from type [java.lang.String] to type [@org.springframework.web.bind.annotation.PathVariable com.bogoliubova.training_service.entity.enums.AllDirections] for value [NOTEXISTINGDIRECTION]]
-05.03.2024 20:38:05.175 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 20:38:05.244 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 20:43:12.330 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 20:43:12.427 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 20:48:31.291 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 20:48:31.350 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 20:50:30.588 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 20:50:30.688 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 20:56:44.037 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 20:56:44.123 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 21:02:24.243 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-05.03.2024 21:02:24.341 [main] ERROR o.s.b.SpringApplication - Application run failed
-org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'liquibase' defined in class path resource [org/springframework/boot/autoconfigure/liquibase/LiquibaseAutoConfiguration$LiquibaseConfiguration.class]: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1775)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:523)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:325)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:323)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:312)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1173)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:936)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:616)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:753)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:455)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:323)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1342)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1331)
-	at com.bogoliubova.training_service.TrainingServiceApplication.main(TrainingServiceApplication.java:18)
-Caused by: liquibase.exception.CommandExecutionException: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.command.CommandScope.execute(CommandScope.java:237)
-	at liquibase.Liquibase.lambda$update$0(Liquibase.java:222)
-	at liquibase.Scope.lambda$child$0(Scope.java:184)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:183)
-	at liquibase.Scope.child(Scope.java:162)
-	at liquibase.Liquibase.runInScope(Liquibase.java:1371)
-	at liquibase.Liquibase.update(Liquibase.java:211)
-	at liquibase.Liquibase.update(Liquibase.java:193)
-	at liquibase.integration.spring.SpringLiquibase.performUpdate(SpringLiquibase.java:331)
-	at liquibase.integration.spring.SpringLiquibase.afterPropertiesSet(SpringLiquibase.java:286)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1822)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1771)
-	... 18 common frames omitted
-Caused by: liquibase.exception.ChangeLogParseException: ERROR: The file 'classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml' was not found.
-The file property cannot be configured with a fully qualified path, but must be a relative path on the property,
-and any local or remote base of the path set on the search path.
-	at liquibase.parser.core.xml.XMLChangeLogSAXParser.parseToNode(XMLChangeLogSAXParser.java:114)
-	at liquibase.parser.core.xml.AbstractChangeLogParser.parse(AbstractChangeLogParser.java:15)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.lambda$getDatabaseChangeLog$0(DatabaseChangelogCommandStep.java:129)
-	at liquibase.Scope.child(Scope.java:193)
-	at liquibase.Scope.child(Scope.java:169)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.getDatabaseChangeLog(DatabaseChangelogCommandStep.java:128)
-	at liquibase.command.core.helpers.DatabaseChangelogCommandStep.run(DatabaseChangelogCommandStep.java:87)
-	at liquibase.command.CommandScope.execute(CommandScope.java:214)
-	... 30 common frames omitted
-05.03.2024 21:26:47.462 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
-06.03.2024 00:51:20.111 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
-06.03.2024 00:53:02.281 [main] WARN  o.h.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-06.03.2024 00:53:13.235 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-06.03.2024 00:56:02.515 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
+07.03.2024 11:49:20.949 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
+07.03.2024 11:50:01.952 [http-nio-8080-exec-1] WARN  o.s.w.s.h.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864' (previous null). Performing CorsConfiguration lookup. This is logged once only at WARN level, and every time at TRACE.
+07.03.2024 11:50:01.987 [http-nio-8080-exec-1] WARN  o.s.w.s.h.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+07.03.2024 13:08:11.016 [main] WARN  liquibase.executor - Integer display width is deprecated and will be removed in a future release.
+07.03.2024 13:12:51.617 [http-nio-8080-exec-5] ERROR o.a.c.c.C.[.[.[.[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.IllegalArgumentException: UUID string too large] with root cause
+java.lang.IllegalArgumentException: UUID string too large
+	at java.base/java.util.UUID.fromString1(UUID.java:264)
+	at java.base/java.util.UUID.fromString(UUID.java:258)
+	at com.bogoliubova.training_service.service.impl.BookServiceImpl.getBookById(BookServiceImpl.java:30)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:352)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:385)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:765)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:717)
+	at com.bogoliubova.training_service.service.impl.BookServiceImpl$$SpringCGLIB$$0.getBookById(<generated>)
+	at com.bogoliubova.training_service.controller.page.BookController.getBookByBookId(BookController.java:19)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:254)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:182)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:917)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:829)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:340)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:391)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:896)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1744)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
