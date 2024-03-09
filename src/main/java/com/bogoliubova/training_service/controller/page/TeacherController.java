@@ -24,7 +24,7 @@ public class TeacherController {
 
     // поиск по id
     @GetMapping("/id_teacher/{teacher_id}")
-//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
+//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887 +++
     @Operation(summary = "Return the teacher by id",
             description = "If the teacher id exists in the database, all information on this teacher is displayed",
             responses = {

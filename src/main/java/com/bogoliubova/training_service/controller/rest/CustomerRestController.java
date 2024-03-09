@@ -27,7 +27,7 @@ public class CustomerRestController {
 
     // поиск по id + специальная валидация на формат id + exception
     @GetMapping("/id_customerRest/{customer_id}")
-    //http://localhost:8080/customer/id_customerRest/483e5800-e40a-2cd3-f678-617223078864
+    //http://localhost:8080/customer/id_customerRest/483e5800-e40a-2cd3-f678-617223078864  +++
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             responses = {

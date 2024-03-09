@@ -1,6 +1,5 @@
 package com.bogoliubova.training_service.securityConfig;
 
-
 import com.bogoliubova.training_service.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -21,13 +21,11 @@ public class SecurityConfig {
 
     @Autowired
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    private UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        PasswordEncoder pas = new BCryptPasswordEncoder();
-        System.out.println("****************" + pas);
-        return pas;//new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder();
     }
 
     @Bean
@@ -36,26 +34,53 @@ public class SecurityConfig {
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
 
-        System.out.println("**********************" + provider);
         return provider;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(a -> a
-                        //.requestMatchers("/", "/login", "/logout").permitAll()
-                        .requestMatchers("/customer/id_customer/**", "/customer/id_customerRest/**").hasRole("USER")
-                        .requestMatchers("/customer/createCustomer", "/customer/updateCustomer/**", "/customer/part_updateCustomer/**").hasRole("PARTNER")
-                        .requestMatchers("/customer/deleteCustomer/**").hasRole("ADMIN")
-                        .requestMatchers("/teacher/id_teacherRest/**", "/teacher/getTeacherCity/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**").hasRole("USER")
-                        .requestMatchers("/teacher/createTeacherRest", "/teacher/id_teacher/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**", "/teacher/createTeacher").hasRole("PARTNER")
-                        .anyRequest().authenticated())
+//                .authorizeHttpRequests(a -> a
+//                        //.requestMatchers("/", "/login", "/logout").permitAll()
+//                        .requestMatchers("/customer/id_customer/**", "/customer/id_customerRest/**").hasRole("USER")
+//                        .requestMatchers("/teacher/id_teacher/**", "/teacher/id_teacherRest/**", "/teacher/getTeacherCity/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**").hasRole("USER")
+//                        .requestMatchers("/customer/createCustomer", "/customer/updateCustomer/**", "/customer/part_updateCustomer/**").hasRole("PARTNER")
+//                        .requestMatchers("/customer/deleteCustomer/**").hasRole("ADMIN")
+//
+//                        .requestMatchers("/teacher/createTeacherRest", "/teacher/createTeacher").hasRole("PARTNER")
+//                        .anyRequest().authenticated())
+//                .formLogin(Customizer.withDefaults())
+//                .logout(logoutPage -> logoutPage.logoutSuccessUrl("/"))
+//                .httpBasic(Customizer.withDefaults())////
+
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(
+                                new AntPathRequestMatcher("/customer/id_customer/**"),
+                                new AntPathRequestMatcher("/customer/id_customerRest/**"),
+                                new AntPathRequestMatcher("/customer/createCustomer"),
+                                new AntPathRequestMatcher("/customer/updateCustomer/**"),
+                                new AntPathRequestMatcher("/customer/part_updateCustomer/**"),
+                                new AntPathRequestMatcher("/customer/deleteCustomer/**"),
+                                new AntPathRequestMatcher("/teacher/id_teacher/**"),
+                                new AntPathRequestMatcher("/teacher/createTeacher"),
+                                new AntPathRequestMatcher("/teacher/id_teacherRest/**"),
+                                new AntPathRequestMatcher("/teacher/createTeacherRest"),
+                                new AntPathRequestMatcher("/teacher/getTeacherCity/**"),
+                                new AntPathRequestMatcher("/teacher/getTeacherRating/**"),
+                                new AntPathRequestMatcher("/teacher/getTeacherDirAndRating/**")
+                        )
+                        .hasRole("PARTNER")
+
+                        .anyRequest()//.authenticated())
+                .permitAll())
                 .formLogin(Customizer.withDefaults())
                 .logout(logoutPage -> logoutPage.logoutSuccessUrl("/"))
-                .build();
-    }
+                .httpBasic(Customizer.withDefaults())////
 
+                .build();
+
+    }
+}
 
 //    @Autowired
 //    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
@@ -104,7 +129,7 @@ public class SecurityConfig {
 //    }
 
 
-    //Создание юзеров в памяти, если не хотим вводить их в БД
+//Создание юзеров в памяти, если не хотим вводить их в БД
 //    @Bean
 //    public UserDetailsService userDetailsService() {
 //        UserDetails user = User.builder()
@@ -123,7 +148,6 @@ public class SecurityConfig {
 //
 //        return new InMemoryUserDetailsManager(user, admin);
 //    }
-}
 
 
 //                        .requestMatchers("/customer/id_customer/{customer_id}").hasRole("USER")

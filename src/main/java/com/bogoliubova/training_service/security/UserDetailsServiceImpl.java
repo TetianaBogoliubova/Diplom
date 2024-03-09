@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User with login '" + login + "' not found");
         }
-        System.out.println("********************** user found " + user);
+
         return withUsername(login)
                 .username(user.getLogin())
                 .password(user.getPassword())

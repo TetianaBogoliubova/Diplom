@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 
 @SpringBootTest(classes = TrainingServiceApplication.class)
 @AutoConfigureMockMvc
@@ -52,7 +54,6 @@ class TeacherRestControllerTest {
         teacher.setTeacherId(UUID.fromString("837e8317-e35a-4cd1-f710-387841923887"));
         ratings.add(new Rating(UUID.fromString("877e2246-e57a-9cd7-f555-573360728004"), 7, "Good with children", teacher));
 
-
         teacherDto.setFirstName("Ulysses");
         teacherDto.setLastName("Runte");
         teacherDto.setTeachEmail("monroe.hilpert@yahoo.com");
@@ -61,6 +62,7 @@ class TeacherRestControllerTest {
         teacherDto.setRatings(ratings);
     }
 
+    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
     @Test
     void createTeacherRestIntegrationTest() throws Exception {
         Teacher teacher = new Teacher();
@@ -72,6 +74,7 @@ class TeacherRestControllerTest {
         MvcResult createTeacherPositiveResult = mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/teacher/createTeacherRest")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newStringTeacher))
                 .andReturn();
@@ -87,6 +90,7 @@ class TeacherRestControllerTest {
         assertEquals(teacher.getTeachEmail(), teacherResult.getTeachEmail());
     }
 
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void getFirstNameAndLastNameAndRatingsIntegrationTest() throws Exception {
         TeacherFullNameAndRatingDto teacherFNRDto = new TeacherFullNameAndRatingDto();
@@ -97,6 +101,7 @@ class TeacherRestControllerTest {
         String teacherNewString = objectMapper.writeValueAsString(teacherFNRDto);
         MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/id_teacherRest/{teacher_id}", "837e8317-e35a-4cd1-f710-387841923887")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -104,6 +109,7 @@ class TeacherRestControllerTest {
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/id_teacherRest/{teacher_id}", "837e8317-e35a-4cd1-f710-387841923000")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -121,12 +127,14 @@ class TeacherRestControllerTest {
         assertIterableEquals(teacherResult.getRatings(), teacherFNRDto.getRatings());
     }
 
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void getTeacherByCityIntegrationTest() throws Exception {
         String teacherNewString = objectMapper.writeValueAsString(teacherDto);
 
         MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherCity/{city}", "Dortmund")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -134,6 +142,7 @@ class TeacherRestControllerTest {
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherCity/{city}", "Dnepr")
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -151,12 +160,14 @@ class TeacherRestControllerTest {
         assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void getTeacherByRatingIntegrationTest() throws Exception {
         String teacherNewString = objectMapper.writeValueAsString(teacherDto);
 
         MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherRating/{rating}", 7)
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -164,6 +175,7 @@ class TeacherRestControllerTest {
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherRating/{rating}", 12)
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -177,12 +189,14 @@ class TeacherRestControllerTest {
         assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void getTeacherByDirectionAndRatingIntegrationTest() throws Exception {
         String teacherNewString = objectMapper.writeValueAsString(teacherDto);
 
         MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherDirAndRating/{direction}/{rating}", "ENGLISH", 7)
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();
@@ -190,6 +204,7 @@ class TeacherRestControllerTest {
 
         MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
                         .get("/teacher/getTeacherDirAndRating/{direction}/{rating}", "NOTEXISTINGDIRECTION", 10)
+                        .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(teacherNewString))
                 .andReturn();

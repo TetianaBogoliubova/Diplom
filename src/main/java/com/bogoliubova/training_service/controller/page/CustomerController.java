@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
+//https://ru.stackoverflow.com/questions/1560853/spring-security-%D0%B2%D1%81%D0%B5-%D0%B2%D1%80%D0%B5%D0%BC%D1%8F-%D0%B2%D1%8B%D0%B4%D0%B0%D0%B5%D1%82-%D0%BE%D1%88%D0%B8%D0%B1%D0%BA%D1%83-403
+
 @RestController
 @Validated
 @RequiredArgsConstructor
@@ -31,7 +34,7 @@ public class CustomerController {
     // поиск по id + специальная валидация для проверки формата id + exception
     @GetMapping("/id_customer/{customer_id}")
     @CrossOrigin(origins = "*")
-//http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
+//http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864  +++
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             tags = "Customer",

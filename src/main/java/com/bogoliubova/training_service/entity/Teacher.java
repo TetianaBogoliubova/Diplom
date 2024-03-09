@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class Teacher {
 //    @Column(name = "t_password")
 //    private String teachPassword;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Direction> directions;
 
@@ -50,11 +51,11 @@ public class Teacher {
     @JsonIgnore
     private Location location;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)//fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)//fetch = FetchType.LAZY,
     @JsonIgnore
     private List<Rating> ratings;
 
-    @OneToMany(mappedBy = "teacher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "teacher", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<TypeOfLearning> typesOfLearning;
 
