@@ -15,23 +15,24 @@ spring:
 
   liquibase:
     change-log: classpath:/db/changelog/changelog-master.xml
-#    change-log: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml
+    #    change-log: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/master-changelog.xml
     parameters:
       searchPath: classpath:/db/changelog/changes/v0.0.1-SNAPSHOT/
     enabled: true
 
 
 Swagger configuration:
- springfox:
-   documentation:
-   #swagger.v2.path=/api-docs
-     swagger-ui:
-       path: /swagger-ui/index.html
+  springfox:
+    documentation:
+      swagger.v2.path: /v2/api-docs
+    swagger-ui:
+      path: /swagger-ui/index.html
+      url: /v2/api-docs
 
- app:
-   description: Training service
-   version: 1.0.0
-   server:
-     url: http://localhost:8080
-     stage: development
+  app:
+    description: Training service
+    version: 1.0.0
+    server:
+      url: http://localhost:8080
+      stage: development
 
