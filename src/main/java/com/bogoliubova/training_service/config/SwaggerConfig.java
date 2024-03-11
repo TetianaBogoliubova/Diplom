@@ -53,3 +53,27 @@ package com.bogoliubova.training_service.config;
 //        //.addServersItem(new Server().url(serverUrl).description(stage));
 //    }
 //}
+
+//
+//@Configuration
+//@EnableSwagger2
+//public class SwaggerConfig {
+//
+//    @Bean
+//    public Docket api() {
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage("ваш.пакет.контроллеров"))
+//                .paths(PathSelectors.any())
+//                .build()
+//                .apiInfo(apiInfo());
+//    }
+//
+//    private ApiInfo apiInfo() {
+//        return new ApiInfoBuilder()
+//                .title("Ваш заголовок API")
+//                .description("Ваше описание API")
+//                .version("1.0.0")
+//                .build();
+//    }
+//}

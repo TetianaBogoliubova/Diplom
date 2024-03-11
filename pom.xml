@@ -203,6 +203,26 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.12.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.12.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>0.12.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!--        <dependency>-->
         <!--            <groupId>jakarta.validation</groupId>-->
         <!--            <artifactId>jakarta.validation-api</artifactId>-->
@@ -325,3 +345,102 @@
     </build>
 
 </project>
+
+
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-core</artifactId>-->
+<!--&lt;!&ndash;            <version>6.4.4.Final</version>&ndash;&gt;-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.hibernate</groupId>-->
+<!--            <artifactId>hibernate-entitymanager</artifactId>-->
+<!--            <version>5.6.15.Final</version>-->
+<!--        </dependency>-->
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>org.hibernate.validator</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>hibernate-validator</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>8.0.1.Final</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>javax.xml.bind</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>jaxb-api</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>2.3.0</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>jakarta.xml.bind</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>jakarta.xml.bind-api</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>4.0.1</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+
+
+
+
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>org.javassist</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>javassist</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>3.30.2-GA</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>org.antlr</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>antlr4-runtime</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>4.13.0</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+
+
+
+
+
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>org.firebirdsql.jdbc</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>jaybird</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>4.0.8.java11</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.antlr</groupId>-->
+<!--            <artifactId>antlr4</artifactId>-->
+<!--            <version>4.13.0</version> &lt;!&ndash; Или другая актуальная версия &ndash;&gt;-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.antlr</groupId>-->
+<!--            <artifactId>antlr4-runtime</artifactId>-->
+<!--            <version>4.13.0</version> &lt;!&ndash; Или другая актуальная версия &ndash;&gt;-->
+<!--        </dependency>-->
+
+
+
+
+
+
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>jakarta.validation</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jakarta.validation-api</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>3.0.2</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>jakarta.servlet</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jakarta.servlet-api</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>6.0.0</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <scope>provided</scope>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--        &lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <groupId>com.fasterxml.jackson.datatype</groupId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <artifactId>jackson-datatype-hibernate5</artifactId>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <version>2.15.3</version>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </dependency>&ndash;&gt;-->
+
+<!--    </dependencies>-->
+
