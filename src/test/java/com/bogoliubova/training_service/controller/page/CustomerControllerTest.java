@@ -67,7 +67,7 @@ class CustomerControllerTest {
         assertEquals(customerResult.getLastName(), customer.getLastName());
         assertEquals(customerResult.getCusEmail(), customer.getCusEmail());
     }
-    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void createCustomerIntegrationTest() throws Exception {
         Customer customer = new Customer();

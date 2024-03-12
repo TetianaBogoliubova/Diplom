@@ -29,3 +29,12 @@
     - get-запрос учителя с возвратом Dto-класса по направлению и рейтингу. Содержит SQL-запрос в Repository, прописанную
       документацию для swagger.
 
+http.csrf().disable()  /* change to: */  http.csrf(AbstractHttpConfigurer::disable);
+
+http..sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+/* change to: */
+http.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+http..authorizeRequests().antMatchers(HttpMethod.POST,"/account/**").permitAll()
+ /* change to: */
+http.authorizeHttpRequests(matcher -> matcher.requestMatchers("/pattern").permitAll().anyRequest().authenticated());
