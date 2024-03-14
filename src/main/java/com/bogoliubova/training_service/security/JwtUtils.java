@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
-@Component
+@Service
 public class JwtUtils {
 
     @Value("${variables.jwtSecret}")

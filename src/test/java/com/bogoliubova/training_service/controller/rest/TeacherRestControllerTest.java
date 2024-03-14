@@ -62,7 +62,7 @@ class TeacherRestControllerTest {
         teacherDto.setRatings(ratings);
     }
 
-    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void createTeacherRestIntegrationTest() throws Exception {
         Teacher teacher = new Teacher();
@@ -80,8 +80,12 @@ class TeacherRestControllerTest {
                 .andReturn();
 
         assertEquals(200, createTeacherPositiveResult.getResponse().getStatus());
-
+        System.out.println("*********************" +teacher);
         String teacherResultJSON = createTeacherPositiveResult.getResponse().getContentAsString();
+        System.out.println("*********************" +teacherResultJSON);
+
+        assertFalse(teacherResultJSON.isEmpty());
+
         Teacher teacherResult = objectMapper.readValue(teacherResultJSON, Teacher.class);
 
         assertNotNull(teacherResult.getTeacherId());
