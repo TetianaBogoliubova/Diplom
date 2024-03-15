@@ -38,6 +38,8 @@ public class Role {
 
 //    @ManyToMany(mappedBy = "users")
 //    private Set<User> users;
+//
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "role_authorities",

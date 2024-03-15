@@ -80,9 +80,8 @@ class TeacherRestControllerTest {
                 .andReturn();
 
         assertEquals(200, createTeacherPositiveResult.getResponse().getStatus());
-        System.out.println("*********************" +teacher);
+
         String teacherResultJSON = createTeacherPositiveResult.getResponse().getContentAsString();
-        System.out.println("*********************" +teacherResultJSON);
 
         assertFalse(teacherResultJSON.isEmpty());
 

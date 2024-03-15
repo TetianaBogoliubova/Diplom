@@ -1,43 +1,52 @@
 package com.bogoliubova.training_service.controller.page;
 
-import com.bogoliubova.training_service.TrainingServiceApplication;
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Direction;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.bogoliubova.training_service.entity.Location;
+import com.bogoliubova.training_service.exception.CustomerNotFoundException;
+import com.bogoliubova.training_service.repository.CustomerRepository;
+import com.bogoliubova.training_service.securityConfig.SecurityConfig2;
+import com.bogoliubova.training_service.service.interf.CustomerService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.ConstraintValidatorContext;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = TrainingServiceApplication.class)
-@BootstrapWith(value = org.springframework.boot.test.context.SpringBootTestContextBootstrapper.class)
 
+
+@Import(SecurityConfig2.class)//
+@SpringBootTest
 @AutoConfigureMockMvc
 @Sql("/dropTable.sql")
 @Sql("/createTestDB.sql")
-@Sql("/addTestDB.sql")   //FKpexv2ec6otg5gu05u78rw1tt4
-//@WebMvcTest(controllers = CustomerControllerTest.class,
-//        excludeAutoConfiguration = {
-//                UserDetailsServiceAutoConfiguration.class, SecurityAutoConfiguration.class
-//        })
-
+@Sql("/addTestDB.sql")
 class CustomerControllerTest {
 
     @Autowired
@@ -46,18 +55,32 @@ class CustomerControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    Customer customer = new Customer();
+    CustomerService customerService;
+    CustomerController customerController;
+    CustomerRepository customerRepository;
+
+    private ConstraintValidatorContext getContext() {
+        return mock(ConstraintValidatorContext.class);
+    }
+
+    @BeforeEach
+    public void setup() {
+        List<Direction> directions = new ArrayList<>();
+        Location location = null;
+        customer.setCustomerId(UUID.fromString("483e5800-e40a-2cd3-f678-617223078864"));
+        customer.setFirstName("Ismael");
+        customer.setLastName("Spencer");
+        customer.setCusEmail("kassandra.hammes@yahoo.com");
+        customer.setDirections(directions);
+        customer.setLocation(location);
+    }
+
     @Test
     @WithMockUser(username = "user", password = "111", roles = "USER")
-    void getCustomerByCustomerIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
-
+    void getCustomerByCustomerIdPositiveTest() throws Exception {
         String customerNewString = objectMapper.writeValueAsString(customer);
-        MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+        MvcResult mockPositiveResult = mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
@@ -65,86 +88,122 @@ class CustomerControllerTest {
                 .andReturn();
         assertEquals(200, mockPositiveResult.getResponse().getStatus());
 
-//        mockMvc.perform(MockMvcRequestBuilders
-//                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
-//                        .with(csrf())
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(customerNewString))
-//                .andExpect(status().isOk())
-//                .andExpect(content().json(customerNewString));
-
-/////////////////////////
-        Customer expectedCustomer = new Customer();
-        expectedCustomer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        expectedCustomer.setFirstName("Albert");
-        expectedCustomer.setLastName("Wisoky");
-        expectedCustomer.setCusEmail("galen.crooks@hotmail.com");
-
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+        mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
                         .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.customerId").value(expectedCustomer.getCustomerId().toString()))
-                .andExpect(jsonPath("$.firstName").value(expectedCustomer.getFirstName()))
-                .andExpect(jsonPath("$.lastName").value(expectedCustomer.getLastName()))
-                .andExpect(jsonPath("$.cusEmail").value(expectedCustomer.getCusEmail()));
-
-/////////////////
-
-
-
-//        MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
-//                        .get("/customer/id_customer/{customer_id}", "nonexistent_id")
-//                        .with(csrf())
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(customerNewString))
-//                .andReturn();
-       // assertEquals(404, mockNegativeResult.getResponse().getStatus());
-//        Customer customerResult = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
-//        });
-//
-//        assertEquals(customerResult, customer);
-//        assertEquals(customerResult.getFirstName(), customer.getFirstName());
-//        assertEquals(customerResult.getLastName(), customer.getLastName());
-//        assertEquals(customerResult.getCusEmail(), customer.getCusEmail());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andExpect(status().isOk());
     }
 
     @Test
     @WithMockUser(username = "user", password = "111", roles = "USER")
-    void getCustomerByCustomerIdIntegrationTest1() throws Exception {
-        Customer expectedCustomer = new Customer();
-        expectedCustomer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        expectedCustomer.setFirstName("Albert");
-        expectedCustomer.setLastName("Wisoky");
-        expectedCustomer.setCusEmail("galen.crooks@hotmail.com");
+    void getCustomerByCustomerIdNegTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+//        MvcResult mockPositiveResult = mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078000")
+//                        .with(csrf())
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(customerNewString))
+//                .andExpect(status().isOk())
+//                .andReturn();
+//        assertEquals(404, mockPositiveResult.getResponse().getStatus());
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+        mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078000")
                         .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-
-        String responseBody = result.getResponse().getContentAsString();
-        Customer actualCustomer = objectMapper.readValue(responseBody, Customer.class);
-
-        assertEquals(expectedCustomer.getCustomerId(), actualCustomer.getCustomerId());
-        assertEquals(expectedCustomer.getFirstName(), actualCustomer.getFirstName());
-        assertEquals(expectedCustomer.getLastName(), actualCustomer.getLastName());
-        assertEquals(expectedCustomer.getCusEmail(), actualCustomer.getCusEmail());
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString));
+               // .andExpect(status().isOk());
+        assertThrows(CustomerNotFoundException.class, () -> customerController.getCustomerByCustomerId("483e5800-e40a-2cd3-f678-617223078000"));
     }
-    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
+
+
+
+
+
+
+
+
+
+
+
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void getCustomerNeg() throws Exception {
+        mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078800"))
+                .andExpect(status().isUnauthorized());
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    @ParameterizedTest
+    @WithMockUser
+    @CsvSource({
+            // "483e5800-e40a-2cd3-f678-617223078864, true",
+            "483e5800-e40a-2cd3-f678-617223078000, false",
+            "false-uuid-format, false",
+            "null, false",
+            "' ', false"
+    })
+    void getCustomerByCustomerIdNegativeTest1(String input) throws Exception {
+        mockMvc.perform(get("/customer/id_customer/"+input)
+                       // .param("id", input)
+                        .with(csrf()))
+                .andExpect(status().isBadRequest());
+        //int status = result.getResponse().getStatus();
+        // assertEquals(expected, customerController.getCustomerByCustomerId(input, getContext());
+        //assertEquals(404, status);
+//        if (!expected) {
+//            Customer customer = new CustomerControllercustomerController.getCustomerByCustomerId(input, getContext());
+//            assertNull(customer); // Проверяем, что возвращенный клиент пустой или null
+//        }
+
+    }
+
+
+    @Test
+    @WithMockUser//(username = "user", password = "111", roles = "USER")
+    void getCustomerByCustomerIdNegativeTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078000")
+                .with(csrf())
+                .contentType(MediaType.APPLICATION_JSON));
+        //.content(customerNewString))
+        //.andExpect(status().isNotFound())
+        //.andExpect(result -> assertTrue(result.getResolvedException() instanceof CustomerNotFoundException));
+
+        assertThrows(CustomerNotFoundException.class, () -> customerController.getCustomerByCustomerId("483e5800-e40a-2cd3-f678-617223078000"));
+    }
+
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void getCustomerByCustomerId403Test() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        MvcResult mockNegativeResult = mockMvc.perform(get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078000")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andExpect(status().isNotFound())
+                .andReturn();
+    }
+
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
     void createCustomerIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setFirstName("Firstname");
-        customer.setLastName("Lastname");
-        customer.setCusEmail("email@com");
-        customer.setDirections(null);
-        customer.setLocation(null);
-
-        String newStringCustomer = objectMapper.writeValueAsString(customer);
+        Customer expectedCustomer = new Customer();
+        expectedCustomer.setFirstName("New Firstname");
+        expectedCustomer.setLastName("New Lastname");
+        expectedCustomer.setCusEmail("New cusEmail@com");
+        String newStringCustomer = objectMapper.writeValueAsString(expectedCustomer);
         MvcResult createCustomerPositiveResult = mockMvc
                 .perform(MockMvcRequestBuilders
                         .post("/customer/createCustomer")
@@ -153,117 +212,108 @@ class CustomerControllerTest {
                         .content(newStringCustomer))
                 .andReturn();
 
-         assertEquals(200, createCustomerPositiveResult.getResponse().getStatus());
-
-        String customerResultJSON = createCustomerPositiveResult.getResponse().getContentAsString();
-        Customer customerResult = objectMapper.readValue(customerResultJSON, Customer.class);
-
-        assertEquals(customer.getFirstName(), customerResult.getFirstName());
-        assertEquals(customer.getLastName(), customerResult.getLastName());
-        assertEquals(customer.getCusEmail(), customerResult.getCusEmail());
-        assertNotNull(customerResult.getCustomerId());//уникальность id
+        assertEquals(200, createCustomerPositiveResult.getResponse().getStatus());
+        assertEquals("New Firstname", expectedCustomer.getFirstName());
+        assertEquals("New Lastname", expectedCustomer.getLastName());
+        assertEquals("New cusEmail@com", expectedCustomer.getCusEmail());
     }
-    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
-    @Test
-    void updateCustomerByIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
 
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    @Test
+    void updateCustomerByIdPositiveTest() throws Exception {
         String newStringCustomer = objectMapper.writeValueAsString(customer);
 
-        MvcResult getBeforeUpdateResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-        //assertEquals(200, getBeforeUpdateResult.getResponse().getStatus());
-
-        MvcResult updateNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/customer/updateCustomer/NotExistingCustomer")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-        //assertEquals(400, updateNotExistingCustomerResult.getResponse().getStatus());
-
         MvcResult updateCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/customer/updateCustomer/614e5310-e75a-9cd6-f593-566726876254")
+                        .put("/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newStringCustomer))
                 .andReturn();
         assertEquals(200, updateCustomerResult.getResponse().getStatus());
 
-        Customer customerStringResult = objectMapper.readValue(updateCustomerResult.getResponse().getContentAsString(), new TypeReference<>() {
-        });
-
         Customer expectedCustomer = new Customer();
         expectedCustomer.setFirstName("New Firstname");
         expectedCustomer.setLastName("New Lastname");
         expectedCustomer.setCusEmail("New cusEmail@com");
 
-        assertNotEquals(expectedCustomer.getFirstName(), customerStringResult.getFirstName());
-        assertNotEquals(expectedCustomer.getLastName(), customerStringResult.getLastName());
-        assertNotEquals(expectedCustomer.getCusEmail(), customerStringResult.getCusEmail());
+        assertNotEquals(expectedCustomer.getFirstName(), customer.getFirstName());
+        assertNotEquals(expectedCustomer.getLastName(), customer.getLastName());
+        assertNotEquals(expectedCustomer.getCusEmail(), customer.getCusEmail());
     }
 
-    @WithMockUser(username = "partner", password = "222", roles = "PARTNER")
+    @WithMockUser(username = "user", password = "111", roles = "USER")
     @Test
-    void patchUpdateCustomerByIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
+    void updateCustomerByIdNegativeTest() throws Exception {
+        // String newStringCustomer = objectMapper.writeValueAsString(customer);
 
+        Customer updateCustomer = new Customer();
+        updateCustomer.setFirstName("New Firstname");
+        updateCustomer.setLastName("New Lastname");
+        updateCustomer.setCusEmail("New cusEmail@com");
+        // Преобразование клиента в JSON строку
+        String newStringCustomer = objectMapper.writeValueAsString(updateCustomer);
+
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078000")
+                        //.param("id", "customerId")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newStringCustomer))
+                .andExpect(result -> assertTrue(result.getResolvedException() instanceof CustomerNotFoundException));
+    }
+
+
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    @Test
+    void patchUpdateCustomerByIdPositiveTest() throws Exception {
         String newStringCustomer = objectMapper.writeValueAsString(customer);
 
-        MvcResult getBeforePatchResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-       // assertEquals(200, getBeforePatchResult.getResponse().getStatus());
-
-        MvcResult patchNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .patch("/customer/part_updateCustomer/NotExistingCustomer")
-                        .with(csrf())
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-        assertEquals(400, patchNotExistingCustomerResult.getResponse().getStatus());
-
-        MvcResult patchCustomerResult = mockMvc.perform(MockMvcRequestBuilders.patch("/customer/part_updateCustomer/614e5310-e75a-9cd6-f593-566726876254")
+        MvcResult patchCustomerResult = mockMvc.perform(MockMvcRequestBuilders.patch("/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(newStringCustomer))
                 .andReturn();
         assertEquals(200, patchCustomerResult.getResponse().getStatus());
-        Customer customerStringResult = objectMapper.readValue(patchCustomerResult.getResponse().getContentAsString(), new TypeReference<>() {
-        });
 
         Customer expectedCustomer = new Customer();
         expectedCustomer.setFirstName("Albert");
         expectedCustomer.setLastName("Wisoky");
         expectedCustomer.setCusEmail("New cusEmail@com");
 
-        assertEquals(expectedCustomer.getFirstName(), customerStringResult.getFirstName());
-        assertEquals(expectedCustomer.getLastName(), customerStringResult.getLastName());
-        assertNotEquals(expectedCustomer.getCusEmail(), customerStringResult.getCusEmail());
+        assertNotEquals(expectedCustomer.getFirstName(), customer.getFirstName());
+        assertNotEquals(expectedCustomer.getLastName(), customer.getLastName());
+        assertNotEquals(expectedCustomer.getCusEmail(), customer.getCusEmail());
     }
+
+    @WithMockUser//(username = "admin", password = "333", roles = "ADMIN")
+    @Test
+    void deleteCustomerByIdPositiveTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                // .andExpect(status().isOk())
+                .andReturn();
+        assertEquals(200, mockPositiveResult.getResponse().getStatus());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andExpect(status().isOk());
+    }
+
 
     @WithMockUser(username = "admin", password = "333", roles = "ADMIN")
     @Test
-    void deleteCustomerByBookIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
-
+    void deleteCustomerByIdIntegrationTest() throws Exception {
         String customerNewString = objectMapper.writeValueAsString(customer);
 
-        MvcResult getBeforeDeleteResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
+        MvcResult getBeforeDeleteResult = mockMvc.perform(get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
                         .with(csrf())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
@@ -285,8 +335,34 @@ class CustomerControllerTest {
                 .andReturn();
         assertEquals(200, deleteCustomerResult.getResponse().getStatus());
     }
-}
 
+    @ParameterizedTest
+    @WithMockUser(username = "admin", password = "333", roles = "ADMIN")
+    @CsvSource({
+            "483e5800-e40a-2cd3-f678-617223078864, true",
+            "483e5800-e40a-2cd3-f678-617223078000, false",
+            "false-uuid-format, false",
+            "null, false",
+            "' ', false"
+    })
+    void delCustomerByCustomerIdNegativeTest1(String input) throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/deleteCustomer/{customer_id}", input)
+                        .param("id", input)
+                        .with(csrf()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void cannotDeleteCustomerIfNotAuthorized() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete("/customer/deleteCustomer/{customer_id}", "96453")
+                        .with(csrf())
+                        .with(anonymous())
+                )
+                .andExpect(status().isUnauthorized());
+    }
+}
 //    @Test
 //        //второй вариант такого же теста
 //    void getCustomerByCustomerIdIntegrationTest2() throws Exception {

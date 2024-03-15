@@ -13,7 +13,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +57,8 @@ public class CustomerController {
 
 
     // создание нового объекта
+    @ResponseStatus(HttpStatus.CREATED)//
+    @PreAuthorize("hasRole('USER')")//
     @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
     @Operation(summary = "Create a new customer",
             description = "If necessary fields are filled in, a new customer is created",
@@ -125,6 +129,9 @@ public class CustomerController {
     }
 
     // удаление объекта по id
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)//
+    @PreAuthorize("hasRole('USER')")//
     @DeleteMapping("/deleteCustomer/{customer_id}")
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",

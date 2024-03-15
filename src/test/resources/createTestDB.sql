@@ -101,9 +101,11 @@ CREATE TABLE IF NOT EXISTS roles (
     FOREIGN KEY (user_id) REFERENCES users (user_id)
     );
 
+
+
 CREATE TABLE IF NOT EXISTS authorities (
     authority_id CHAR(36) PRIMARY KEY NOT NULL,
-    authority_name VARCHAR(10) NOT NULL
+    authority_name VARCHAR(30) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS role_authorities (

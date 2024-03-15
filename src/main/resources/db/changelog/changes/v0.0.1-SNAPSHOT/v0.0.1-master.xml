@@ -20,10 +20,10 @@
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-users-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-roles-data.sql"/>
     <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-authorities-data.sql"/>
-<!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-role_authorities-data.sql"/>-->
+    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-role_authorities-data.sql"/>
     <!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-customer_role-data.sql"/>-->
     <!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-teacher_role-data.sql"/>-->
-    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-user_role-data.sql"/>
+<!--    <include file="db/changelog/changes/v0.0.1-SNAPSHOT/insert-user_role-data.sql"/>-->
 
     <!--<include file="db/changelog/changes/v0.0.1-SNAPSHOT/data.sql"/>  -->
     <!--<include file="db/changelog/changes/v0.0.1-SNAPSHOT/create-tables-changelog.yml"/> -->

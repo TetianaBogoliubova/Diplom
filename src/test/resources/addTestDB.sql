@@ -97,27 +97,31 @@ insert into users (user_id, login, password, customer_id, teacher_id, role_id)
 values ('226e8867-e33a-2cd3-f362-211620192111', 'user',
         '$2a$12$hjlMUVOKjmCNMlWOdpoVturUb/FaDQlIetlrGqUgFN8d/TNmajCkq',
         null, null, '226e8867-e33a-2cd3-f362-a11620192111'),
-       ('226e8867-e33a-2cd3-f362-211620192222', 'partner',
-        '$2a$12$TwaCTQvxWXOVfC/IHSTM1e1HYLxJdmxLAkyJ/IcHWbbeo.h2L.Jxa',
-        null, null, '340e6220-e51a-3cd9-f027-973873847222'),
+--        ('226e8867-e33a-2cd3-f362-211620192222', 'partner',
+--         '$2a$12$TwaCTQvxWXOVfC/IHSTM1e1HYLxJdmxLAkyJ/IcHWbbeo.h2L.Jxa',
+--         null, null, '340e6220-e51a-3cd9-f027-973873847222'),
        ('226e8867-e33a-2cd3-f362-211620192333', 'admin',
         '$2a$12$i0dkwNJkmXquMqdXrDOhiOOrOj0pbZlvRGVNnFJWLu5TLp1efpm7W',
         null, null, '340e6220-e51a-3cd9-f027-973873847333');
 
 insert into roles (role_id, role_name, user_id)
 values ('226e8867-e33a-2cd3-f362-a11620192111', 'ROLE_USER', '226e8867-e33a-2cd3-f362-211620192111'),
-       ('340e6220-e51a-3cd9-f027-973873847222', 'ROLE_PARTNER', '226e8867-e33a-2cd3-f362-211620192222'),
+--        ('340e6220-e51a-3cd9-f027-973873847222', 'ROLE_PARTNER', '226e8867-e33a-2cd3-f362-211620192222'),
        ('340e6220-e51a-3cd9-f027-973873847333', 'ROLE_ADMIN', '226e8867-e33a-2cd3-f362-211620192333');
 
 insert into authorities (authority_id, authority_name)
 values ('116e8867-e33a-2cd3-f362-211620192111', 'READ'),
        ('220e6220-e51a-3cd9-f027-973873847222', 'WRITE'),
-       ('330e6220-e51a-3cd9-f027-973873847333', 'ALLCHANGE');
+       ('330e6220-e51a-3cd9-f027-973873847333', 'READ_WRITE');
 
 insert into role_authorities(rol_id, authority_id)
 values ('226e8867-e33a-2cd3-f362-a11620192111', '116e8867-e33a-2cd3-f362-211620192111'),
-       ('340e6220-e51a-3cd9-f027-973873847222', '220e6220-e51a-3cd9-f027-973873847222'),
+--        ('340e6220-e51a-3cd9-f027-973873847222', '220e6220-e51a-3cd9-f027-973873847222'),
        ('340e6220-e51a-3cd9-f027-973873847333', '330e6220-e51a-3cd9-f027-973873847333');
+
+
+
+
 
 -- insert into customer_role(cus_id, rol_id)
 -- values ('614e5310-e75a-9cd6-f593-566726876254', '340e6220-e51a-3cd9-f027-973873847222'),

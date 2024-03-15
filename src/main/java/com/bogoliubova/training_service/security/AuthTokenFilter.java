@@ -24,6 +24,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     private final UserDetailsServiceImpl userDetailsService;
     private static final String BEARER = "Authorization=Bearer";
 
+
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) {
         String jwt = parseJwt(request);
@@ -54,6 +55,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
         }
         return null;
     }
+
 }
 
 

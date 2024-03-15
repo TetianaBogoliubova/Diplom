@@ -411,7 +411,7 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
 
-            <column name="authority_name" type="varchar(10)">
+            <column name="authority_name" type="varchar(30)">
                 <constraints nullable="false"/>
             </column>
 
@@ -443,6 +443,11 @@
 
         </createTable>
     </changeSet>
+
+
+
+
+
 
 
 <!--    <changeSet author="bogoliubova" id="create customer_role table">-->
