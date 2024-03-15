@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class CustomerController {
 
     // поиск по id + специальная валидация для проверки формата id + exception
     @GetMapping("/id_customer/{customer_id}")
+    @PreAuthorize("hasRole('USER')")
 //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",

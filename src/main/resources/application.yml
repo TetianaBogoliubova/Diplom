@@ -35,3 +35,10 @@ Swagger configuration:
      url: http://localhost:8080
      stage: development
 
+variables:
+#  jwtSecret: 749fe06c2d935dd3d9540498a5ada866ec421696764cdcfdb6766b2e824d35c3
+#  jwtExpirationMS: 864_000_000
+
+token:
+  signing:
+    key: 1d770d10e025ee9c1918bb89bcfb2c45c77f966e26171365be2d0ad99d32c814

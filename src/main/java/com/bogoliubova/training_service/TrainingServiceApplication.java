@@ -7,11 +7,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 
 
-@EnableAspectJAutoProxy
-//@ComponentScan(value = "com.bogoliubova.training_service")
-@ComponentScan(value =  "com.bogoliubova.training_service.aspect")
+
 @SpringBootApplication
-//@ComponentScan(basePackages = "com.bogoliubova.training_service")
 public class TrainingServiceApplication {
 
     public static void main(String[] args) {
