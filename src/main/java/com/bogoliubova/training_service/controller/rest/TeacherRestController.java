@@ -42,7 +42,7 @@ public class TeacherRestController {
                     description = "Insert json format data according to TeacherDto class",
                     required = true,
                     content = @Content(
-                            mediaType = "applicaton/json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = Teacher.class)
                     )
             )

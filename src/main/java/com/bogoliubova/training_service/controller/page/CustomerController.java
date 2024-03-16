@@ -62,7 +62,7 @@ public class CustomerController {
                     description = "Insert jason format data according to Customer Entity class",
                     required = true,
                     content = @Content(
-                            mediaType = "applicaton/json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = Customer.class)
                     )
             )

@@ -52,7 +52,7 @@ public class TeacherController {
                     description = "Insert jason format data according to Teacher Entity class",
                     required = true,
                     content = @Content(
-                            mediaType = "applicaton/json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = Customer.class)
                     )
             )
