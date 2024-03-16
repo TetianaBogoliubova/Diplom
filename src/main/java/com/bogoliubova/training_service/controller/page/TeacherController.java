@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,8 @@ public class TeacherController {
 
     // поиск по id
     @GetMapping("/id_teacher/{teacher_id}")
-//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
+//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887 ++  ++
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Return the teacher by id",
             description = "If the teacher id exists in the database, all information on this teacher is displayed",
             responses = {
@@ -41,6 +43,8 @@ public class TeacherController {
     }
 
     @PostMapping("/createTeacher")
+    //http://localhost:8080/teacher/createTeacher -- ++
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Create a new teacher",
             description = "If necessary fields are filled in, a new teacher is created",
             tags = "Teacher",

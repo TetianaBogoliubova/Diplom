@@ -34,7 +34,7 @@ public class TeacherRestController {
     // + exception
     // + ExceptionHandler на MethodArgumentNotValidException.class
 
-    @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
+    @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest --  ++
     @Operation(summary = "Create a new teacher",
             description = "If necessary fields are filled in, a new teacher is created",
             tags = "Teacher",
@@ -56,7 +56,7 @@ public class TeacherRestController {
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND) с возвратом url
     @GetMapping("/id_teacherRest/{teacher_id}")
-//http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
+//http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887 ++  ++
     @Operation(summary = "Return the teacher by id",
             description = "If the teacher id exists in the database, method return TeacherFullNameAndRatingDto class",
             responses = {
@@ -76,7 +76,7 @@ public class TeacherRestController {
     //поиск учителя по указанному городу
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_IN_THIS_CITY_NOT_FOUND)
-    @GetMapping("/getTeacherCity/{city}")//http://localhost:8080/teacher/getTeacherCity/Vien
+    @GetMapping("/getTeacherCity/{city}")//http://localhost:8080/teacher/getTeacherCity/Vien ++ ++
     @Operation(summary = "Return the teacher by city",
             description = "If the city exists in the database, method return list of TeacherDto class",
             responses = {
@@ -96,7 +96,7 @@ public class TeacherRestController {
     // + SQL-запрос в Repository
     // + специальная валидация на проверку значения рейтинга (1-10)
     // + ExceptionHandler на ConstraintViolationException.class("The number is not within the rating!!!")
-    @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9
+    @GetMapping("/getTeacherRating/{rating}")//http://localhost:8080/teacher/getTeacherRating/9 ++  ++
     @Operation(summary = "Return the teacher by rating",
             description = "If the rating is between 1 and 10, method return list of TeacherDto class",
             responses = {
@@ -114,7 +114,7 @@ public class TeacherRestController {
 
     //поиск учителя по направлению и рейтингу + SQL-запрос в Repository
     @GetMapping("/getTeacherDirAndRating/{direction}/{rating}")
-//http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
+//http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9 ++ ++
     @Operation(summary = "Return the teacher by directions and rating",
             description = "If the rating is between 1 and 10 and direction exists in the database, method return list of TeacherDto class",
             responses = {
