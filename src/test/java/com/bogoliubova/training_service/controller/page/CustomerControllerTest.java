@@ -1,22 +1,28 @@
 package com.bogoliubova.training_service.controller.page;
 
 import com.bogoliubova.training_service.entity.Customer;
-import com.bogoliubova.training_service.repository.CustomerRepository;
+import com.bogoliubova.training_service.entity.Direction;
+import com.bogoliubova.training_service.entity.Location;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -25,37 +31,39 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql("/addTestDB.sql")
 class CustomerControllerTest {
 
+    Customer customer = new Customer();
+
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
-    void getCustomerByCustomerIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
+    @BeforeEach
+    public void setup() {
+        List<Direction> directions = new ArrayList<>();
+        Location location = null;
 
+        customer.setCustomerId(UUID.fromString("483e5800-e40a-2cd3-f678-617223078864"));
+        customer.setFirstName("Ismael");
+        customer.setLastName("Spencer");
+        customer.setCusEmail("kassandra.hammes@yahoo.com");
+        customer.setDirections(directions);
+        customer.setLocation(location);
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void getCustomerByCustomerIdPositiveTest() throws Exception {
         String customerNewString = objectMapper.writeValueAsString(customer);
         MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+                        .get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
                 .andReturn();
         assertEquals(200, mockPositiveResult.getResponse().getStatus());
-
-        MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/{customer_id}", "nonexistent_id")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(customerNewString))
-                .andReturn();
-        assertEquals(404, mockNegativeResult.getResponse().getStatus());
         Customer customerResult = objectMapper.readValue(mockPositiveResult.getResponse().getContentAsString(), new TypeReference<>() {
         });
-
         assertEquals(customerResult, customer);
         assertEquals(customerResult.getFirstName(), customer.getFirstName());
         assertEquals(customerResult.getLastName(), customer.getLastName());
@@ -63,7 +71,30 @@ class CustomerControllerTest {
     }
 
     @Test
-    void createCustomerIntegrationTest() throws Exception {
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void getCustomerByCustomerIdNegativeTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/id_customer/{customer_id}", "nonexistent_id")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andReturn();
+        assertEquals(404, mockNegativeResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", password = "111", roles = "ADMIN")
+    void getCustomerByCustomerIdForbiddenTest() throws Exception {
+        MvcResult mockForbiddenResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/id_customer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        assertEquals(403, mockForbiddenResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void createCustomerPositiveTest() throws Exception {
         Customer customer = new Customer();
         customer.setFirstName("Firstname");
         customer.setLastName("Lastname");
@@ -89,116 +120,141 @@ class CustomerControllerTest {
     }
 
     @Test
-    void updateCustomerByIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
-
-        String newStringCustomer = objectMapper.writeValueAsString(customer);
-
-        MvcResult getBeforeUpdateResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
+    @WithMockUser(username = "admin", password = "111", roles = "ADMIN")
+    void createCustomerForbiddenTest() throws Exception {
+        MvcResult mockForbiddenResult = mockMvc.perform(MockMvcRequestBuilders
+                        .post("/customer/createCustomer")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-        assertEquals(200, getBeforeUpdateResult.getResponse().getStatus());
+        assertEquals(403, mockForbiddenResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void updateCustomerByIdPositiveTest() throws Exception {
+        customer.setFirstName("New Firstname");
+        customer.setLastName("New Lastname");
+        customer.setCusEmail("New cusEmail@com");
+        String newStringCustomer = objectMapper.writeValueAsString(customer);
+
+        MvcResult updateCustomerResult = mockMvc.perform(MockMvcRequestBuilders
+                        .put("/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newStringCustomer))
+                .andReturn();
+        assertEquals(200, updateCustomerResult.getResponse().getStatus());
+
+        MvcResult getAfterUpdateResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        Customer expectedCustomer = objectMapper.readValue(getAfterUpdateResult.getResponse().getContentAsString(), new TypeReference<>() {
+        });
+        assertEquals("New Firstname", expectedCustomer.getFirstName());
+        assertEquals("New Lastname", expectedCustomer.getLastName());
+        assertEquals("New cusEmail@com", expectedCustomer.getCusEmail());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void updateCustomerByIdNegativeTest() throws Exception {
 
         MvcResult updateNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
                         .put("/customer/updateCustomer/NotExistingCustomer")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(400, updateNotExistingCustomerResult.getResponse().getStatus());
-
-        MvcResult updateCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .put("/customer/updateCustomer/614e5310-e75a-9cd6-f593-566726876254")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(newStringCustomer))
-                .andReturn();
-        assertEquals(200, updateCustomerResult.getResponse().getStatus());
-
-        Customer customerStringResult = objectMapper.readValue(updateCustomerResult.getResponse().getContentAsString(), new TypeReference<>() {
-        });
-
-        Customer expectedCustomer = new Customer();
-        expectedCustomer.setFirstName("New Firstname");
-        expectedCustomer.setLastName("New Lastname");
-        expectedCustomer.setCusEmail("New cusEmail@com");
-
-        System.out.println(customerStringResult);
-
-        assertNotEquals(expectedCustomer.getFirstName(), customerStringResult.getFirstName());
-        assertNotEquals(expectedCustomer.getLastName(), customerStringResult.getLastName());
-        assertNotEquals(expectedCustomer.getCusEmail(), customerStringResult.getCusEmail());
     }
 
     @Test
-    void patchUpdateCustomerByIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
-
-        String newStringCustomer = objectMapper.writeValueAsString(customer);
-
-        MvcResult getBeforePatchResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
+    @WithMockUser(username = "admin", password = "111", roles = "ADMIN")
+    void updateCustomerByIdForbiddenTest() throws Exception {
+        MvcResult mockForbiddenResult = mockMvc.perform(MockMvcRequestBuilders
+                        .put("/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-        assertEquals(200, getBeforePatchResult.getResponse().getStatus());
+        assertEquals(403, mockForbiddenResult.getResponse().getStatus());
+    }
 
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void patchUpdateCustomerByIdPositiveTest() throws Exception {
+        customer.setFirstName("New Firstname");
+        customer.setLastName("New Lastname");
+        customer.setCusEmail("New cusEmail@com");
+        String newStringCustomer = objectMapper.writeValueAsString(customer);
+
+        MvcResult partUpdateCustomerResult = mockMvc.perform(MockMvcRequestBuilders
+                        .patch("/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(newStringCustomer))
+                .andReturn();
+        assertEquals(200, partUpdateCustomerResult.getResponse().getStatus());
+
+        MvcResult getAfterUpdateResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        Customer expectedCustomer = objectMapper.readValue(getAfterUpdateResult.getResponse().getContentAsString(), new TypeReference<>() {
+        });
+        assertEquals("New Firstname", expectedCustomer.getFirstName());
+        assertEquals("New Lastname", expectedCustomer.getLastName());
+        assertEquals("New cusEmail@com", expectedCustomer.getCusEmail());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void patchUpdateCustomerByIdNegativeTest() throws Exception {
         MvcResult patchNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
                         .patch("/customer/part_updateCustomer/NotExistingCustomer")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(400, patchNotExistingCustomerResult.getResponse().getStatus());
-
-        MvcResult patchCustomerResult = mockMvc.perform(MockMvcRequestBuilders.patch("/customer/part_updateCustomer/614e5310-e75a-9cd6-f593-566726876254")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(newStringCustomer))
-                .andReturn();
-        assertEquals(200, patchCustomerResult.getResponse().getStatus());
-        Customer customerStringResult = objectMapper.readValue(patchCustomerResult.getResponse().getContentAsString(), new TypeReference<>() {
-        });
-
-        Customer expectedCustomer = new Customer();
-        expectedCustomer.setFirstName("Albert");
-        expectedCustomer.setLastName("Wisoky");
-        expectedCustomer.setCusEmail("New cusEmail@com");
-
-        assertEquals(expectedCustomer.getFirstName(), customerStringResult.getFirstName());
-        assertEquals(expectedCustomer.getLastName(), customerStringResult.getLastName());
-        assertNotEquals(expectedCustomer.getCusEmail(), customerStringResult.getCusEmail());
     }
 
     @Test
-    void deleteCustomerByBookIdIntegrationTest() throws Exception {
-        Customer customer = new Customer();
-        customer.setCustomerId(UUID.fromString("614e5310-e75a-9cd6-f593-566726876254"));
-        customer.setFirstName("Albert");
-        customer.setLastName("Wisoky");
-        customer.setCusEmail("galen.crooks@hotmail.com");
-
-        String customerNewString = objectMapper.writeValueAsString(customer);
-
-        MvcResult getBeforeDeleteResult = mockMvc.perform(MockMvcRequestBuilders
-                        .get("/customer/id_customer/614e5310-e75a-9cd6-f593-566726876254")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(customerNewString))
-                .andReturn();
-        assertEquals(200, getBeforeDeleteResult.getResponse().getStatus());
-
-        MvcResult deleteNotExistingCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/customer/deleteCustomer/{customer_id}", "614e5310-e75a-9cd6-f593-566726870000")
+    @WithMockUser(username = "admin", password = "111", roles = "ADMIN")
+    void patchUpdateCustomerByIdForbiddenTest() throws Exception {
+        MvcResult mockForbiddenResult = mockMvc.perform(MockMvcRequestBuilders
+                        .patch("/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andReturn();
-        assertEquals(404, deleteNotExistingCustomerResult.getResponse().getStatus());
+        assertEquals(403, mockForbiddenResult.getResponse().getStatus());
+    }
 
-        MvcResult deleteCustomerResult = mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/customer/deleteCustomer/{customer_id}", "614e5310-e75a-9cd6-f593-566726876254")
+    @Test
+    @WithMockUser(username = "admin", password = "222", roles = "ADMIN")
+    void deleteCustomerByBookIdPositiveTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        MvcResult mockPositiveResult = mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/deleteCustomer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(customerNewString))
                 .andReturn();
-        assertEquals(200, deleteCustomerResult.getResponse().getStatus());
+        assertEquals(200, mockPositiveResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(username = "admin", password = "222", roles = "ADMIN")
+    void deleteCustomerByCustomerIdNegativeTest() throws Exception {
+        String customerNewString = objectMapper.writeValueAsString(customer);
+        MvcResult mockNegativeResult = mockMvc.perform(MockMvcRequestBuilders
+                        .delete("/customer/deleteCustomer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078000")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(customerNewString))
+                .andReturn();
+        assertEquals(404, mockNegativeResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "111", roles = "USER")
+    void deleteCustomerByCustomerIdForbiddenTest() throws Exception {
+        MvcResult mockForbiddenResult = mockMvc.perform(MockMvcRequestBuilders
+                        .get("/customer/deleteCustomer/{customer_id}", "483e5800-e40a-2cd3-f678-617223078864")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andReturn();
+        assertEquals(403, mockForbiddenResult.getResponse().getStatus());
     }
 }
 

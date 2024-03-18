@@ -127,6 +127,7 @@ public class CustomerController {
     // удаление объекта по id
     @DeleteMapping("/deleteCustomer/{customer_id}")
     //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             responses = {

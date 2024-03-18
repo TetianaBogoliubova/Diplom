@@ -51,7 +51,6 @@ class TeacherRestControllerTest {
         teacher.setTeacherId(UUID.fromString("837e8317-e35a-4cd1-f710-387841923887"));
         ratings.add(new Rating(UUID.fromString("877e2246-e57a-9cd7-f555-573360728004"), 7, "Good with children", teacher));
 
-
         teacherDto.setFirstName("Ulysses");
         teacherDto.setLastName("Runte");
         teacherDto.setTeachEmail("monroe.hilpert@yahoo.com");
