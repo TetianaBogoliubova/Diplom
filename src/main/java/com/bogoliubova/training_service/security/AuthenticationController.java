@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-public class AuthController {
+public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
    // @Operation(summary = "Регистрация пользователя")
     @PostMapping("/sign-up")
-    public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
-        return authenticationService.signUp(request);
+    public JwtAuthenticationResponse registrationOfUser(@RequestBody @Valid SignUpRequest request) {
+        return authenticationService.registrationUser(request);
     }
 
    // @Operation(summary = "Авторизация пользователя")
     @PostMapping("/sign-in")
-    public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request) {
-        return authenticationService.signIn(request);
+    public JwtAuthenticationResponse authenticationOfUser(@RequestBody @Valid SignInRequest request) {
+        return authenticationService.authenticationUser(request);
     }
 }

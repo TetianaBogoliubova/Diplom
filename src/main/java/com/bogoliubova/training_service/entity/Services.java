@@ -49,7 +49,9 @@ public class Services {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Services services = (Services) o;
-        return Objects.equals(serviceId, services.serviceId) && type == services.type && Objects.equals(servicePrice, services.servicePrice);
+        return Objects.equals(serviceId, services.serviceId)
+                && type == services.type
+                && Objects.equals(servicePrice, services.servicePrice);
     }
 
     @Override

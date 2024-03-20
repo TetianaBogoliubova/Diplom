@@ -1,7 +1,7 @@
 package com.bogoliubova.training_service.entity;
 
-import com.bogoliubova.training_service.dto.AllAuthorities;
-import com.bogoliubova.training_service.dto.AllRoles;
+//import com.bogoliubova.training_service.dto.AllAuthorities;
+//import com.bogoliubova.training_service.dto.AllRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,26 +12,26 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.Set;
 import java.util.UUID;
-
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Entity
-@Table(name = "authorities")
-public class Authority {
-
-    @Id
-    @Column(name = "authority_id", columnDefinition = "UUID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JdbcTypeCode(SqlTypes.CHAR)
-    private UUID authorityId;
-
-    @Column(name = "authority_name")
-    @Enumerated(EnumType.STRING)
-    private AllAuthorities authorityName;
+//
+//@AllArgsConstructor
+//@NoArgsConstructor
+//@Getter
+//@Setter
+//@Entity
+//@Table(name = "authorities")
+//public class Authority {
+//
+//    @Id
+//    @Column(name = "authority_id", columnDefinition = "UUID")
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @JdbcTypeCode(SqlTypes.CHAR)
+//    private UUID authorityId;
+//
+//    @Column(name = "authority_name")
+//    @Enumerated(EnumType.STRING)
+//    private AllAuthorities authorityName;
 
 //    @ManyToMany(mappedBy = "authoritySet")
 //    private AllRoles role;
 
-}
+//}

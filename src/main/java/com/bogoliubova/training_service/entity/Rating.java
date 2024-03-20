@@ -42,7 +42,9 @@ public class Rating {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rating rating = (Rating) o;
-        return ratingOfTeacher == rating.ratingOfTeacher && Objects.equals(ratingId, rating.ratingId) && Objects.equals(feedback, rating.feedback);
+        return ratingOfTeacher == rating.ratingOfTeacher
+                && Objects.equals(ratingId, rating.ratingId)
+                && Objects.equals(feedback, rating.feedback);
     }
 
     @Override

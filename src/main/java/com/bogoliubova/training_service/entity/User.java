@@ -1,7 +1,6 @@
 package com.bogoliubova.training_service.entity;
 
-import com.bogoliubova.training_service.dto.AllRoles;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.bogoliubova.training_service.entity.enums.AllRoles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,7 +12,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -43,45 +45,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
     private Teacher teacher;
 
-  //  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-   // @JsonIgnore
-  @Enumerated(EnumType.STRING)
-  @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private AllRoles role;
-
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "user_role",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    @JsonIgnore
-//    private Set<Role> roles;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(userId, user.userId)
-                && Objects.equals(login, user.login)
-                && Objects.equals(password, user.password);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userId, login, password);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", customer=" + customer +
-                ", teacher=" + teacher +
-                ", role=" + role +
-                '}';
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -111,5 +77,32 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(userId, user.userId)
+                && Objects.equals(login, user.login)
+                && Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, login, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", customer=" + customer +
+                ", teacher=" + teacher +
+                ", role=" + role +
+                '}';
     }
 }

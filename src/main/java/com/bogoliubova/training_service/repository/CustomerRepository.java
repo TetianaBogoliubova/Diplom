@@ -15,7 +15,7 @@ public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     @Modifying
     @Query("UPDATE Customer c SET c.firstName = :firstName, c.lastName = :lastName, c.cusEmail = :cusEmail, c.location = :location, c.directions = :directions WHERE c.customerId = :customerId")
-    int patchUpdateCustomer(@Param("customerId") String customerId,
+    void patchUpdateCustomer(@Param("customerId") String customerId,
                             @Param("firstName") String firstName,
                             @Param("lastName") String lastName,
                             @Param("cusEmail") String cusEmail,

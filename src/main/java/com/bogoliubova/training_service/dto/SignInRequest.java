@@ -6,10 +6,9 @@ import lombok.Data;
 @Data
 public class SignInRequest {
 
-    @NotBlank(message = "Имя пользователя не может быть пустыми")
+    @NotBlank(message = "The login cannot be blank")
     private String login;
 
-
-    @NotBlank(message = "Пароль не может быть пустыми")
+    @NotBlank(message = "The password cannot be blank")
     private String password;
 }

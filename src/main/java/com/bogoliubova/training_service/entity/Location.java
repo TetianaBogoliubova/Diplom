@@ -1,7 +1,6 @@
 package com.bogoliubova.training_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,7 +38,6 @@ public class Location {
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     @JsonIgnore
-    //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Customer> customers;
 
     @OneToMany(mappedBy = "location", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -52,7 +50,10 @@ public class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
-        return postalCode == location.postalCode && Objects.equals(locationId, location.locationId) && Objects.equals(country, location.country) && Objects.equals(city, location.city);
+        return postalCode == location.postalCode
+                && Objects.equals(locationId, location.locationId)
+                && Objects.equals(country, location.country)
+                && Objects.equals(city, location.city);
     }
 
     @Override
@@ -72,23 +73,3 @@ public class Location {
                 '}';
     }
 }
-
-
-//////////////////////////////////////
-//    @PrePersist
-//    @PreUpdate
-//    private void prePersistOrUpdate() {
-//        // Сохраняем teachers и customers перед сохранением Location
-//        if (teachers != null) {
-//            for (Teacher teacher : teachers) {
-//                teacher.setLocation(this);
-//            }
-//        }
-//
-//        if (customers != null) {
-//            for (Customer customer : customers) {
-//                customer.setLocation(this);
-//            }
-//        }
-//    }
-////////////////////////////////////////////////

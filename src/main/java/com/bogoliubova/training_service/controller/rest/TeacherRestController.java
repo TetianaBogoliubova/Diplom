@@ -51,7 +51,6 @@ public class TeacherRestController {
         return teacherService.create(teacherDto);
     }
 
-
     //поиск имени, фамилии, рейтинга учителя по id
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND) с возвратом url

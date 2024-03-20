@@ -1,6 +1,5 @@
 package com.bogoliubova.training_service.security;
 
-import com.bogoliubova.training_service.dto.AllRoles;
 import com.bogoliubova.training_service.entity.User;
 import com.bogoliubova.training_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class UserService {
     public User create(User user) {
         if (userRepository.existsByLogin(user.getLogin())) {
             // Заменить на свои исключения
-            throw new RuntimeException("Пользователь с таким именем уже существует");
+            throw new RuntimeException("A user with this name already exists");
         }
         return save(user);
     }
@@ -29,12 +28,10 @@ public class UserService {
     //Получение пользователя по имени пользователя
     public User getByUsername(String login) {
         return userRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
-
     // Получение пользователя по имени пользователя Нужен для Spring Security
-
     public UserDetailsService userDetailsService() {
         return this::getByUsername;
     }
@@ -42,15 +39,7 @@ public class UserService {
     // Получение текущего пользователя
     public User getCurrentUser() {
         // Получение имени пользователя из контекста Spring Security
-        var username = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return getByUsername(username);
-    }
-
-    //Выдача прав администратора текущему пользователю Нужен для демонстрации
-    @Deprecated
-    public void getAdmin() {
-        var user = getCurrentUser();
-        user.setRole(AllRoles.ROLE_ADMIN);
-        save(user);
     }
 }

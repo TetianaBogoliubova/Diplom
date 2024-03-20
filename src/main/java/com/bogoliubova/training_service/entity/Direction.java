@@ -61,7 +61,9 @@ public class Direction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Direction direction = (Direction) o;
-        return Objects.equals(directionId, direction.directionId) && dirTitle == direction.dirTitle && grading == direction.grading;
+        return Objects.equals(directionId, direction.directionId)
+                && dirTitle == direction.dirTitle
+                && grading == direction.grading;
     }
 
     @Override

@@ -4,7 +4,8 @@ import lombok.Value;
 
 @Value
 public class BookDto {
-    String bookTitle;
-    String author;
 
+    String bookTitle;
+
+    String author;
 }

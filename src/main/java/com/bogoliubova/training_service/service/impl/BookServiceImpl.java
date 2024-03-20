@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -72,31 +70,6 @@ public class BookServiceImpl implements BookService {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-//    private void applyUpdates(Book book, Map<String, Object> updates) {
-//
-//        if (updates.containsKey("bookTitle")) {
-//            book.setBookTitle((String) updates.get("bookTitle"));
-//        }
-//        if (updates.containsKey("author")) {
-//            book.setAuthor((String) updates.get("author"));
-//        }
-//        if (updates.containsKey("bookPrice")) {
-
-//
-//            //book.setBookPrice((BigDecimal) updates.get("bookPrice"));
-//
-//            Object priceValue = updates.get("bookPrice");
-//            if (priceValue instanceof BigDecimal) {
-//                book.setBookPrice((BigDecimal) priceValue);
-//            } else if (priceValue instanceof Double) {
-//                book.setBookPrice(BigDecimal.valueOf((Double) priceValue));
-//            }
-
-//            book.setBookPrice((BigDecimal) updates.get("bookPrice"));
-
-//        }
-//    }
 
     @Override
     @Transactional(isolation = SERIALIZABLE)

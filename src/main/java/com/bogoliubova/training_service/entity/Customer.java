@@ -50,7 +50,10 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(cusEmail, customer.cusEmail);
+        return Objects.equals(customerId, customer.customerId)
+                && Objects.equals(firstName, customer.firstName)
+                && Objects.equals(lastName, customer.lastName)
+                && Objects.equals(cusEmail, customer.cusEmail);
     }
 
     @Override

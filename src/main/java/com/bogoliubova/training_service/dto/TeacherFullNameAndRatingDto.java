@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 public class TeacherFullNameAndRatingDto {
+
     private String firstName;
 
     private String lastName;

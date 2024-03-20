@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 
 public class TeacherDto {
+
     @NotBlank
     private String firstName;
 
@@ -23,5 +24,4 @@ public class TeacherDto {
     private Location location;
 
     private List<Rating> ratings;
-
 }

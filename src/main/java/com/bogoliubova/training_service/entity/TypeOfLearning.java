@@ -45,7 +45,9 @@ public class TypeOfLearning {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TypeOfLearning that = (TypeOfLearning) o;
-        return Objects.equals(typeId, that.typeId) && learningTypes == that.learningTypes && Objects.equals(specialPrice, that.specialPrice);
+        return Objects.equals(typeId, that.typeId)
+                && learningTypes == that.learningTypes
+                && Objects.equals(specialPrice, that.specialPrice);
     }
 
     @Override
