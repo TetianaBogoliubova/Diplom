@@ -38,10 +38,7 @@ public class AuthenticationService {
 
     // Аутентификация пользователя
     public JwtAuthenticationResponse authenticationUser(SignInRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                request.getLogin(),
-                request.getPassword()
-        ));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getLogin(), request.getPassword()));
 
         UserDetails user = userService
                 .userDetailsService()

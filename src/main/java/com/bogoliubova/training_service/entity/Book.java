@@ -25,7 +25,6 @@ public class Book {
     @Id
     @Column(name = "book_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@UuidGenerator
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID bookId;
 
