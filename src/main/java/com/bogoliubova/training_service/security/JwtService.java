@@ -45,8 +45,7 @@ public class JwtService {
     }
 
     // Извлечение данных из токена @param claimsResolvers функция извлечения данных
-  private   <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
-        //private Claims extractClaim(String token, Function<Claims, T> claimsResolvers) {
+    protected <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
     }
@@ -60,17 +59,17 @@ public class JwtService {
     }
 
     // Проверка токена на просроченность @return true, если токен просрочен
-    private boolean isTokenExpired(String token) {
+    protected boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
     // Извлечение даты истечения токена @return дата истечения
-    private Date extractExpiration(String token) {
+    protected Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
 
-     // Извлечение всех данных из токена
- private Claims extractAllClaims(String token) {
+    // Извлечение всех данных из токена
+    protected Claims extractAllClaims(String token) {
         return Jwts
                 .parser()
                 .setSigningKey(getSigningKey())
@@ -79,7 +78,7 @@ public class JwtService {
                 .getBody();
     }
 
-     //Получение ключа для подписи токена
+    //Получение ключа для подписи токена
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
