@@ -23,7 +23,8 @@ public class JwtService {
 
     //Извлечение имени пользователя из токена
     public String extractUserName(String token) {
-        return extractClaim(token, Claims::getSubject);
+
+        return extractClaim(token, claims -> claims.getSubject());
     }
 
     // Генерация токена
@@ -44,7 +45,8 @@ public class JwtService {
     }
 
     // Извлечение данных из токена @param claimsResolvers функция извлечения данных
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
+  private   <T> T extractClaim(String token, Function<Claims, T> claimsResolvers) {
+        //private Claims extractClaim(String token, Function<Claims, T> claimsResolvers) {
         final Claims claims = extractAllClaims(token);
         return claimsResolvers.apply(claims);
     }
@@ -68,8 +70,12 @@ public class JwtService {
     }
 
      // Извлечение всех данных из токена
-    private Claims extractAllClaims(String token) {
-        return Jwts.parser().setSigningKey(getSigningKey()).build().parseClaimsJws(token)
+ private Claims extractAllClaims(String token) {
+        return Jwts
+                .parser()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
                 .getBody();
     }
 

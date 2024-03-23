@@ -3,13 +3,13 @@ package com.bogoliubova.training_service.security;
 import com.bogoliubova.training_service.entity.User;
 import com.bogoliubova.training_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+
 public class UserService {
     private final UserRepository userRepository;
 
@@ -37,9 +37,9 @@ public class UserService {
     }
 
     // Получение текущего пользователя
-    public User getCurrentUser() {
-        // Получение имени пользователя из контекста Spring Security
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return getByUsername(username);
-    }
+//    public User getCurrentUser() {
+//        // Получение имени пользователя из контекста Spring Security
+//        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//        return getByUsername(username);
+//    }
 }

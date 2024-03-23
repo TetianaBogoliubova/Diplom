@@ -15,8 +15,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -28,10 +26,10 @@ class AuthenticationControllerTest {
     @MockBean
     private AuthenticationService authenticationService;
 
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private UserRepository userRepository;
+//    @Autowired
+//    private ObjectMapper objectMapper;
+//    @Autowired
+//    private UserRepository userRepository;
 
 
     @Test
@@ -70,7 +68,6 @@ class AuthenticationControllerTest {
         assertEquals(400, mvcResult.getResponse().getStatus());
     }
 
-
     @Test
     @WithMockUser
     void authenticationUserPositiveTest() throws Exception {
@@ -81,6 +78,30 @@ class AuthenticationControllerTest {
                 .andReturn();
 
         assertEquals(HttpStatus.OK.value(), mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser
+    void authenticationUserWithoutLoginTTest() throws Exception {
+        String requestBody = "{\"login\": \", \"password\":\"password\"}";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/sign-in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andReturn();
+
+        assertEquals(400, mvcResult.getResponse().getStatus());
+    }
+
+    @Test
+    @WithMockUser
+    void authenticationUserWithoutPasswordTTest() throws Exception {
+        String requestBody = "{\"login\": testUser\", \"password\": \"}";
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/auth/sign-in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andReturn();
+
+        assertEquals(400, mvcResult.getResponse().getStatus());
     }
 }
 
@@ -95,6 +116,7 @@ class AuthenticationControllerTest {
 //                .andExpect(status().isOk())
 //                .andExpect(jsonPath("$.token").exists());
 //    }
+
 //
 //    @Test
 //    @WithMockUser
@@ -108,8 +130,6 @@ class AuthenticationControllerTest {
 //                .andExpect(jsonPath("$.token").exists());
 //    }
 //}
-
-
 
 
 //    @Test
@@ -126,6 +146,7 @@ class AuthenticationControllerTest {
 //                .andExpect(status().isOk())
 //                .andExpect(jsonPath("$.token").value("testToken"));
 //    }
+//}
 //
 //    @Test
 //    public void testAuthenticationOfUser1() throws Exception {
