@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,8 @@ public class CustomerController {
 
     // поиск по id + специальная валидация для проверки формата id + exception
     @GetMapping("/id_customer/{customer_id}")
-//http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
+    @PreAuthorize("hasRole('USER')")
+//http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864 ++ ++
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             tags = "Customer",
@@ -51,7 +53,8 @@ public class CustomerController {
 
 
     // создание нового объекта
-    @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
+    @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer --  ++
+    @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Create a new customer",
             description = "If necessary fields are filled in, a new customer is created",
             //tags = "Customer",
@@ -59,7 +62,7 @@ public class CustomerController {
                     description = "Insert jason format data according to Customer Entity class",
                     required = true,
                     content = @Content(
-                            mediaType = "applicaton/json",
+                            mediaType = "application/json",
                             schema = @Schema(implementation = Customer.class)
                     )
             )
@@ -70,7 +73,7 @@ public class CustomerController {
 
     // обновление нового объекта по id + exception
     @PutMapping(value = "/updateCustomer/{customer_id}")
-//http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864
+//http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++ ++
     @Operation(summary = "Update customer in database by id",
             description = "Updates customer details based on the provided JSON format data.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -96,6 +99,7 @@ public class CustomerController {
 
     // частичное обновление объекта по id + exception (2 вида exception)
     @PatchMapping("/part_updateCustomer/{customer_id}")
+    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++  ++
     @Operation(summary = "Update customer in database by id",
             description = "",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -122,6 +126,8 @@ public class CustomerController {
 
     // удаление объекта по id
     @DeleteMapping("/deleteCustomer/{customer_id}")
+    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++
+    @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             responses = {

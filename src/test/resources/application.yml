@@ -19,6 +19,8 @@ spring:
     init:
         mode: never
 
-
+token:
+  signing:
+    key: 1d770d10e025ee9c1918bb89bcfb2c45c77f966e26171365be2d0ad99d32c814
 
 

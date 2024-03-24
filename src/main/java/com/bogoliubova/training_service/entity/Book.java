@@ -25,7 +25,6 @@ public class Book {
     @Id
     @Column(name = "book_id", columnDefinition = "UUID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    //@UuidGenerator
     @JdbcTypeCode(SqlTypes.CHAR)
     private UUID bookId;
 
@@ -56,7 +55,6 @@ public class Book {
                 Objects.equals(bookId, book.bookId) &&
                 Objects.equals(bookTitle, book.bookTitle) &&
                 Objects.equals(author, book.author);
-
     }
 
     @Override

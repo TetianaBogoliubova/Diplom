@@ -9,16 +9,10 @@ import java.util.List;
 
 public interface TeacherService {
     Teacher getTeacherById(String id);
-
     Teacher createNewTeacher(Teacher teacher);
-
     Teacher create(TeacherDto teacherDto);
-
     TeacherFullNameAndRatingDto getFLRId(String id);
-
     List<TeacherDto> getTByC(String city);
-
     List<TeacherDto> getTByR(Integer rating);
-
     List<TeacherDto> getTByDR(AllDirections dirTitle, Integer ratingOfTeacher);
 }

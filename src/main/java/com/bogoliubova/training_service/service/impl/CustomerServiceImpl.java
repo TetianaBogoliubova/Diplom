@@ -23,8 +23,8 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepository customerRepository;
-    private final CustomerMapper customerMapper;
 
+    private final CustomerMapper customerMapper;
 
     @Override
     @Transactional

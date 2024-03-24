@@ -29,6 +29,4 @@ public class UuidAnnotationCheckerTest {
         assertFalse(uuidAnnotationChecker.isValid(null, getContext()));
         assertFalse(uuidAnnotationChecker.isValid(" ", getContext()));
     }
-
-
 }
