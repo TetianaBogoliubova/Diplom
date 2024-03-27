@@ -3,9 +3,6 @@ package com.bogoliubova.training_service.service.interf;
 import com.bogoliubova.training_service.entity.Book;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
-
-
 public interface BookService {
     Book getBookById(String id);
 

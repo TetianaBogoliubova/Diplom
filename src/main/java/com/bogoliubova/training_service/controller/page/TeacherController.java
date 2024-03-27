@@ -24,8 +24,8 @@ public class TeacherController {
     private final TeacherService teacherService;
 
     // поиск по id
+    //http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
     @GetMapping("/id_teacher/{teacher_id}")
-//http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887 ++  ++
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Return the teacher by id",
             description = "If the teacher id exists in the database, all information on this teacher is displayed",
@@ -35,15 +35,14 @@ public class TeacherController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
         return teacherService.getTeacherById(id);
     }
 
-    @PostMapping("/createTeacher")
     //http://localhost:8080/teacher/createTeacher -- ++
+    @PostMapping("/createTeacher")
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Create a new teacher",
             description = "If necessary fields are filled in, a new teacher is created",

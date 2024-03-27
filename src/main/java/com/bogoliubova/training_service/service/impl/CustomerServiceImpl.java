@@ -98,7 +98,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public CustomerDto getCLDId(String id) {
         Optional<CustomerDto> entity = customerRepository.findById(UUID.fromString(id))
-                .map(c -> customerMapper.toDto(c));
+                .map(customerMapper::toDto);
         return entity.orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
     }
 }

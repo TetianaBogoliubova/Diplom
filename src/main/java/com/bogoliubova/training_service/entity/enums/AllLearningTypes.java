@@ -8,9 +8,6 @@ public enum AllLearningTypes {
     REGULAR("regular"),
     TIMELY("timely");
 
-    private final String value;
-
     AllLearningTypes(String value) {
-        this.value = value;
     }
 }

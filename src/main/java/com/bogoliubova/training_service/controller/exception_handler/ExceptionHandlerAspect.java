@@ -18,6 +18,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.util.Objects;
+
 @ControllerAdvice
 public class ExceptionHandlerAspect {
 
@@ -31,7 +33,7 @@ public class ExceptionHandlerAspect {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         ErrorResponse errorResponse = new ErrorResponse();
-        errorResponse.setMessage("!!!!! " + ex.getMessage());
+        errorResponse.setMessage("Attention " + ex.getMessage());
         errorResponse.setUrl(String.valueOf(request.getRequestURL()));
 
         return ResponseEntity
@@ -51,7 +53,7 @@ public class ExceptionHandlerAspect {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .headers(headers)
-                .body("!!!!! " + ex.getMessage());
+                .body("Attention " + ex.getMessage());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -72,7 +74,7 @@ public class ExceptionHandlerAspect {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
                 .headers(headers)
-                .body("!!!!! " + errorMessage);
+                .body("Attention " + errorMessage);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -86,12 +88,13 @@ public class ExceptionHandlerAspect {
         String errorMessage = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                .filter(Objects::nonNull)///
                 .findFirst()
                 .orElse("Validation error");
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .headers(headers)
-                .body("!!!!! " + errorMessage);
+                .body("Attention " + errorMessage);
     }
 }

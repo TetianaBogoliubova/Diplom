@@ -1,4 +1,5 @@
 package com.bogoliubova.training_service.dto;
+
 import com.bogoliubova.training_service.entity.Direction;
 import com.bogoliubova.training_service.entity.Location;
 import com.bogoliubova.training_service.entity.Rating;

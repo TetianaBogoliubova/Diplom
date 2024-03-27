@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.UUID;
 
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
-    Customer findCustomerByCustomerId(UUID customerId);
+  //  Customer findCustomerByCustomerId(UUID customerId);
 
     @Modifying
     @Query("UPDATE Customer c SET c.firstName = :firstName, c.lastName = :lastName, c.cusEmail = :cusEmail, c.location = :location, c.directions = :directions WHERE c.customerId = :customerId")

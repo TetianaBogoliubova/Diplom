@@ -4,36 +4,36 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 @Aspect
 @Component
 @Slf4j
-@Order(Ordered.LOWEST_PRECEDENCE)
 public class LoggingAspect {
-    @Pointcut("execution(public * com.bogoliubova.training_service.controller.*.*(..))")
+    @Pointcut(value = "execution(public * com.bogoliubova.training_service.controller.*.*(..))")
     public void controllerLog() {
     }
 
-    @Pointcut("execution(public * com.bogoliubova.training_service.service.*.*(..))")
+    @Pointcut(value = "execution(public * com.bogoliubova.training_service.service.*.*(..))")
     public void serviceLog() {
     }
 
     @Before("controllerLog()")
     public void doBeforeController(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
-        log.info("NEW REQUEST:\n" +
-                        "IP : {}\n" +
-                        "URL : {}\n" +
-                        "HTTP_METHOD : {}\n" +
-                        "CONTROLLER_METHOD : {}.{}",
+        HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
+        log.info("""
+                        NEW REQUEST:
+                        IP : {}
+                        URL : {}
+                        HTTP_METHOD : {}
+                        CONTROLLER_METHOD : {}.{}
+                        """,
                 request.getRemoteAddr(),
                 request.getRequestURL(),
                 request.getMethod(),
@@ -49,7 +49,10 @@ public class LoggingAspect {
 
     @AfterReturning(returning = "returnObject", pointcut = "controllerLog()")
     public void doAfterReturning(Object returnObject) {
-        log.info("\nReturn value from controller: {}\n" + "END OF CONTROLLER REQUEST", returnObject);
+        log.info("""
+                Return value from controller: {}
+                END OF CONTROLLER REQUEST
+                """, returnObject);
     }
 
     @AfterThrowing(throwing = "ex", pointcut = "controllerLog()")
@@ -60,7 +63,10 @@ public class LoggingAspect {
 
     @AfterReturning(returning = "returnObject", pointcut = "serviceLog()")
     public void doAfterReturningService(Object returnObject) {
-        log.info("\nReturn value from service: {}\n" + "END OF SERVICE METHOD", returnObject);
+        log.info("""
+                Return value from service: {}
+                END OF SERVICE METHOD
+                """, returnObject);
     }
 
     @AfterThrowing(throwing = "ex", pointcut = "serviceLog()")

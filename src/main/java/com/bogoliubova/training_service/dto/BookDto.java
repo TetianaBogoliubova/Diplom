@@ -1,10 +1,12 @@
 package com.bogoliubova.training_service.dto;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class BookDto {
-    String bookTitle;
-    String author;
+
+    private String bookTitle;
+
+    private String author;
 
 }

@@ -24,7 +24,7 @@ public class JwtService {
     //Извлечение имени пользователя из токена
     public String extractUserName(String token) {
 
-        return extractClaim(token, claims -> claims.getSubject());
+        return extractClaim(token, Claims::getSubject);
     }
 
     // Генерация токена

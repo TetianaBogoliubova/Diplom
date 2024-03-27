@@ -2,7 +2,6 @@ package com.bogoliubova.training_service.controller.page;
 
 import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.entity.Direction;
-import com.bogoliubova.training_service.entity.Location;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,14 +41,12 @@ class CustomerControllerTest {
     @BeforeEach
     public void setup() {
         List<Direction> directions = new ArrayList<>();
-        Location location = null;
 
         customer.setCustomerId(UUID.fromString("483e5800-e40a-2cd3-f678-617223078864"));
         customer.setFirstName("Ismael");
         customer.setLastName("Spencer");
         customer.setCusEmail("kassandra.hammes@yahoo.com");
         customer.setDirections(directions);
-        customer.setLocation(location);
     }
 
     @Test

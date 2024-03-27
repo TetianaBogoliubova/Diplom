@@ -50,7 +50,10 @@ public class Location {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Location location = (Location) o;
-        return postalCode == location.postalCode && Objects.equals(locationId, location.locationId) && Objects.equals(country, location.country) && Objects.equals(city, location.city);
+        return postalCode == location.postalCode &&
+                Objects.equals(locationId, location.locationId) &&
+                Objects.equals(country, location.country) &&
+                Objects.equals(city, location.city);
     }
 
     @Override

@@ -30,9 +30,9 @@ public class CustomerController {
     private final CustomerService customerService;
 
     // поиск по id + специальная валидация для проверки формата id + exception
+    //http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864
     @GetMapping("/id_customer/{customer_id}")
     @PreAuthorize("hasRole('USER')")
-//http://localhost:8080/customer/id_customer/483e5800-e40a-2cd3-f678-617223078864 ++ ++
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
             tags = "Customer",
@@ -44,13 +44,11 @@ public class CustomerController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public Customer getCustomerByCustomerId(@UuidChecker @PathVariable("customer_id") String id) {
         return customerService.getCustomerById(id);
     }
-
 
     // создание нового объекта
     @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer --  ++
@@ -72,8 +70,8 @@ public class CustomerController {
     }
 
     // обновление нового объекта по id + exception
+    //http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     @PutMapping(value = "/updateCustomer/{customer_id}")
-//http://localhost:8080/customer/updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++ ++
     @Operation(summary = "Update customer in database by id",
             description = "Updates customer details based on the provided JSON format data.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
@@ -98,10 +96,10 @@ public class CustomerController {
     }
 
     // частичное обновление объекта по id + exception (2 вида exception)
+    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     @PatchMapping("/part_updateCustomer/{customer_id}")
-    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++  ++
     @Operation(summary = "Update customer in database by id",
-            description = "",
+            description = "Partially updates customer details based on the provided JSON format data.",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "insert jason format data according to Customer Entity class",
                     required = true,
@@ -125,8 +123,9 @@ public class CustomerController {
     }
 
     // удаление объекта по id
+    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     @DeleteMapping("/deleteCustomer/{customer_id}")
-    //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864 ++
+
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",
@@ -136,8 +135,7 @@ public class CustomerController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {
         return customerService.deleteCustomerById(customerId);

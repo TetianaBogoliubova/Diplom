@@ -4,7 +4,6 @@ import com.bogoliubova.training_service.dto.ErrorResponse;
 import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Direction;
-import com.bogoliubova.training_service.entity.Location;
 import com.bogoliubova.training_service.entity.Rating;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.exception.ErrorMassage;
@@ -47,7 +46,7 @@ class TeacherRestControllerTest {
     @BeforeEach
     public void setup() {
         List<Direction> directions = new ArrayList<>();
-        Location location = null;
+        //Location location = null;
         Teacher teacher = new Teacher();
         teacher.setTeacherId(UUID.fromString("837e8317-e35a-4cd1-f710-387841923887"));
         ratings.add(new Rating(UUID.fromString("877e2246-e57a-9cd7-f555-573360728004"), 7, "Good with children", teacher));
@@ -56,7 +55,7 @@ class TeacherRestControllerTest {
         teacherDto.setLastName("Runte");
         teacherDto.setTeachEmail("monroe.hilpert@yahoo.com");
         teacherDto.setDirections(directions);
-        teacherDto.setLocation(location);
+        //teacherDto.setLocation(location);
         teacherDto.setRatings(ratings);
     }
 
@@ -138,7 +137,7 @@ class TeacherRestControllerTest {
         assertEquals(404, mockNegativeResult.getResponse().getStatus());
 
         String errorMessage = objectMapper.readValue(mockNegativeResult.getResponse().getContentAsString(), ErrorResponse.class).getMessage();
-        assertEquals("!!!!! " + ErrorMassage.M_TEACHER_NOT_FOUND, errorMessage);
+        assertEquals("Attention " + ErrorMassage.M_TEACHER_NOT_FOUND, errorMessage);
     }
 
     @Test
@@ -184,7 +183,7 @@ class TeacherRestControllerTest {
         assertEquals(404, mockNegativeResult.getResponse().getStatus());
 
         String errorMessage = mockNegativeResult.getResponse().getContentAsString();
-        assertTrue(errorMessage.contains("!!!!! " + ErrorMassage.M_TEACHER_IN_THIS_CITY_NOT_FOUND));
+        assertTrue(errorMessage.contains("Attention " + ErrorMassage.M_TEACHER_IN_THIS_CITY_NOT_FOUND));
     }
 
     @Test

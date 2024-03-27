@@ -45,7 +45,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public TeacherFullNameAndRatingDto getFLRId(String id) {
         Optional<TeacherFullNameAndRatingDto> entity = teacherRepository.findById(UUID.fromString(id))
-                .map(t -> teacherMapper.toDtoFullName(t));
+                .map(teacherMapper::toDtoFullName);
         return entity.orElseThrow(() -> new TeacherNotFoundException(ErrorMassage.M_TEACHER_NOT_FOUND));
     }
 

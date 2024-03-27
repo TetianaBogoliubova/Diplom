@@ -9,7 +9,6 @@ import org.mapstruct.Named;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface TeacherMapper {
@@ -37,8 +36,8 @@ public interface TeacherMapper {
     @Mapping(source = "teacher.directions", target = "directions", qualifiedByName = "findTeachersByDirectionAndRating")
     default List<TeacherDto> toDtoList(List<Teacher> teachers){
         return teachers.stream()
-                .map(entity -> toDto(entity))
-                .collect(Collectors.toList());
+                .map(this::toDto)
+                .toList();
     }
 
     @Named("getTeacherByCity")

@@ -59,7 +59,10 @@ public class Teacher {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return Objects.equals(teacherId, teacher.teacherId) && Objects.equals(firstName, teacher.firstName) && Objects.equals(lastName, teacher.lastName) && Objects.equals(teachEmail, teacher.teachEmail);
+        return Objects.equals(teacherId, teacher.teacherId) &&
+                Objects.equals(firstName, teacher.firstName) &&
+                Objects.equals(lastName, teacher.lastName) &&
+                Objects.equals(teachEmail, teacher.teachEmail);
     }
 
     @Override

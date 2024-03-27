@@ -55,8 +55,8 @@ public class TeacherRestController {
     //поиск имени, фамилии, рейтинга учителя по id
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND) с возвратом url
+    //http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
     @GetMapping("/id_teacherRest/{teacher_id}")
-//http://localhost:8080/teacher/id_teacherRest/837e8317-e35a-4cd1-f710-387841923887
     @Operation(summary = "Return the teacher by id",
             description = "If the teacher id exists in the database, method return TeacherFullNameAndRatingDto class",
             responses = {
@@ -65,8 +65,7 @@ public class TeacherRestController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") String id) {
         UUID teacherId = UUID.fromString(id);
@@ -85,8 +84,7 @@ public class TeacherRestController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public List<TeacherDto> getTeacherByCity(@PathVariable("city") String city) {
         return teacherService.getTByC(city);
@@ -105,16 +103,15 @@ public class TeacherRestController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public List<TeacherDto> getTeacherByRating(@RatingRestChecker @PathVariable("rating") Integer rating) {
         return teacherService.getTByR(rating);
     }
 
     //поиск учителя по направлению и рейтингу + SQL-запрос в Repository
+    //http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
     @GetMapping("/getTeacherDirAndRating/{direction}/{rating}")
-//http://localhost:8080/teacher/getTeacherDirAndRating/GERMAN/9
     @Operation(summary = "Return the teacher by directions and rating",
             description = "If the rating is between 1 and 10 and direction exists in the database, method return list of TeacherDto class",
             responses = {
@@ -123,8 +120,7 @@ public class TeacherRestController {
             },
             security = {
                     @SecurityRequirement(name = "")
-            },
-            hidden = false
+            }
     )
     public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") AllDirections dirTitle, @PathVariable("rating") Integer ratingOfTeacher) {
         return teacherService.getTByDR(dirTitle, ratingOfTeacher);

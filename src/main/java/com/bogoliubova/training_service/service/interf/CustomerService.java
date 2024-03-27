@@ -4,7 +4,6 @@ import com.bogoliubova.training_service.entity.Customer;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
-import java.util.UUID;
 
 public interface CustomerService {
     Customer getCustomerById(String id);
