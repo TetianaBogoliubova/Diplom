@@ -1,16 +1,25 @@
 package com.bogoliubova.training_service.config;
 
+import com.bogoliubova.training_service.security.JwtAuthenticationFilter;
+import com.bogoliubova.training_service.security.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -28,6 +37,16 @@ class SecurityConfigurationTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Mock
+    private JwtAuthenticationFilter jwtAuthenticationFilter = mock(JwtAuthenticationFilter.class);
+
+    @Mock
+    private UserService userService = mock(UserService.class);
+
+//    @Mock
+//    private PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+
 
     //при обращении к пути /swagger-ui.html выполняется перенаправление на URL /swagger-ui/index.html.
     @Test
@@ -106,5 +125,14 @@ class SecurityConfigurationTest {
     void testSecurityFilterChain25128212() throws Exception {
         mockMvc.perform(logout("/signin"))
                 .andExpect(status().is3xxRedirection());
+    }
+
+
+    @Test
+    void testAuthenticationProviderBean() {
+        SecurityConfiguration securityConfiguration = new SecurityConfiguration(jwtAuthenticationFilter, userService);
+        AuthenticationProvider authenticationProvider = securityConfiguration.authenticationProvider();
+        assertNotNull(authenticationProvider);
+        assertTrue(authenticationProvider instanceof DaoAuthenticationProvider);
     }
 }
