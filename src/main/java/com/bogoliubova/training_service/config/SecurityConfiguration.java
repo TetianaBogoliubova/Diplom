@@ -17,6 +17,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -51,6 +53,30 @@ public class SecurityConfiguration {
             "/csrf"
     };
 
+    private static final String[] USER_LIST = {
+            "/customer/id_customer/**",
+            "/customer/id_customerRest/**",
+           "/teacher/id_teacher/**",
+            "/teacher/id_teacherRest/**",
+            "/teacher/getTeacherCity/**",
+            "/teacher/getTeacherRating/**",
+            "/teacher/getTeacherDirAndRating/**",
+            "/customer/createCustomer",
+            "/customer/updateCustomer/**",
+            "/customer/part_updateCustomer/**",
+          "/teacher/createTeacherRest",
+            "/teacher/createTeacher"
+    };
+
+    @Bean/////////
+    public CsrfTokenRepository csrfTokenRepository() {
+        return new HttpSessionCsrfTokenRepository();
+    }
+//    @Bean////???
+//    public Filter springSecurityFilterChain() throws Exception {
+//        return springSecurityFilterChain();
+//    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -77,11 +103,8 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(a -> a
                         .requestMatchers(SWAGGER_LIST).permitAll()
-                        .requestMatchers("/customer/id_customer/**", "/customer/id_customerRest/**").hasRole("USER")
-                        .requestMatchers("/teacher/id_teacher/**", "/teacher/id_teacherRest/**", "/teacher/getTeacherCity/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**").hasRole("USER")
-                        .requestMatchers("/customer/createCustomer", "/customer/updateCustomer/**", "/customer/part_updateCustomer/**").hasRole("USER")
+                        .requestMatchers(USER_LIST).hasRole("USER")
                         .requestMatchers("/customer/deleteCustomer/**").hasRole("ADMIN")
-                        .requestMatchers("/teacher/createTeacherRest", "/teacher/createTeacher").hasRole("USER")
                         .anyRequest().authenticated())
                 .httpBasic(withDefaults())
                 .formLogin(withDefaults())
@@ -94,3 +117,7 @@ public class SecurityConfiguration {
         return http.build();
     }
 }
+//.requestMatchers("/customer/id_customer/**", "/customer/id_customerRest/**").hasRole("USER")
+//.requestMatchers("/teacher/id_teacher/**", "/teacher/id_teacherRest/**", "/teacher/getTeacherCity/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**").hasRole("USER")
+//.requestMatchers("/customer/createCustomer", "/customer/updateCustomer/**", "/customer/part_updateCustomer/**").hasRole("USER")
+//.requestMatchers("/teacher/createTeacherRest", "/teacher/createTeacher").hasRole("USER")

@@ -1,0 +1,377 @@
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="bogoliubova" id="create locations table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table locations already exists">
+            <not>
+                <tableExists tableName="locations"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="locations">
+
+            <column name="location_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="country" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="city" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="postal_code" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create teachers table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table teachers already exists">
+            <not>
+                <tableExists tableName="teachers"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="teachers">
+
+            <column name="teacher_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="first_name" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_name" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="t_email" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="direction_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="location_id" type="char(36)">
+                <constraints foreignKeyName="fk_teachers_location" references="locations(location_id)"
+                             unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="type_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="rating_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create customers table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table customers already exists">
+            <not>
+                <tableExists tableName="customers"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="customers">
+
+            <column name="customer_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="first_name" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="last_name" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="c_email" type="varchar(70)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="location_id" type="char(36)">
+                <constraints foreignKeyName="fk_customers_location" references="locations(location_id)"
+                             unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="direction_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create services table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table services already exists">
+            <not>
+                <tableExists tableName="services"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="services">
+
+            <column name="service_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="type" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="s_price" type="decimal(6, 2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="direction_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+            <column name="book_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create books table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table books already exists">
+            <not>
+                <tableExists tableName="books"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="books">
+
+            <column name="book_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="b_title" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="author" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="b_price" type="decimal(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="direction_id" type="char(36)">
+                <constraints unique="false"
+                             nullable="true"/>
+            </column>
+            <column name="service_id" type="char(36)">
+                <constraints foreignKeyName="fk_books_service_id" references="services(service_id)"
+                             unique="false"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create types_of_learning table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table types_of_learning already exists">
+            <not>
+                <tableExists tableName="types_of_learning"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="types_of_learning">
+
+            <column name="type_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="learning_types" type="varchar(150)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="special_price" type="decimal(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_type_teacher_id" references="teachers(teacher_id)"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create ratings table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table ratings already exists">
+            <not>
+                <tableExists tableName="ratings"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="ratings">
+
+            <column name="rating_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="rating_for_teacher" type="integer">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="feedback" type="varchar(150)">
+                <constraints nullable="true"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_rating_teacher_id" references="teachers(teacher_id)"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create directions table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table directions already exists">
+            <not>
+                <tableExists tableName="directions"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="directions">
+
+            <column name="direction_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="d_title" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="grading" type="varchar(45)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_direction_teacher_id" references="teachers(teacher_id)"
+                             nullable="true"/>
+            </column>
+
+            <column name="service_id" type="char(36)">
+                <constraints foreignKeyName="fk_direction_service_id" references="services(service_id)"
+                             nullable="true"/>
+            </column>
+
+            <column name="book_id" type="char(36)">
+                <constraints foreignKeyName="fk_direction_book_id" references="books(book_id)"
+                             nullable="true"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints foreignKeyName="fk_direction_customer_id" references="customers(customer_id)"
+                             nullable="true"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="bogoliubova" id="create users table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table users already exists">
+            <not>
+                <tableExists tableName="users"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="users">
+
+            <column name="user_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="login" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="password" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="customer_id" type="char(36)">
+                <constraints  foreignKeyName="fk_user_customer_id" references="customers(customer_id)"
+                              nullable="true"/>
+            </column>
+
+            <column name="teacher_id" type="char(36)">
+                <constraints foreignKeyName="fk_user_teacher_id" references="teachers(teacher_id)"
+                             nullable="true"/>
+            </column>
+
+            <column name="role" type="char(36)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet author="bogoliubova" id="create authorities table">
+
+        <preConditions onFail="CONTINUE" onFailMessage="Table authorities already exists">
+            <not>
+                <tableExists tableName="authorities"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="authorities">
+
+            <column name="authority_id" type="char(36)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="authority_name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
