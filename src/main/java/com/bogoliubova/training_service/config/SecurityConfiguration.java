@@ -13,12 +13,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -30,8 +28,6 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     private final UserService userService;
-
-    //private final PasswordEncoder passwordEncoder;
     private static final String[] SWAGGER_LIST = {
             "/v2/api-docs",
             "/v3/api-docs/**",
@@ -58,7 +54,7 @@ public class SecurityConfiguration {
     private static final String[] USER_LIST = {
             "/customer/id_customer/**",
             "/customer/id_customerRest/**",
-           "/teacher/id_teacher/**",
+            "/teacher/id_teacher/**",
             "/teacher/id_teacherRest/**",
             "/teacher/getTeacherCity/**",
             "/teacher/getTeacherRating/**",
@@ -66,13 +62,12 @@ public class SecurityConfiguration {
             "/customer/createCustomer",
             "/customer/updateCustomer/**",
             "/customer/part_updateCustomer/**",
-          "/teacher/createTeacherRest",
+            "/teacher/createTeacherRest",
             "/teacher/createTeacher"
     };
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
     }
 
@@ -111,7 +106,3 @@ public class SecurityConfiguration {
         return http.build();
     }
 }
-//.requestMatchers("/customer/id_customer/**", "/customer/id_customerRest/**").hasRole("USER")
-//.requestMatchers("/teacher/id_teacher/**", "/teacher/id_teacherRest/**", "/teacher/getTeacherCity/**", "/teacher/getTeacherRating/**", "/teacher/getTeacherDirAndRating/**").hasRole("USER")
-//.requestMatchers("/customer/createCustomer", "/customer/updateCustomer/**", "/customer/part_updateCustomer/**").hasRole("USER")
-//.requestMatchers("/teacher/createTeacherRest", "/teacher/createTeacher").hasRole("USER")

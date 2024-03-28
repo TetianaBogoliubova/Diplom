@@ -8,9 +8,9 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -44,9 +44,20 @@ class SecurityConfigurationTest {
     @Mock
     private UserService userService = mock(UserService.class);
 
-//    @Mock
-//    private PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
+    @Test
+    void testAuthenticationProviderBean() {
+        SecurityConfiguration securityConfiguration = new SecurityConfiguration(jwtAuthenticationFilter, userService);
+        AuthenticationProvider authenticationProvider = securityConfiguration.authenticationProvider();
+        assertNotNull(authenticationProvider);
+        assertTrue(authenticationProvider instanceof DaoAuthenticationProvider);
+    }
+    @Test
+    void testAuthenticationManager() {
+        assertNotNull(authenticationManager);
+    }
 
     //при обращении к пути /swagger-ui.html выполняется перенаправление на URL /swagger-ui/index.html.
     @Test
@@ -56,7 +67,6 @@ class SecurityConfigurationTest {
                 .andExpect(redirectedUrl("/swagger-ui/index.html"));
     }
 
-    // запросы GET без токена CSRF неудачно завершаются
     @Test
     void securityFilterChainGetWithOutCsrfTokenTest() throws Exception {
         mockMvc
@@ -64,7 +74,6 @@ class SecurityConfigurationTest {
                 .andExpect(status().isNotFound());
     }
 
-    // запросы POST без токена CSRF неудачно завершаются
     @Test
     void securityFilterChainPostWithOutCsrfTokenTest() throws Exception {
         mockMvc
@@ -72,15 +81,13 @@ class SecurityConfigurationTest {
                 .andExpect(status().isNotFound());
     }
 
-    // запросы PUT без токена CSRF неудачно завершаются
     @Test
     void securityFilterChainPutWithOutCsrfTokenTest() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.put("/"))
+                .perform(MockMvcRequestBuilders.put("/").with(csrf()))
                 .andExpect(status().isNotFound());
     }
 
-    // запросы PATCH без токена CSRF неудачно завершаются
     @Test
     void securityFilterChainPatchWithOutCsrfTokenTest() throws Exception {
         mockMvc
@@ -125,14 +132,5 @@ class SecurityConfigurationTest {
     void testSecurityFilterChain25128212() throws Exception {
         mockMvc.perform(logout("/signin"))
                 .andExpect(status().is3xxRedirection());
-    }
-
-
-    @Test
-    void testAuthenticationProviderBean() {
-        SecurityConfiguration securityConfiguration = new SecurityConfiguration(jwtAuthenticationFilter, userService);
-        AuthenticationProvider authenticationProvider = securityConfiguration.authenticationProvider();
-        assertNotNull(authenticationProvider);
-        assertTrue(authenticationProvider instanceof DaoAuthenticationProvider);
     }
 }

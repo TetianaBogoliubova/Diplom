@@ -7669,3 +7669,5 @@ select u1_0.user_id,u1_0.customer_id,u1_0.login,u1_0.password,u1_0.role,u1_0.tea
 	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:177)
 	... 166 common frames omitted
 28.03.2024 16:31:33.681 [http-nio-8080-exec-1] WARN  o.s.w.s.h.HandlerMappingIntrospector - Cache miss for REQUEST dispatch to '/customer/id_customerRest/483e5800-e40a-2cd3-f678-617223078864' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+28.03.2024 20:52:06.400 [main] WARN  o.h.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+28.03.2024 20:52:15.553 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
