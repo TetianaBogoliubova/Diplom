@@ -1,11 +1,12 @@
 package com.bogoliubova.training_service.service.impl;
+
 import com.bogoliubova.training_service.dto.TeacherDto;
 import com.bogoliubova.training_service.dto.TeacherFullNameAndRatingDto;
 import com.bogoliubova.training_service.entity.Teacher;
 import com.bogoliubova.training_service.entity.enums.AllDirections;
 import com.bogoliubova.training_service.exception.ErrorMassage;
-import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import com.bogoliubova.training_service.exception.TeacherInThisCityNotFound;
+import com.bogoliubova.training_service.exception.TeacherNotFoundException;
 import com.bogoliubova.training_service.exception.ThatTeacherAlreadyExists;
 import com.bogoliubova.training_service.mapper.TeacherMapper;
 import com.bogoliubova.training_service.repository.TeacherRepository;
@@ -47,6 +48,7 @@ public class TeacherServiceImpl implements TeacherService {
         } else teacherRepository.save(teacherMapper.toEntity(teacherDto));
         return teacherRepository.getTeacherByFirstNameAndLastName(teacherDto.getFirstName(), teacherDto.getLastName());
     }
+
     @Override
     @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public TeacherFullNameAndRatingDto getFLRId(String id) {

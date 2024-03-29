@@ -8,7 +8,6 @@ import java.util.Optional;
 
 public class RatingAnnotationRestChecker implements ConstraintValidator<RatingRestChecker, Integer> {
 
-
     @Override
     public boolean isValid(Integer rating, ConstraintValidatorContext context) {
         return Optional.ofNullable(rating)

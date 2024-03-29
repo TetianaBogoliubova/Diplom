@@ -1,5 +1,6 @@
 package com.bogoliubova.training_service.config;
 
+import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.security.JwtAuthenticationFilter;
 import com.bogoliubova.training_service.security.UserService;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,7 @@ import static org.mockito.Mockito.mock;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.logout;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -52,6 +54,7 @@ class SecurityConfigurationTest {
         assertNotNull(authenticationProvider);
         assertTrue(authenticationProvider instanceof DaoAuthenticationProvider);
     }
+
     @Test
     void authenticationManagerTest() {
 
@@ -104,7 +107,7 @@ class SecurityConfigurationTest {
     @Test
     void securityFilterChainDeleteWithoutCsrfTokenTest() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("/"))
+                .perform(delete("/"))
                 .andExpect(status().isNotFound());
     }
 
@@ -146,7 +149,7 @@ class SecurityConfigurationTest {
     @Test
     void securityFilterChainDeleteWithCsrfTokenTest() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.delete("/").with(csrf()))
+                .perform(delete("/").with(csrf()))
                 .andExpect(status().isNotFound());
     }
 

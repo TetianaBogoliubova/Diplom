@@ -6,7 +6,7 @@ mentoring services. The application allows participants to create, manage, searc
 different types of training in a wide variety of areas and for different age groups.  Features 
 such as user authentication, categorization of destinations, age gradations, types of services, 
 and different types of training are active in the app. Also, you can always see ratings and 
-reviews of participants, buy, sell or exchange books here. The service will help everyone to 
+reviews of participants, buy, sell or exchange books here. The application will help everyone to 
 find their teacher easily. And each teacher will be able to share their knowledge and experience.
 
 Translated with DeepL.com (free version)
@@ -25,7 +25,7 @@ The main stack of technologies:
 - Liquibase
 
 # Installation
-
+https://github.com/TetianaBogoliubova/Diplom/tree/master/src/main/java/com/bogoliubova/training_service
 
 # Database structure
 
@@ -135,11 +135,3 @@ The database includes:
 | teacher_id  | char(36)     | teacher's id, foreign key                      |
 | role        | char(36)     | name of the role for authorization             |
 
-# Contributing
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
-
-Fork the Project
-Create your Feature Branch (git checkout -b feature/AmazingFeature)
-Commit your Changes (git commit -m 'Add some AmazingFeature')
-Push to the Branch (git push origin feature/AmazingFeature)
-Open a Pull Request
