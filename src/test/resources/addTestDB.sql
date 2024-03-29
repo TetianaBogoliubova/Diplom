@@ -100,8 +100,3 @@ values ('226e8867-e33a-2cd3-f362-211620192111', 'user',
        ('226e8867-e33a-2cd3-f362-211620192333', 'admin',
         '$2a$12$i0dkwNJkmXquMqdXrDOhiOOrOj0pbZlvRGVNnFJWLu5TLp1efpm7W',
         null, null, 'ROLE_ADMIN');
-
-insert into authorities (authority_id, authority_name)
-values ('116e8867-e33a-2cd3-f362-211620192111', 'READ'),
-       ('220e6220-e51a-3cd9-f027-973873847222', 'WRITE'),
-       ('330e6220-e51a-3cd9-f027-973873847333', 'READ_WRITE');

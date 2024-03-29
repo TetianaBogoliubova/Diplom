@@ -12,11 +12,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import static org.springframework.transaction.annotation.Isolation.READ_COMMITTED;
+import static org.springframework.transaction.annotation.Isolation.SERIALIZABLE;
 
 @Service
 @RequiredArgsConstructor
@@ -27,18 +31,20 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
 
     @Override
-    @Transactional
+    @Transactional(isolation = Isolation.READ_UNCOMMITTED)
     public Customer getCustomerById(String id) {
         return customerRepository.findById(UUID.fromString(id))
                 .orElseThrow(() -> new CustomerNotFoundException(ErrorMassage.M_CUSTOMER_NOT_FOUND));
     }
 
     @Override
+    @Transactional
     public Customer createNewCustomer(Customer customer) {
         return customerRepository.save(customer);
     }
 
     @Override
+    @Transactional
     public Customer updateCustomer(Customer updateCustomer, String customerId) {
 
         UUID uuidCustomerId = UUID.fromString(customerId);
@@ -55,6 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional(isolation = READ_COMMITTED)
     public Customer patchUpdateCustomerById(String customerId, Map<String, Object> updates) {
 
         UUID uuidCustomerId = UUID.fromString(customerId);
@@ -83,6 +90,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
+    @Transactional(isolation = SERIALIZABLE)
     public ResponseEntity<String> deleteCustomerById(String customerId) {
         UUID uuidCustomerId = UUID.fromString(customerId);
         Optional<Customer> customer = customerRepository.findById(uuidCustomerId);

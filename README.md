@@ -15,9 +15,17 @@ Translated with DeepL.com (free version)
 The main stack of technologies:
 
 - Java
-- Spring
+- Spring Boot
 - MySQL
 - REST API
+- Security
+- Swagger
+- Jacoco
+- Hibernate
+- Liquibase
+
+# Installation
+
 
 # Database structure
 

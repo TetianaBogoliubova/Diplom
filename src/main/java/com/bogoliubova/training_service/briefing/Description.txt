@@ -1,31 +1,39 @@
 1. Класс Book:
+
+BookController-page:
     - основные запросы (get, post, put, patch, delete) - page-Controller.
+    - Unit-тесты к контроллерам и сервисам
 
 2. Класс Customer:
-    - основные запросы (get, post, put, patch, delete) - CustomerController-page.
 
-      get-запрос содержит специальную валидацию для проверки формата id, exception, прописанную документацию для swagger;
-      put-запрос содержит exception, прописанную документацию для swagger;
-      patch-запрос содержит 2 вида exception, прописанную документацию для swagger;
+CustomerController-page:
+    - основные запросы (get, post, put, patch, delete);
+    - get-запрос содержит специальную валидацию для проверки формата id, exception, прописанную документацию для swagger;
+    - put-запрос содержит exception, прописанную документацию для swagger;
+    - patch-запрос содержит 2 вида exception, прописанную документацию для swagger;
+    - интеграционные тесты на все контроллеры;
 
-    - get-запрос с возвратом Dto-класса (3 поля), содержит специальную валидацию для проверки формата id, exception и
+CustomerRestController-rest:
+    - get-запрос с возвратом Dto-класса (3 поля). Cодержит специальную валидацию для проверки формата id, exception и
    прописанную документацию для swagger;
-      Прописан в CustomerRestController.
+
 
 3. Класс Teacher:
+
+TeacherRestController-rest:
     - post-запрос на создание нововго объекта. Содержит встроенную валидацию @NotBlank на поля в Dto-классе, exception,
-      ExceptionHandler на MethodArgumentNotValidException.class, прописанную документацию для swagger;
+      ExceptionHandler на MethodArgumentNotValidException.class, прописанную документацию для swagger, интеграционный
+      тест;
 
     - get-запрос с возвратом Dto-класса (имени, фамилии, рейтинга учителя) по id. Содержит exception, ExceptionHandler
-      на Exception.class(TEACHER_NOT_FOUND), прописанную документацию для swagger;
+      на Exception.class(TEACHER_NOT_FOUND), прописанную документацию для swagger, интеграционный тест;
 
     - get-запрос учителя с возвратом Dto-класса по названию города. Содержит exception, ExceptionHandler на
-      Exception.class(TEACHER_IN_THIS_CITY_NOT_FOUND), прописанную документацию для swagger;
+      Exception.class(TEACHER_IN_THIS_CITY_NOT_FOUND), прописанную документацию для swagger, интеграционный тест;
 
     - get-запрос учителя с возвратом Dto-класса по рейтингу. Содержит SQL-запрос в Repository, специальную валидацию
       на проверку значения рейтинга (1-10), ExceptionHandler на ConstraintViolationException.class
-      ("The number is not within the rating!!!"), прописанную документацию для swagger;
+      ("The number is not within the rating!!!"), прописанную документацию для swagger, интеграционный тест;
 
     - get-запрос учителя с возвратом Dto-класса по направлению и рейтингу. Содержит SQL-запрос в Repository, прописанную
-      документацию для swagger.
-
+      документацию для swagger,интеграционный тест;

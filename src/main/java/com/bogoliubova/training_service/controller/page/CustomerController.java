@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -125,7 +127,6 @@ public class CustomerController {
     // удаление объекта по id
     //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     @DeleteMapping("/deleteCustomer/{customer_id}")
-
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Return the customer by id",
             description = "If the customer id exists in the database, all information on this client is displayed",

@@ -353,25 +353,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet author="bogoliubova" id="create authorities table">
-
-        <preConditions onFail="CONTINUE" onFailMessage="Table authorities already exists">
-            <not>
-                <tableExists tableName="authorities"/>
-            </not>
-        </preConditions>
-
-        <createTable tableName="authorities">
-
-            <column name="authority_id" type="char(36)">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-
-            <column name="authority_name" type="varchar(30)">
-                <constraints nullable="false"/>
-            </column>
-
-        </createTable>
-    </changeSet>
-
 </databaseChangeLog>
