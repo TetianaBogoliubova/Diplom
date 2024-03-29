@@ -46,7 +46,6 @@ class TeacherRestControllerTest {
     @BeforeEach
     public void setup() {
         List<Direction> directions = new ArrayList<>();
-        //Location location = null;
         Teacher teacher = new Teacher();
         teacher.setTeacherId(UUID.fromString("837e8317-e35a-4cd1-f710-387841923887"));
         ratings.add(new Rating(UUID.fromString("877e2246-e57a-9cd7-f555-573360728004"), 7, "Good with children", teacher));
@@ -55,7 +54,6 @@ class TeacherRestControllerTest {
         teacherDto.setLastName("Runte");
         teacherDto.setTeachEmail("monroe.hilpert@yahoo.com");
         teacherDto.setDirections(directions);
-        //teacherDto.setLocation(location);
         teacherDto.setRatings(ratings);
     }
 
@@ -215,7 +213,6 @@ class TeacherRestControllerTest {
         assertEquals(teacherResultList.get(0).getRatings(), teacherDto.getRatings());
     }
 
-
     @Test
     @WithMockUser(username = "user", password = "111", roles = "USER")
     void getTeacherByRatingNegativeTest() throws Exception {
@@ -270,7 +267,6 @@ class TeacherRestControllerTest {
         assertEquals(400, mockNegativeResult.getResponse().getStatus());
     }
 
-
     @Test
     @WithMockUser(username = "admin", password = "111", roles = "ADMIN")
     void getTeacherByDirectionAndRatingForbiddenTest() throws Exception {
@@ -280,5 +276,4 @@ class TeacherRestControllerTest {
                 .andReturn();
         assertEquals(403, mockForbiddenResult.getResponse().getStatus());
     }
-
 }

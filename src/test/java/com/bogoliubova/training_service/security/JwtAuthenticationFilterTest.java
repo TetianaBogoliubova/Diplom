@@ -96,7 +96,7 @@ class JwtAuthenticationFilterTest {
 
         when(jwtService.isTokenValid(Mockito.anyString(), Mockito.any(UserDetails.class))).thenReturn(false);
         when(userDetailsService.loadUserByUsername(Mockito.anyString())).thenReturn(userDetails);
-        when(userService.userDetailsService()).thenReturn(userDetailsService); // Настройка мока для userService
+        when(userService.userDetailsService()).thenReturn(userDetailsService);
         when(jwtService.isTokenValid(Mockito.anyString(), Mockito.any(UserDetails.class))).thenReturn(false);
         when(userService.userDetailsService().loadUserByUsername(Mockito.anyString())).thenReturn(userDetails);
         when(request.getHeader("Authorization")).thenReturn("Bearer invalidToken");

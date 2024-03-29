@@ -34,6 +34,7 @@ class UserServiceTest {
         user.setRole(AllRoles.ROLE_USER);
     }
 
+    //проверяет метод save в контексте сохранения существующего пользователя
     @Test
     void savePositiveTest() {
         when(userRepository.save(user)).thenReturn(user);
@@ -46,20 +47,6 @@ class UserServiceTest {
 
     @Test
     void createExistUserTest() {
-        User existingUser = new User();
-        existingUser.setUserId(UUID.fromString("226e8867-e33a-2cd3-f362-211620192111"));
-        existingUser.setLogin("user");
-        existingUser.setPassword("111");
-        existingUser.setRole(AllRoles.ROLE_USER);
-        when(userRepository.existsByLogin(existingUser.getLogin())).thenReturn(true);
-
-        assertThrows(RuntimeException.class, () -> userService.create(existingUser));
-
-        verify(userRepository, never()).save(existingUser);
-    }
-
-    @Test
-    void createExistUserTest2() {
 
         when(userRepository.existsByLogin(user.getLogin())).thenReturn(true);
         assertThrows(RuntimeException.class, () -> userService.create(user));
@@ -67,6 +54,7 @@ class UserServiceTest {
         verify(userRepository, never()).save(user);
     }
 
+    // проверяет создание нового пользователя в случае отсутствия пользователя с таким логином в системе.
     @Test
     void createNotExistUserTest() {
         User existingUser = new User();
@@ -84,7 +72,7 @@ class UserServiceTest {
     }
 
     @Test
-    void getByUsernameExistUserTest() {
+    void getByUsernamePositiveTest() {
         String login = user.getLogin();
 
         when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
@@ -95,16 +83,17 @@ class UserServiceTest {
     }
 
     @Test
-    void getByUsernameNotExistUser() {
+    void getByUsernameNegativeTest() {
         String login = "newLogin";
         when(userRepository.findByLogin(login)).thenReturn(Optional.empty());
 
         assertThrows(UsernameNotFoundException.class, () -> userService.getByUsername(login));
     }
 
+    // проверка на возвращает ссылки на функцию getByUsername
     @Test
-    void testUserDetailsService() {
-        // Проверяем, что метод просто возвращает ссылку на функцию getByUsername
+    void userDetailsServiceTest() {
+
         assertNotNull(userService.userDetailsService());
     }
 }
