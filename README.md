@@ -9,8 +9,6 @@ and different types of training are active in the app. Also, you can always see 
 reviews of participants, buy, sell or exchange books here. The application will help everyone to 
 find their teacher easily. And each teacher will be able to share their knowledge and experience.
 
-Translated with DeepL.com (free version)
-
 # Technologies
 The main stack of technologies:
 
@@ -25,7 +23,8 @@ The main stack of technologies:
 - Liquibase
 
 # Installation
-https://github.com/TetianaBogoliubova/Diplom/tree/master/src/main/java/com/bogoliubova/training_service
+git clone https://github.com/TetianaBogoliubova/Diplom/tree/master/src/main/java/com/bogoliubova/training_service
+cd training_service
 
 # Database structure
 
@@ -135,3 +134,12 @@ The database includes:
 | teacher_id  | char(36)     | teacher's id, foreign key                      |
 | role        | char(36)     | name of the role for authorization             |
 
+# Contribution
+If you would like to contribute to my project, please follow the instructions. Your contribution
+can include suggestions for new features, bug fixes, testing, etc.
+
+- Fork my Project
+- Create your Feature Branch (git checkout -b feature/NewFeature)
+- Commit your Changes (git commit -m 'Add some NewFeature')
+- Push to the Branch (git push origin feature/NewFeature)
+- Open a Pull Request
