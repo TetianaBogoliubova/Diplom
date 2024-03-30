@@ -24,6 +24,7 @@ The main stack of technologies:
 
 # Installation
 git clone https://github.com/TetianaBogoliubova/Diplom/tree/master/src/main/java/com/bogoliubova/training_service
+
 cd training_service
 
 # Database structure
