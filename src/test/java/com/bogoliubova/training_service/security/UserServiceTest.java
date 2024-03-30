@@ -47,7 +47,6 @@ class UserServiceTest {
 
     @Test
     void createExistUserTest() {
-
         when(userRepository.existsByLogin(user.getLogin())).thenReturn(true);
         assertThrows(RuntimeException.class, () -> userService.create(user));
 
@@ -61,8 +60,8 @@ class UserServiceTest {
         existingUser.setLogin("newUser");
         existingUser.setPassword("999");
         existingUser.setRole(AllRoles.ROLE_USER);
-        when(userRepository.existsByLogin(existingUser.getLogin())).thenReturn(false);
 
+        when(userRepository.existsByLogin(existingUser.getLogin())).thenReturn(false);
         when(userRepository.save(existingUser)).thenReturn(existingUser);
 
         User createdUser = userService.create(existingUser);
@@ -73,11 +72,9 @@ class UserServiceTest {
 
     @Test
     void getByUsernamePositiveTest() {
-        String login = user.getLogin();
+        when(userRepository.findByLogin(user.getLogin())).thenReturn(Optional.of(user));
 
-        when(userRepository.findByLogin(login)).thenReturn(Optional.of(user));
-
-        User expectedUser = userService.getByUsername(login);
+        User expectedUser = userService.getByUsername(user.getLogin());
 
         assertEquals(user, expectedUser);
     }
@@ -93,7 +90,6 @@ class UserServiceTest {
     // проверка на возвращает ссылки на функцию getByUsername
     @Test
     void userDetailsServiceTest() {
-
         assertNotNull(userService.userDetailsService());
     }
 }

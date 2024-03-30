@@ -17,7 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -201,7 +204,7 @@ public class BookServiceImplTest {
         book.setBookPrice(BigDecimal.valueOf(40.00));
         book.setDirections(directions);
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById( book.getBookId().toString(), book);
+        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById(book.getBookId().toString(), book);
 
         assertEquals("New Title", Objects.requireNonNull(expectedBook.getBody()).getBookTitle());
         assertEquals("New Author", expectedBook.getBody().getAuthor());
@@ -216,7 +219,7 @@ public class BookServiceImplTest {
     public void patchUpdateBookByIdNegativeTest() {
         when(bookRepository.findById(book.getBookId())).thenReturn(null);
 
-        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById( UUID.randomUUID().toString(), book);
+        ResponseEntity<Book> expectedBook = bookServiceImpl.patchUpdateBookById(UUID.randomUUID().toString(), book);
 
         assertEquals(HttpStatus.NOT_FOUND, expectedBook.getStatusCode());
         assertNull(expectedBook.getBody());

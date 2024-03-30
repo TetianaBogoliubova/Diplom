@@ -1,8 +1,0 @@
-#databaseChangeLog:
-#  - changeSet:
-#      id: 1
-#      author: bogoliubova
-#
-#name: db.changelog-master.yaml
-#environment: testing
-#is-enabled: false

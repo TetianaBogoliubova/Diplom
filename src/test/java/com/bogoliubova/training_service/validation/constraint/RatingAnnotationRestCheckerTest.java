@@ -19,12 +19,12 @@ public class RatingAnnotationRestCheckerTest {
     }
 
     @Test
-   public void isValidPositiveTest() {
+    public void isValidPositiveTest() {
         assertTrue(ratingChecker.isValid(5, getContext()));
     }
 
     @Test
-   public void isValidNegativeTest() {
+    public void isValidNegativeTest() {
         assertFalse(ratingChecker.isValid(0, getContext()));
         assertFalse(ratingChecker.isValid(12, getContext()));
         assertFalse(ratingChecker.isValid(null, getContext()));

@@ -1,6 +1,5 @@
 package com.bogoliubova.training_service.config;
 
-import com.bogoliubova.training_service.entity.Customer;
 import com.bogoliubova.training_service.security.JwtAuthenticationFilter;
 import com.bogoliubova.training_service.security.UserService;
 import org.junit.jupiter.api.Test;

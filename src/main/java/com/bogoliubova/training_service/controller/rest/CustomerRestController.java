@@ -5,7 +5,6 @@ import com.bogoliubova.training_service.service.interf.CustomerService;
 import com.bogoliubova.training_service.validation.annotation.UuidRestChecker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -33,9 +32,6 @@ public class CustomerRestController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Customer with this id exists"),
                     @ApiResponse(responseCode = "404", description = "Customer with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public CustomerDto getCustomerAndLocationAndDirection(@UuidRestChecker @PathVariable("customer_id") String id) {

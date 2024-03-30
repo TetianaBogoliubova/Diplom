@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +22,6 @@ public class TeacherController {
 
     private final TeacherService teacherService;
 
-    // поиск по id
     //http://localhost:8080/teacher/id_teacher/837e8317-e35a-4cd1-f710-387841923887
     @GetMapping("/id_teacher/{teacher_id}")
     @PreAuthorize("hasRole('USER')")
@@ -32,16 +30,13 @@ public class TeacherController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Teacher with this id exists"),
                     @ApiResponse(responseCode = "404", description = "Teacher with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public Teacher getTeacherByTeacherId(@PathVariable("teacher_id") String id) {
         return teacherService.getTeacherById(id);
     }
 
-    //http://localhost:8080/teacher/createTeacher -- ++
+    //http://localhost:8080/teacher/createTeacher
     @PostMapping("/createTeacher")
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Create a new teacher",

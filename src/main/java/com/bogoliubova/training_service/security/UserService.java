@@ -3,7 +3,6 @@ package com.bogoliubova.training_service.security;
 import com.bogoliubova.training_service.entity.User;
 import com.bogoliubova.training_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -37,5 +36,5 @@ public class UserService {
         return this::getByUsername;
     }
 
-    }
+}
 

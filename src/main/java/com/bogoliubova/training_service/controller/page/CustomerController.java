@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -41,9 +40,6 @@ public class CustomerController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Customer with this id exists"),
                     @ApiResponse(responseCode = "404", description = "Customer with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public Customer getCustomerByCustomerId(@UuidChecker @PathVariable("customer_id") String id) {
@@ -51,11 +47,10 @@ public class CustomerController {
     }
 
     // создание нового объекта
-    @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer --  ++
+    @PostMapping("/createCustomer")//http://localhost:8080/customer/createCustomer
     @PreAuthorize("hasRole('USER')")
     @Operation(summary = "Create a new customer",
             description = "If necessary fields are filled in, a new customer is created",
-            //tags = "Customer",
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Insert jason format data according to Customer Entity class",
                     required = true,
@@ -122,7 +117,6 @@ public class CustomerController {
         return customerService.patchUpdateCustomerById(customerId, updates);
     }
 
-    // удаление объекта по id
     //http://localhost:8080/customer/part_updateCustomer/483e5800-e40a-2cd3-f678-617223078864
     @DeleteMapping("/deleteCustomer/{customer_id}")
     @PreAuthorize("hasRole('ADMIN')")
@@ -131,9 +125,6 @@ public class CustomerController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Customer with this id exists"),
                     @ApiResponse(responseCode = "404", description = "Customer with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public ResponseEntity<String> deleteCustomerByBookId(@PathVariable("customer_id") String customerId) {

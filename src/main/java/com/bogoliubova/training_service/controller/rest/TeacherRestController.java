@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,6 @@ public class TeacherRestController {
     // + встроенная валидация @NotBlank на поля в Dto-классе
     // + exception
     // + ExceptionHandler на MethodArgumentNotValidException.class
-
     @PostMapping("/createTeacherRest")//http://localhost:8080/teacher/createTeacherRest
     @Operation(summary = "Create a new teacher",
             description = "If necessary fields are filled in, a new teacher is created",
@@ -51,7 +49,6 @@ public class TeacherRestController {
         return teacherService.create(teacherDto);
     }
 
-
     //поиск имени, фамилии, рейтинга учителя по id
     // + exception
     // + ExceptionHandler на Exception.class(TEACHER_NOT_FOUND) с возвратом url
@@ -62,9 +59,6 @@ public class TeacherRestController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Teacher with this id exists"),
                     @ApiResponse(responseCode = "404", description = "Teacher with this id does not exists")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public TeacherFullNameAndRatingDto getFirstNameAndLastNameAndRatings(@PathVariable("teacher_id") String id) {
@@ -81,9 +75,6 @@ public class TeacherRestController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Teachers in this city exist"),
                     @ApiResponse(responseCode = "404", description = "Teachers in this city do not exist")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public List<TeacherDto> getTeacherByCity(@PathVariable("city") String city) {
@@ -100,9 +91,6 @@ public class TeacherRestController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Teachers with this rating exist"),
                     @ApiResponse(responseCode = "404", description = "Teachers with this rating do not exist")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public List<TeacherDto> getTeacherByRating(@RatingRestChecker @PathVariable("rating") Integer rating) {
@@ -117,9 +105,6 @@ public class TeacherRestController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Teachers with this rating and with direction exist"),
                     @ApiResponse(responseCode = "404", description = "Teachers with this rating and with direction do not exist")
-            },
-            security = {
-                    @SecurityRequirement(name = "")
             }
     )
     public List<TeacherDto> getTeacherByDirectionAndRating(@PathVariable("direction") AllDirections dirTitle, @PathVariable("rating") Integer ratingOfTeacher) {

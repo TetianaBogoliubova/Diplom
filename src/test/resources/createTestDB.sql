@@ -88,7 +88,3 @@ CREATE TABLE IF NOT EXISTS users (
     FOREIGN KEY (teacher_id) REFERENCES teachers (teacher_id)
     );
 
--- CREATE TABLE IF NOT EXISTS authorities (
---     authority_id CHAR(36) PRIMARY KEY NOT NULL,
---     authority_name VARCHAR(30) NOT NULL
---     );

@@ -10,11 +10,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 import java.io.IOException;
 
@@ -45,7 +44,7 @@ class JwtAuthenticationFilterTest {
 //на отсутствие заголовка Authorization в HTTP-запросе
     void doFilterInternalWithoutAuthorizationHeaderTest() throws Exception {
 
-        Mockito.when(request.getHeader("Authorization")).thenReturn(null);
+        when(request.getHeader("Authorization")).thenReturn(null);
 
         filter.doFilterInternal(request, response, filterChain);
 
@@ -74,15 +73,12 @@ class JwtAuthenticationFilterTest {
         when(userDetailsService.loadUserByUsername("username")).thenReturn(userDetails);
         when(jwtService.isTokenValid(validToken, userDetails)).thenReturn(true);
 
-        SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+        Authentication authToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
                 userDetails.getAuthorities()
         );
-        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-        securityContext.setAuthentication(authToken);
-        SecurityContextHolder.setContext(securityContext);
+        SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filter.doFilterInternal(request, response, filterChain);
 
@@ -94,15 +90,12 @@ class JwtAuthenticationFilterTest {
 //на  передачу недействительного JWT токена
     void doFilterInternalInvalidTokenTest() throws Exception {
 
-        when(jwtService.isTokenValid(Mockito.anyString(), Mockito.any(UserDetails.class))).thenReturn(false);
-        when(userDetailsService.loadUserByUsername(Mockito.anyString())).thenReturn(userDetails);
-        when(userService.userDetailsService()).thenReturn(userDetailsService);
-        when(jwtService.isTokenValid(Mockito.anyString(), Mockito.any(UserDetails.class))).thenReturn(false);
-        when(userService.userDetailsService().loadUserByUsername(Mockito.anyString())).thenReturn(userDetails);
+        when(jwtService.isTokenValid(anyString(), any(UserDetails.class))).thenReturn(false);
+        when(userDetailsService.loadUserByUsername(anyString())).thenReturn(userDetails);
         when(request.getHeader("Authorization")).thenReturn("Bearer invalidToken");
 
         filter.doFilterInternal(request, response, filterChain);
 
-        Mockito.verify(filterChain).doFilter(request, response);
+        verify(filterChain).doFilter(request, response);
     }
 }

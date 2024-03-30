@@ -1,12 +1,11 @@
 package com.bogoliubova.training_service.security;
 
-import com.bogoliubova.training_service.entity.enums.AllRoles;
 import com.bogoliubova.training_service.dto.SignInRequest;
 import com.bogoliubova.training_service.dto.SignUpRequest;
 import com.bogoliubova.training_service.entity.User;
+import com.bogoliubova.training_service.entity.enums.AllRoles;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +21,6 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     // Регистрация пользователя
-
     public JwtAuthenticationResponse registrationUser(SignUpRequest request) {
 
         User user = new User();
