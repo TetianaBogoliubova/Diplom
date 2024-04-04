@@ -38,8 +38,8 @@ The database includes:
 | first_name   | varchar(45) | client's name,  not null              |
 | last_name    | varchar(45) | client's surname, not null            |
 | c_email      | varchar(45) | client's e-mail, not null             |
-| location_id  | varchar(36) | location's id, foreign key, not null  |
-| direction_id | varchar(36) | direction's id                        |
+| location_id  | char(36)    | location's id, foreign key, not null  |
+| direction_id | char(36)    | direction's id                        |
 
 
 ### Table Teachers (people who offer their services in teaching)
